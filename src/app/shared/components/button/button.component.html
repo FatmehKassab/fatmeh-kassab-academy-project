@@ -1,0 +1,19 @@
+<button
+  [type]="type"
+  (click)="emitClick()"
+  [ngClass]="className"
+  [ngStyle]="{ backgroundColor: bgColor, width: width }"
+  class="custom-button"
+>
+  <span [style.color]="textColor" class="title">
+    {{ title }}
+  </span>
+  <span *ngIf="icon" class="icon">
+    <!-- <img
+      [src]="ICONS[icon]"
+      [alt]="icon + ' icon'"
+      width="16"
+      height="16"
+    /> -->
+  </span>
+</button>
