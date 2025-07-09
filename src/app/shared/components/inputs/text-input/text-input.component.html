@@ -1,0 +1,37 @@
+<div class="text-input">
+  <label *ngIf="fullBorder" [for]="inputId" class="label-full">
+    {{ label }}
+  </label>
+
+  <input
+    [type]="inputType"
+    [id]="inputId"
+    [value]="value"
+    (input)="onInputChange($event)"
+    [placeholder]="showPlaceholder && hasValue ? label : ''"
+    [class.border-full]="fullBorder"
+    [class.border-bottom]="!fullBorder"
+    class="input"
+  />
+
+  <label
+    *ngIf="!fullBorder"
+    [for]="inputId"
+    class="floating-label"
+    [class.floating]="hasValue"
+  >
+    {{ label }}
+  </label>
+
+  <button
+    *ngIf="type === 'password'"
+    type="button"
+    (click)="togglePassword()"
+    class="toggle-password"
+  >
+    <img
+      [src]="passwordHidden ? ICONS.show : ICONS.hide"
+      alt="Toggle visibility"
+    />
+  </button>
+</div>
