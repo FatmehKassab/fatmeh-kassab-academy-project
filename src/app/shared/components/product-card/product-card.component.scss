@@ -1,4 +1,14 @@
 
+.product-list {
+  display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+padding: 20px;
+  gap: 2rem;
+
+}
+
 .product-card {
   border-radius: 20px;
   overflow: hidden;
