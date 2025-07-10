@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { TextInputComponent } from "../../shared/components/inputs/text-input/text-input.component";
+import { RouterModule } from '@angular/router';
 
 interface SignUpForm {
   fname: string;
@@ -19,7 +20,8 @@ interface SignUpForm {
     ButtonComponent, 
     TextInputComponent,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'

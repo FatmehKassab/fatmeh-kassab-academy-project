@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { TextInputComponent } from "../../shared/components/inputs/text-input/text-input.component";
+import { RouterModule } from '@angular/router';
 
 interface SignInForm {
   email: string;
@@ -16,7 +17,8 @@ interface SignInForm {
     ButtonComponent, 
     TextInputComponent,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
