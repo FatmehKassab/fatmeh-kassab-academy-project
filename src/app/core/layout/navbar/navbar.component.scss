@@ -1,0 +1,26 @@
+.nav-container{
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 40px;
+border-bottom: 1px solid var(--primary);
+
+}
+
+.nav-links{
+display: flex;
+justify-content: space-between;
+align-items: center;
+list-style: none;
+gap: 20px;
+font-weight: 600;
+color: var(--primary);
+cursor: pointer;
+::hover{
+    color: var(--secondary);
+}
+.active{
+    color: var(--secondary);
+
+}
+}
