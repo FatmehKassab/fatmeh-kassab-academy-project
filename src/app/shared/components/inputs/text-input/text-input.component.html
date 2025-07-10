@@ -8,7 +8,7 @@
     [id]="inputId"
     [value]="value"
     (input)="onInputChange($event)"
-    [placeholder]="showPlaceholder && hasValue ? label : ''"
+    [placeholder]="showPlaceholder && hasValue ? label : label"
     [class.border-full]="fullBorder"
     [class.border-bottom]="!fullBorder"
     class="input"

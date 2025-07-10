@@ -13,7 +13,7 @@ export class TextInputComponent {
   @Input() type: 'text' | 'password' = 'text';
   @Input() value: string = '';
   @Input() showPlaceholder?: boolean=true;
-  @Input() fullBorder: boolean = false;
+  @Input() fullBorder: boolean = true;
   @Output() valueChange = new EventEmitter<string>();
 
   passwordHidden: boolean = true;

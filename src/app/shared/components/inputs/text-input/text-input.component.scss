@@ -1,32 +1,30 @@
 .text-input {
   position: relative;
   width: 100%;
+  
 
   .input {
-    width: 100%;
+    width: 75%;
     padding: 0.5rem 2.5rem 0.5rem 0.5rem;
-    font-size: 1rem;
     outline: none;
-    color: #333;
-    background-color: var(--white);
+    color: var(--primary);
+    background-color: transparent;
 
     &.border-full {
-      border: 1px solid  var(--secondary);
+      border: 1px solid  var(--primary);
       border-radius: 4px;
     }
 
     &.border-bottom {
       border: none;
-      border-bottom: 1px solid var(--secondary) ;
+      border-bottom: 1px solid  var(--primary);
     }
 
     &::placeholder {
-      color: transparent;
-    }
-
-    &:focus::placeholder {
       color: #ccc;
     }
+
+   
   }
 
   .label-full {
@@ -55,7 +53,7 @@
   .toggle-password {
     position: absolute;
     right: 0.5rem;
-    top: 50%;
+    top: 73%;
     transform: translateY(-50%);
     background: none;
     border: none;

@@ -13,9 +13,9 @@ export class ButtonComponent {
   @Input() title: string = '';
   @Input() icon?: string; 
   @Input() className: string = '';
-  @Input() bgColor: string = 'primary';
+  @Input() bgColor: string = "var(--primary)";
   @Input() width: string = '100%'; 
-  @Input() textColor: string = 'white'; 
+  @Input() textColor: string = "var(--white)"; 
 
   @Output() onClick = new EventEmitter<void>();
 
