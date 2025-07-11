@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { TextInputComponent } from "../../shared/components/inputs/text-input/text-input.component";
 import { RouterModule, Router } from '@angular/router';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '../../core/auth/services/auth.service';
 
 
 @Component({

@@ -5,7 +5,7 @@ import { ButtonComponent } from "../../shared/components/button/button.component
 import { TextInputComponent } from "../../shared/components/inputs/text-input/text-input.component";
 import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '../../core/auth/services/auth.service';
 
 interface SignInForm {
   email: string;
