@@ -1,7 +1,17 @@
 <app-navbar></app-navbar>
 
 <div class="product-container">
-    <div class="clas">hui</div>
-    <app-product-card class="clas2"></app-product-card>
-</div>
+  <!-- Filters -->
+  <div class="clas">
+   <app-boolean-input
+  *ngFor="let category of categories"
+  [label]="category"
+  [value]="selectedCategories.has(category)"
+  (valueChange)="onCategoryChange($event, category)"
+></app-boolean-input>
 
+  </div>
+
+  <!-- Product List -->
+  <app-product-card [products]="filteredProducts" class="clas2"></app-product-card>
+</div>
