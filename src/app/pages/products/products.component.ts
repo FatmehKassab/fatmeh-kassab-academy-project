@@ -3,10 +3,12 @@ import { NavbarComponent } from "../../core/layout/navbar/navbar.component";
 import { ProductCardComponent } from "../../shared/components/product-card/product-card.component";
 import { BooleanInputComponent } from "../../shared/components/inputs/boolean-input/boolean-input.component";
 import { Product, ProductService } from '../../shared/services/product.service';
+
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-products',
+
   standalone:true,
   imports: [NavbarComponent, ProductCardComponent, CommonModule, BooleanInputComponent],
   templateUrl: './products.component.html',

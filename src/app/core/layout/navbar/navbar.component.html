@@ -8,13 +8,21 @@
         />
       </div>
       <ul class="nav-links">
-        <li>Home</li>
-        <li>About</li>
-        <li class="active">Products</li>
-      </ul>
+    <li routerLinkActive="active" >
+      <a routerLink="/">Home</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/about">About</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/products">Products</a>
+    </li>
+  </ul>
 
-      <div>
-        search
+      <div class="socials">
+    <app-socials  [iconPath]="ICONS.search"></app-socials>
+    <app-socials  [iconPath]="ICONS.cart"></app-socials>
+    <app-socials  [iconPath]="ICONS.user_white"></app-socials>
       </div>
 
 </nav>
