@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-products',
-  imports: [NavbarComponent, ProductCardComponent, PageTitleComponent,CommonModule],
+  imports: [NavbarComponent, ProductCardComponent,CommonModule],
   standalone: true,
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
