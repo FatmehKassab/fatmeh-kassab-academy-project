@@ -5,9 +5,9 @@ import { ProductsComponent } from './pages/products/products.component';
 
 
 export const routes: Routes = [
-  { path: 'products', component: ProductsComponent },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
+  { path: 'products', component: ProductsComponent, data: { title: 'Products' } },
+  { path: 'sign-in', component: SignInComponent, data: { title: 'Sign In' } },
+  { path: 'sign-up', component: SignUpComponent, data: { title: 'Sign Up' } },
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' }, 
-  { path: '**', redirectTo: '/sign-in' } 
+  { path: '**', redirectTo: '/sign-in' }
 ];
