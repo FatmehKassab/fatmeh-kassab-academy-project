@@ -1,0 +1,13 @@
+.product-container{
+    width: 100%;
+    display: flex;
+
+    .filters{
+        width: 20%;
+        padding:20px 0px 20px 20px;
+        
+    }
+    .products{
+        width: 80%;
+    }
+}
