@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { TextInputComponent } from "../../shared/components/inputs/text-input/text-input.component";
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../core/auth/services/auth.service';
 
 interface SignInForm {
   email: string;
@@ -25,8 +27,14 @@ interface SignInForm {
 })
 export class SignInComponent implements OnInit {
   signinForm!: FormGroup;
+  isLoading = false;
+  errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -41,9 +49,28 @@ export class SignInComponent implements OnInit {
 
   onSubmit(): void {
     if (this.signinForm.valid) {
-      console.log('Form submitted:', this.signinForm.value);
+      this.isLoading = true;
+      this.errorMessage = null;
+      
+      const credentials = {
+        Email: this.signinForm.value.email,
+        Password: this.signinForm.value.password
+      };
+
+      this.authService.login(credentials).subscribe({
+        next: () => {
+          this.router.navigate(['/products']); 
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.errorMessage = err.error?.message || 'Login failed. Please check your credentials.';
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
     } else {
-      this.signinForm.markAllAsTouched(); 
+      this.signinForm.markAllAsTouched();
     }
   }
 
