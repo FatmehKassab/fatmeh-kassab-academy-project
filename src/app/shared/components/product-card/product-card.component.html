@@ -1,14 +1,13 @@
- <div class="product-list">
- <div *ngFor="let product of products" class="product-card">
-      <img [src]="product.image" [alt]="product.title" class="product-image">
-      <div class="product-details">
-          <p class="category">{{ product.category }}</p>
-        <h3>{{ product.title }}</h3>
-        <p class="price">{{ product.price }}$</p>
-        <!-- <div class="rating">
-          ⭐ {{ product.rating.rate }} ({{ product.rating.count }} reviews)
-        </div> -->
-      
-      </div>
+<div class="product-list">
+  <div *ngFor="let product of products" class="product-card">
+    <div class="hover-content">
+      <app-socials [iconPath]="ICONS.cart" class="social-icon"></app-socials>
     </div>
+    <img [src]="product.image" [alt]="product.title" class="product-image">
+    <div class="product-details">
+      <p class="category">{{ product.category }}</p>
+      <h3>{{ product.title }}</h3>
+      <p class="price">{{ product.price }}$</p>
+    </div>
+  </div>
 </div>
