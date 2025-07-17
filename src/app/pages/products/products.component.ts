@@ -5,12 +5,13 @@ import { BooleanInputComponent } from "../../shared/components/inputs/boolean-in
 import { Product, ProductService } from '../../shared/services/product.service';
 
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from "../../core/layout/footer/footer.component";
 
 @Component({
   selector: 'app-products',
 
   standalone:true,
-  imports: [NavbarComponent, ProductCardComponent, CommonModule, BooleanInputComponent],
+  imports: [NavbarComponent, ProductCardComponent, CommonModule, BooleanInputComponent, FooterComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
