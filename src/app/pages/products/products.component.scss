@@ -1,13 +1,41 @@
 .product-container{
-    width: 100%;
+    width: screen;
     display: flex;
+    justify-content: space-between;
+    padding: 40px;
 
+    
     .filters{
-        width: 20%;
-        padding:20px 0px 20px 20px;
+        width: 10%;
+        padding-right:60px;
+        white-space: nowrap;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+     
         
     }
     .products{
-        width: 80%;
+        width: 90%;
     }
+
+    .sort-container {
+  margin-top: 20px;
+  .sort-select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--primary) ;
+  background-color: white;
+  font-size: 14px;
+  margin-top: 8px;
+  color: var(--primary);
 }
+
+.sort-select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+}
+}
+
