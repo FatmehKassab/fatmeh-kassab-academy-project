@@ -79,7 +79,7 @@ onSubmit(): void {
 
     this.authService.signUp(userData).subscribe({
       next: () => {
-        this.router.navigate(['/products']);
+        this.router.navigate(['/sign-in']);
       },
       error: (err) => {
         this.isLoading = false;
