@@ -12,7 +12,6 @@ import { FooterComponent } from "../../core/layout/footer/footer.component";
 
   standalone:true,
   imports: [NavbarComponent, ProductCardComponent, CommonModule, BooleanInputComponent, FooterComponent,FormsModule],
-
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
