@@ -27,13 +27,13 @@
         <div class="form-group">
           <app-text-input
             label="Email"
-            [value]="f['email'].value"
-            (valueChange)="f['email'].setValue($event)"
+            [value]="f['username'].value"
+            (valueChange)="f['username'].setValue($event)"
             [showPlaceholder]="true"
           ></app-text-input>
-          <div *ngIf="f['email'].touched && f['email'].invalid" class="error">
-            <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
-            <div *ngIf="f['email'].errors?.['email']">Enter a valid email.</div>
+          <div *ngIf="f['username'].touched && f['username'].invalid" class="error">
+            <div *ngIf="f['username'].errors?.['required']">Email is required.</div>
+            <div *ngIf="f['username'].errors?.['username']">Enter a valid email.</div>
           </div>
         </div>
 

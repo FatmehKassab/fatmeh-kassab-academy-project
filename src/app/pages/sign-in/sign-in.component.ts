@@ -42,7 +42,8 @@ export class SignInComponent implements OnInit {
 
   private initializeForm(): void {
     this.signinForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      // email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
   }
@@ -53,7 +54,7 @@ export class SignInComponent implements OnInit {
       this.errorMessage = null;
       
       const credentials = {
-        Email: this.signinForm.value.email,
+        Username: this.signinForm.value.username,
         Password: this.signinForm.value.password
       };
 
