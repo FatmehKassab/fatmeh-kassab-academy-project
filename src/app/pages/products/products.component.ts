@@ -4,12 +4,11 @@ import { ProductCardComponent } from "../../shared/components/product-card/produ
 import { BooleanInputComponent } from "../../shared/components/inputs/boolean-input/boolean-input.component";
 import { Product, ProductService } from '../../shared/services/product.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { FooterComponent } from "../../core/layout/footer/footer.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
-
   standalone:true,
   imports: [NavbarComponent, ProductCardComponent, CommonModule, BooleanInputComponent, FooterComponent,FormsModule],
   templateUrl: './products.component.html',
