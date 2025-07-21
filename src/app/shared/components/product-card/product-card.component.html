@@ -1,7 +1,7 @@
 <div class="product-list">
   <div *ngFor="let product of products" class="product-card">
     <div class="hover-content">
-      <app-socials [iconPath]="ICONS.plus" class="social-icon"></app-socials>
+      <app-socials [iconPath]="ICONS.plus" class="social-icon" (click)="addToCart()"></app-socials>
     </div>
     <img [src]="product.image" [alt]="product.title" class="product-image">
     <div class="product-details">

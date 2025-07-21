@@ -1,7 +1,30 @@
-<p-drawer header="Right Drawer" [(visible)]="visible" position="right">
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-        aliquip ex ea commodo consequat.
-    </p>
+<p-drawer [(visible)]="visible" position="right" [style]="{width: '25rem'}">
+  <ng-template pTemplate="header">
+    <h2>My shopping cart</h2>
+  </ng-template>
+  
+   <div *ngIf="(cartItems$ | async)?.length === 0" class="empty-cart">
+    Your cart is empty
+  </div>
+  
+<div *ngIf="cartItems$ | async as cartItems">
+  <div *ngIf="cartItems.length > 0">
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <!-- <img [src]="item.product.image" [alt]="item.product.title" class="product-image"> -->
+      <div class="product-details">
+        <h3>{{ item?.product?.title }}</h3>
+        <p>{{ item?.product?.price | currency }}</p>
+        <div class="quantity-control">
+          <label>Quantity:</label>
+          <input
+            type="number"
+            [value]="item.quantity"
+            min="1"
+            (change)="updateQuantity(item.product.id, $event)" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </p-drawer>
