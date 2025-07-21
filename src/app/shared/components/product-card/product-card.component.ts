@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Product, ProductService } from '../../services/product.service';
 import { SocialsComponent } from "../socials/socials.component";
+import { ICONS } from '../../utils/icons';
 
 @Component({
   selector: 'app-product-card',
@@ -14,10 +15,5 @@ import { SocialsComponent } from "../socials/socials.component";
 export class ProductCardComponent {
   @Input() products: Product[] = [];
 
-  get ICONS(): any {
-    return {
-      search: 'icons/search.svg', 
-      cart: 'icons/cart.svg',
-      user_white: 'icons/user_white.svg',
-    };}
+ ICONS = ICONS;
 }
