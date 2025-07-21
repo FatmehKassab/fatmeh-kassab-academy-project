@@ -21,7 +21,7 @@
 
       <div class="socials">
     <app-socials  [iconPath]="ICONS.search"></app-socials>
-    <app-socials  [iconPath]="ICONS.cart"></app-socials>
+    <app-socials  [iconPath]="ICONS.cart" (iconClick)="openDrawer()"></app-socials>
     <app-socials  [iconPath]="ICONS.user_white"></app-socials>
       </div>
 
