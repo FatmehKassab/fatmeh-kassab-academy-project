@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Product, ProductService } from '../../services/product.service';
 import { SocialsComponent } from "../socials/socials.component";
 import { ICONS } from '../../utils/icons';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -14,6 +15,12 @@ import { ICONS } from '../../utils/icons';
 })
 export class ProductCardComponent {
   @Input() products: Product[] = [];
+    @Input() product!: Product;
 
  ICONS = ICONS;
-}
+
+ constructor(private cartService: CartService) {}
+
+  addToCart(item: any){
+    this.cartService.addtoCart(item);
+  }}
