@@ -15,42 +15,42 @@ import { FormsModule } from '@angular/forms';
 })
 export class DrawerComponent implements OnInit {
   visible: boolean = false;
- cartItems$!: Observable<any[]>;
+  public products: any = [];
+  public grandTotal: number = 0;
+
   constructor(
     private drawerService: DrawerService,
     private cartService: CartService
   ) {}
 
-
-ngOnInit(): void {
-  this.cartItems$ = this.cartService.cartItems$;
-
-  this.drawerService.drawerVisible$.subscribe(visible => {
-    this.visible = visible;
-  });
-}
-
-
-
-  removeItem(productId: number): void {
-    this.cartService.removeFromCart(productId);
+  ngOnInit(): void {
+    this.drawerService.drawerVisible$.subscribe(visible => {
+      this.visible = visible;
+    });
+    
+    this.cartService.getProducts().subscribe(res => {
+      this.products = res;
+      this.grandTotal = this.cartService.getTotalPrice();
+    });
   }
 
-  updateQuantity(productId: number, event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const quantity = parseInt(input.value, 10);
-    this.cartService.updateQuantity(productId, quantity);
+  removeItem(item: any) {
+    this.cartService.removeCartItem(item);
+    this.grandTotal = this.cartService.getTotalPrice();
   }
 
-  clearCart(): void {
-    this.cartService.clearCart();
+  emptyCart() {
+    this.cartService.removeAllCart();
+    this.grandTotal = 0;
   }
 
-  getTotalItems(): number {
-    return this.cartService.getItemCount();
-  }
-
-  getTotalPrice(): number {
-    return this.cartService.getTotalPrice();
+  updateQuantity(item: any, change: number) {
+    const newQuantity = item.quantity + change;
+    if (newQuantity > 0) {
+      item.quantity = newQuantity;
+      item.total = item.price * item.quantity;
+      this.cartService.productList.next([...this.cartService.cartItemList]);
+      this.grandTotal = this.cartService.getTotalPrice();
+    }
   }
 }

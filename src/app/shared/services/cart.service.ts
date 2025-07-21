@@ -1,101 +1,51 @@
-// cart.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { Product } from '../interfaces/product.model';
-
-interface CartItem {
-  product: Product;
-  quantity: number;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private cartItems: CartItem[] = [];
-  private cartSubject = new BehaviorSubject<CartItem[]>([]);
-  cartItems$ = this.cartSubject.asObservable();
+  public cartItemList: any = [];
+  public productList = new BehaviorSubject<any>([]);
+  public search = new BehaviorSubject<string>("");
 
-  constructor(private http: HttpClient) {}
+  constructor() { }
 
-  // Add product to cart
-  addToCart(product: Product): void {
-    const existingItem = this.cartItems.find(item => item.product.id === product.id);
+  getProducts() {
+    return this.productList.asObservable();
+  }
+
+  setProduct(product: any) {
+    this.cartItemList.push(...product);
+    this.productList.next(product);
+  }
+
+  addtoCart(product: any) {
+    const existingProduct = this.cartItemList.find((item: any) => item.id === product.id);
     
-    if (existingItem) {
-      existingItem.quantity += 1;
+    if (existingProduct) {
+      existingProduct.quantity += product.quantity || 1;
+      existingProduct.total = existingProduct.price * existingProduct.quantity;
     } else {
-      this.cartItems.push({ product, quantity: 1 });
+      product.quantity = product.quantity || 1;
+      product.total = product.price * product.quantity;
+      this.cartItemList.push(product);
     }
     
-    this.cartSubject.next([...this.cartItems]);
+    this.productList.next(this.cartItemList);
   }
 
-  // Remove product from cart
-  removeFromCart(productId: number): void {
-    this.cartItems = this.cartItems.filter(item => item.product.id !== productId);
-    this.cartSubject.next([...this.cartItems]);
-  }
-
-  // Update product quantity
-  updateQuantity(productId: number, quantity: number): void {
-    const item = this.cartItems.find(item => item.product.id === productId);
-    if (item) {
-      item.quantity = quantity;
-      this.cartSubject.next([...this.cartItems]);
-    }
-  }
-
-  // Clear the cart
-  clearCart(): void {
-    this.cartItems = [];
-    this.cartSubject.next([]);
-  }
-
-  // Get total items in cart
-  getItemCount(): number {
-    return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  }
-
-  // Get total price
   getTotalPrice(): number {
-    return this.cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+    return this.cartItemList.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
   }
 
-  // Save cart to API (using FakeStoreAPI)
-  saveCartToApi(): void {
-    const userId = 1; // Mock user ID
-    const date = new Date().toISOString();
-    const products = this.cartItems.map(item => ({
-      productId: item.product.id,
-      quantity: item.quantity
-    }));
-
-    this.http.post('https://fakestoreapi.com/carts', {
-      userId,
-      date,
-      products
-    }).subscribe({
-      next: () => console.log('Cart saved successfully'),
-      error: (err) => console.error('Error saving cart:', err)
-    });
+  removeCartItem(product: any) {
+    this.cartItemList = this.cartItemList.filter((item: any) => item.id !== product.id);
+    this.productList.next(this.cartItemList);
   }
 
-  // Load cart from API
-  loadCartFromApi(): void {
-    this.http.get<any[]>('https://fakestoreapi.com/carts/user/1').subscribe({
-      next: (response) => {
-        if (response && response.length > 0) {
-          const latestCart = response.reduce((prev, current) => 
-            (new Date(prev.date) > new Date(current.date) ? prev : current)
-          );
-          
-          // You would need to fetch product details here
-          console.log('Loaded cart:', latestCart);
-        }
-      },
-      error: (err) => console.error('Error loading cart:', err)
-    });
+  removeAllCart() {
+    this.cartItemList = [];
+    this.productList.next(this.cartItemList);
   }
 }

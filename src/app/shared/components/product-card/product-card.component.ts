@@ -21,11 +21,6 @@ export class ProductCardComponent {
 
  constructor(private cartService: CartService) {}
 
-addToCart(): void {
-
-
-    this.cartService.saveCartToApi();
-    
-
-  }
-}
+  addToCart(item: any){
+    this.cartService.addtoCart(item);
+  }}
