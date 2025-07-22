@@ -7,10 +7,12 @@ import { CartService } from '../../../shared/services/cart.service';
 import { FavoritesService } from '../../../shared/services/favorites.service';
 import { Product } from '../../../shared/interfaces/product.model';
 import { NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [SocialsComponent],
+  standalone:true,
+  imports: [SocialsComponent,RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

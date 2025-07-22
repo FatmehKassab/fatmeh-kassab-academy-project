@@ -1,3 +1,8 @@
 <div class="circle-icon" (click)="onClick()">
   <img [src]="iconPath" [alt]="altText" />
 </div>
+
+
+<div *ngIf="isDropdown && showDropdown" class="dropdown-box">
+  <ng-container *ngTemplateOutlet="dropdownContent"></ng-container>
+</div>
