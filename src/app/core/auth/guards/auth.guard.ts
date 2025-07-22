@@ -8,6 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   const token = authService.getToken();
+  console.log("tken",token)
   const isLoggedIn = !!token;
 
   authService['isLoggedInSubject'].next(isLoggedIn);
