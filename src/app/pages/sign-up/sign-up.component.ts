@@ -5,17 +5,21 @@ import { ButtonComponent } from "../../shared/components/button/button.component
 import { TextInputComponent } from "../../shared/components/inputs/text-input/text-input.component";
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../core/auth/services/auth.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
+  providers: [MessageService],
   imports: [
     ButtonComponent, 
     TextInputComponent,
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    ToastModule
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
@@ -28,7 +32,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -79,11 +84,22 @@ onSubmit(): void {
 
     this.authService.signUp(userData).subscribe({
       next: () => {
+        this.messageService.add({ 
+          severity: 'success', 
+          summary: 'Success', 
+          detail: 'Sign up successful!' 
+        });
         this.router.navigate(['/sign-in']);
       },
-      error: (err) => {
+        error: (err) => {
         this.isLoading = false;
-        this.errorMessage = err.error?.message || 'Sign up failed. Please try again.';
+        const msg = err.error?.message || 'Sign up failed. Please try again.';
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Error', 
+          detail: msg 
+        });
+        this.errorMessage = msg;
       },
       complete: () => {
         this.isLoading = false;
