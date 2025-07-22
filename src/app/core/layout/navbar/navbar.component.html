@@ -8,13 +8,13 @@
         />
       </div>
       <ul class="nav-links">
-    <li routerLinkActive="active" >
+    <li  >
       <a routerLink="/">Home</a>
     </li>
-    <li routerLinkActive="active">
+    <li>
       <a routerLink="/about">About</a>
     </li>
-    <li routerLinkActive="active">
+    <li >
       <a routerLink="/products">Products</a>
     </li>
   </ul>
@@ -25,7 +25,16 @@
      <div style="font-size: 10px; background-color: red;">{{totalItem}}</div>
  <app-socials  [iconPath]="ICONS.heart" (iconClick)="openFavoritesDrawer()"></app-socials>
    <div style="font-size: 10px; background-color: blue;">{{totalFavorites}}</div>
-    <app-socials  [iconPath]="ICONS.user_white"></app-socials>
+
+   <ng-template #userDropdown>
+  <div style="padding: 8px;">
+    <p style="margin: 0;">My Profile</p>
+    <p style="margin: 0;">Logout</p>
+  </div>
+</ng-template>
+    <app-socials  [iconPath]="ICONS.user_white"   [isDropdown]="true"
+  [dropdownContent]="userDropdown"
+  ></app-socials>
       </div>
 
 </nav>
