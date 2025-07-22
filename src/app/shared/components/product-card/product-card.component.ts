@@ -1,40 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Product, ProductService } from '../../services/product.service';
+import { SocialsComponent } from "../socials/socials.component";
+import { ICONS } from '../../utils/icons';
+import { CartService } from '../../services/cart.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-product-card',
 
  standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SocialsComponent],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
 })
 export class ProductCardComponent {
-products: Product[] = [];
-  isLoading = true;
-  error: string | null = null;
+  @Input() products: Product[] = [];
+  @Input() product!: Product;
 
-  constructor(private productService: ProductService) {}
+ ICONS = ICONS;
+private favoritesService = inject(FavoritesService);
+ constructor(private cartService: CartService) {}
 
-  ngOnInit(): void {
-    this.loadProducts();
+  addToCart(item: any){
+    this.cartService.addtoCart(item);
   }
-
-  loadProducts(): void {
-    this.isLoading = true;
-    this.error = null;
-    
-    this.productService.getAllProducts().subscribe({
-      next: (data) => {
-        this.products = data;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.error = 'Failed to load products. Please try again later.';
-        this.isLoading = false;
-        console.error('Error fetching products:', err);
-      }
-    });
+  addToFavorites(item: any){
+    this.favoritesService.addToFavorites(item);
   }
 }

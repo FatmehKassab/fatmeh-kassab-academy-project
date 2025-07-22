@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ICONS } from '../../../utils/icons';
 
 @Component({
   selector: 'app-text-input',
@@ -39,10 +40,5 @@ export class TextInputComponent {
     return this.label.toLowerCase().replace(/\s+/g, '-');
   }
 
-  get ICONS(): any {
-    return {
-      show: 'icons/show.svg', 
-      hide: 'icons/hide.svg',
-    };
-  }
+  ICONS = ICONS;
 }

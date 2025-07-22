@@ -3,16 +3,10 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { TextInputComponent } from "../../shared/components/inputs/text-input/text-input.component";
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../../core/auth/services/auth.service';
 
-interface SignUpForm {
-  fname: string;
-  lname: string;
-  email: string;
-  phone: string;
-  password: string;
-  confirmPassword: string;
-}
+
 @Component({
   selector: 'app-sign-up',
   standalone: true,
@@ -28,8 +22,14 @@ interface SignUpForm {
 })
 export class SignUpComponent implements OnInit {
   signupForm!: FormGroup;
+  isLoading = false;
+  errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -42,7 +42,7 @@ export class SignUpComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [
         Validators.required, 
-        Validators.pattern(/^[0-9]{10,15}$/), // 10-15 digits
+        Validators.pattern(/^[0-9]{10,15}$/),
         Validators.minLength(10),
         Validators.maxLength(15)
       ]],
@@ -57,34 +57,52 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-
   private passwordMatchValidator(formGroup: FormGroup): null | { mismatch: boolean } {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
   }
 
-  onSubmit(): void {
-    if (this.signupForm.valid) {
-      console.log('Form submitted:', this.signupForm.value);
+onSubmit(): void {
+  if (this.signupForm.valid) {
+    this.isLoading = true;
+    this.errorMessage = null;
     
-    } else {
-      this.signupForm.markAllAsTouched(); 
-    }
-  }
+    const formData = this.signupForm.value;
+    const userData = {
+      Firstname: formData.fname,
+      Lastname: formData.lname,
+      Email: formData.email,
+      Password: formData.password,
+      RoleName: formData.rolename,
+    };
 
+    this.authService.signUp(userData).subscribe({
+      next: () => {
+        this.router.navigate(['/sign-in']);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage = err.error?.message || 'Sign up failed. Please try again.';
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
+  } else {
+    this.signupForm.markAllAsTouched();
+  }
+}
 
   get f() {
     return this.signupForm.controls;
   }
-
 
   get passwordsMatch(): boolean {
     return this.signupForm.hasError('mismatch') && 
            this.f['confirmPassword'].touched;
   }
 
-  //iwant to add them in constats
   get IMAGES() {
     return {
       login_illustration: 'images/login_illustration.svg',

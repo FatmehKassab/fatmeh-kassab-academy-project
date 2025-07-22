@@ -22,16 +22,18 @@
     <div class="form">
       <h1 class="text-h1">Welcome to moda fusion</h1>
       <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" novalidate>
+      
+
         <div class="form-group">
           <app-text-input
             label="Email"
-            [value]="f['email'].value"
-            (valueChange)="f['email'].setValue($event)"
+            [value]="f['username'].value"
+            (valueChange)="f['username'].setValue($event)"
             [showPlaceholder]="true"
           ></app-text-input>
-          <div *ngIf="f['email'].touched && f['email'].invalid" class="error">
-            <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
-            <div *ngIf="f['email'].errors?.['email']">Enter a valid email.</div>
+          <div *ngIf="f['username'].touched && f['username'].invalid" class="error">
+            <div *ngIf="f['username'].errors?.['required']">Email is required.</div>
+            <div *ngIf="f['username'].errors?.['username']">Enter a valid email.</div>
           </div>
         </div>
 
@@ -47,8 +49,9 @@
             Password is required.
           </div>
         </div>
-
-      
+  <div *ngIf="errorMessage" class="error">
+          {{ errorMessage }}
+        </div>
         <div class="button-container">
           <span class="account">Don't have an account? <a routerLink="/sign-up" style="color: var(--secondary); text-decoration: underline;">Sign up</a></span>
           <app-button
@@ -56,8 +59,10 @@
             type="submit"
             bgColor="var(--secondary)"
             style="width: 50%;"
-            routerLink="/products"
-          ></app-button>
+          
+          >
+            {{ isLoading ? 'Signing In...' : 'Sign In' }}
+          </app-button>
         </div>
       </form>
     </div>

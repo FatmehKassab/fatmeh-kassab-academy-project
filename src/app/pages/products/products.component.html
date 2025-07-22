@@ -1,2 +1,28 @@
 <app-navbar></app-navbar>
-<app-product-card></app-product-card>
+
+<div class="product-container">
+  <!-- Filters -->
+  <div class="filters">
+    <h1 style="font-size: 20px; color: var(--primary);">Categories</h1>
+    <app-boolean-input
+      *ngFor="let category of categories"
+      [label]="category"
+      [value]="selectedCategories.has(category)"
+      (valueChange)="onCategoryChange($event, category)"
+    ></app-boolean-input>
+    
+    <!-- Sort Dropdown -->
+    <div class="sort-container">
+      <h1 style="font-size: 20px; color: var(--primary); margin-top: 20px;">Sort By</h1>
+      <select [(ngModel)]="selectedSortOption" (change)="onSortChange()" class="sort-select">
+        <option *ngFor="let option of sortOptions" [value]="option.value">{{option.label}}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Product List -->
+  <app-product-card [products]="filteredProducts" class="products"></app-product-card>
+
+</div>
+<app-footer></app-footer>
+
