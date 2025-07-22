@@ -6,16 +6,18 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DrawerService {
 
-  constructor() { }
-  private _drawerVisible = new BehaviorSubject<boolean>(false);
-  drawerVisible$ = this._drawerVisible.asObservable();
+  private visibleSubject = new BehaviorSubject<boolean>(false);
+  private typeSubject = new BehaviorSubject<'cart' | 'favorites'>('cart');
 
-  openDrawer() {
-    this._drawerVisible.next(true);
-    console.log("open")
+  drawerVisible$ = this.visibleSubject.asObservable();
+  drawerType$ = this.typeSubject.asObservable();
+
+  openDrawer(type: 'cart' | 'favorites') {
+    this.typeSubject.next(type);
+    this.visibleSubject.next(true);
   }
 
   closeDrawer() {
-    this._drawerVisible.next(false);
+    this.visibleSubject.next(false);
   }
 }

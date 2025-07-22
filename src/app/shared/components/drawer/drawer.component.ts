@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { DrawerService } from '../../services/drawer.service';
-import { Observable } from 'rxjs';
 import { CartService } from '../../services/cart.service';
+import { FavoritesService } from '../../services/favorites.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -14,37 +14,56 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './drawer.component.scss'
 })
 export class DrawerComponent implements OnInit {
-  visible: boolean = false;
-  public products: any = [];
-  public grandTotal: number = 0;
+  visible = false;
+  drawerType: 'cart' | 'favorites' = 'cart';
+  products: any[] = [];
+  grandTotal: number = 0;
 
   constructor(
     private drawerService: DrawerService,
-    private cartService: CartService
+    private cartService: CartService,
+    private favoritesService: FavoritesService
   ) {}
 
   ngOnInit(): void {
-    this.drawerService.drawerVisible$.subscribe(visible => {
-      this.visible = visible;
-    });
-    
-    this.cartService.getProducts().subscribe(res => {
-      this.products = res;
-      this.grandTotal = this.cartService.getTotalPrice();
+    this.drawerService.drawerVisible$.subscribe(visible => this.visible = visible);
+    this.drawerService.drawerType$.subscribe(type => {
+      this.drawerType = type;
+
+      if (type === 'cart') {
+        this.cartService.getProducts().subscribe(res => {
+          this.products = res;
+          this.grandTotal = this.cartService.getTotalPrice();
+        });
+      } else {
+        this.products = this.favoritesService.favorites();
+      }
     });
   }
 
   removeItem(item: any) {
-    this.cartService.removeCartItem(item);
-    this.grandTotal = this.cartService.getTotalPrice();
+    if (this.drawerType === 'cart') {
+      this.cartService.removeCartItem(item);
+      this.grandTotal = this.cartService.getTotalPrice();
+    } else {
+      this.favoritesService.removeFavorite(item);
+      this.products = this.favoritesService.favorites();
+    }
   }
 
-  emptyCart() {
-    this.cartService.removeAllCart();
-    this.grandTotal = 0;
+  empty() {
+    if (this.drawerType === 'cart') {
+      this.cartService.removeAllCart();
+      this.grandTotal = 0;
+    } else {
+      this.favoritesService.clearFavorites();
+      this.products = [];
+    }
   }
 
   updateQuantity(item: any, change: number) {
+    if (this.drawerType !== 'cart') return;
+
     const newQuantity = item.quantity + change;
     if (newQuantity > 0) {
       item.quantity = newQuantity;
