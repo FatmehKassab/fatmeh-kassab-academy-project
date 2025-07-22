@@ -4,6 +4,7 @@ export const ICONS = {
   chevron_right_white:'icons/chevron_right_white',
   chevron_right:'icons/chevron_right',
   email:'icons/email.svg',
+  heart:'icons/heart.svg',
   hide: 'icons/hide.svg',
   instagram:'icons/instagram.svg',
   minus:'icons/minus.svg',
