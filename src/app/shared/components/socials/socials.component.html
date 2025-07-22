@@ -1,6 +1,22 @@
-<div class="circle-icon" (click)="onClick()">
-  <img [src]="iconPath" [alt]="altText" />
-</div>
+<p-overlaybadge
+  *ngIf="showBadge && badgeValue; else noBadge"
+  pOverlayBadge
+  [value]="badgeValue"
+  severity="danger"
+  class="inline-block relative"
+  (click)="onClick()"
+>
+  <div class="circle-icon">
+    <img [src]="iconPath" [alt]="altText" />
+  </div>
+</p-overlaybadge>
+
+
+<ng-template #noBadge>
+  <div class="circle-icon" (click)="onClick()">
+    <img [src]="iconPath" [alt]="altText" />
+  </div>
+</ng-template>
 
 
 <div *ngIf="isDropdown && showDropdown" class="dropdown-box">
