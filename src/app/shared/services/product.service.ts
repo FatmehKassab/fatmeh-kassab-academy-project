@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 export interface Product {
   id: number;
@@ -13,6 +13,7 @@ export interface Product {
     rate: number;
     count: number;
   };
+   inStock?: number;
 }
 
 @Injectable({
@@ -38,5 +39,27 @@ export class ProductService {
   }
   getProductsByCategory(category: string): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}/category/${category}`);
+  }
+
+   getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl).pipe(
+      map(products => products.map(product => ({
+        ...product,
+        inStock: Math.floor(Math.random() * 100) // Add random stock for demo
+      })))
+    );
+  }
+
+  addProduct(product: Omit<Product, 'id'>): Observable<Product> {
+    // Note: FakeStoreAPI doesn't actually persist changes
+    return this.http.post<Product>(this.apiUrl, product);
+  }
+
+  updateProduct(id: number, product: Partial<Product>): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}/${id}`, product);
+  }
+
+  deleteProduct(id: number): Observable<Product> {
+    return this.http.delete<Product>(`${this.apiUrl}/${id}`);
   }
 }
