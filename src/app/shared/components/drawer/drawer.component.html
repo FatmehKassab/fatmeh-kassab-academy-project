@@ -28,9 +28,11 @@
 
                 <td *ngIf="drawerType === 'cart'">${{item.price | number:'1.2-2'}}</td>
                 <td *ngIf="drawerType === 'cart'">
-                  <button (click)="updateQuantity(item, -1)">-</button>
+                  <app-counter (decrement)="updateQuantity(item, -1)" (increment)="updateQuantity(item, 1)"
+                    [quantity]="item.quantity"></app-counter>
+                  <!-- <button (click)="updateQuantity(item, -1)">-</button>
                   {{item.quantity}}
-                  <button (click)="updateQuantity(item, 1)">+</button>
+                  <button (click)="updateQuantity(item, 1)">+</button> -->
                 </td>
                 <td *ngIf="drawerType === 'cart'">
                   ${{(item.price * item.quantity) | number:'1.2-2'}}

@@ -5,11 +5,12 @@ import { CartService } from '../../services/cart.service';
 import { FavoritesService } from '../../services/favorites.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CounterComponent } from "../counter/counter.component";
 
 @Component({
   selector: 'app-drawer',
   standalone: true,
-  imports: [DrawerModule, CommonModule, FormsModule],
+  imports: [DrawerModule, CommonModule, FormsModule, CounterComponent],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss'
 })
@@ -65,7 +66,7 @@ export class DrawerComponent implements OnInit {
     if (this.drawerType !== 'cart') return;
 
     const newQuantity = item.quantity + change;
-    if (newQuantity > 0) {
+    if (newQuantity > 0 && newQuantity <= 10) {
       item.quantity = newQuantity;
       item.total = item.price * item.quantity;
       this.cartService.productList.next([...this.cartService.cartItemList]);
