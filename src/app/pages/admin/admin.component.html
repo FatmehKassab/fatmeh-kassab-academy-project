@@ -1,6 +1,23 @@
-<ag-grid-angular  style="width: 80%; height: 500px; padding: 20px;"
+<!-- <ag-grid-angular  style="width: 80%; height: 500px; padding: 20px;"
         [rowData]="rowData"
         [columnDefs]="colDefs" 
       [pagination]="true"
-      [theme]="theme"
-       />
+    
+       /> -->
+       <div >
+                <button 
+          
+           
+           
+            (click)="openAddDialog()">Add Product</button>
+       </div>
+ <ag-grid-angular style="width: 80%; height: 500px; padding: 20px;"
+      [rowData]="rowData"
+      [columnDefs]="colDefs"
+      (gridReady)="onGridReady($event)"
+      (cellValueChanged)="onCellValueChanged($event)">
+    </ag-grid-angular>
+
+            <p-confirmDialog [style]="{width: '400px'}"></p-confirmDialog>
+
+            
