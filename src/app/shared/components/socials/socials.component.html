@@ -20,5 +20,17 @@
 
 
 <div *ngIf="isDropdown && showDropdown" class="dropdown-box">
-  <ng-container *ngTemplateOutlet="dropdownContent"></ng-container>
+ @if (isLoggedIn) {
+    <div style="padding: 8px; min-width: 120px;">
+      <p style="margin: 0 0 8px 0; font-weight: bold;">TitleCasePipe</p>
+      <hr style="margin: 4px 0;">
+      <p style="margin: 8px 0; cursor: pointer;" routerLink="/profile">My Profile</p>
+      <p style="margin: 8px 0; cursor: pointer;" (click)="logout()">Logout</p>
+    </div>
+} @else {
+    <div style="padding: 8px; min-width: 120px;">
+      <p style="margin: 8px 0; cursor: pointer;" routerLink="/sign-in">Sign In</p>
+      <p style="margin: 8px 0; cursor: pointer;" routerLink="/sign-up">Sign Up</p>
+    </div>
+}
 </div>

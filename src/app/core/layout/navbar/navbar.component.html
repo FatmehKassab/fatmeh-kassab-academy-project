@@ -30,51 +30,10 @@
 
  <app-socials  [iconPath]="ICONS.heart" (iconClick)="openFavoritesDrawer()" [badgeValue]="totalFavorites"  [showBadge]="true"></app-socials>
 
-<!-- 
-  @if (isLoggedIn | async) {
-  <ng-template #loggedInDropdown>
-    <div style="padding: 8px; min-width: 120px;">
-      <p style="margin: 0 0 8px 0; font-weight: bold;">Hello, {{username}}</p>
-      <hr style="margin: 4px 0;">
-      <p style="margin: 8px 0; cursor: pointer;" routerLink="/profile">My Profile</p>
-      <p style="margin: 8px 0; cursor: pointer;" (click)="logout()">Logout</p>
-    </div>
-  </ng-template>
-} @else {
-  <ng-template #loggedOutDropdown>
-    <div style="padding: 8px; min-width: 120px;">
-      <p style="margin: 8px 0; cursor: pointer;" routerLink="/sign-in">Sign In</p>
-      <p style="margin: 8px 0; cursor: pointer;" routerLink="/sign-up">Sign Up</p>
-    </div>
-  </ng-template>
-}
 
-<app-socials 
-  [iconPath]="ICONS.user_white"   
-  [isDropdown]="true"
-  [dropdownContent]="currentDropdown">
-</app-socials> -->
-    <ng-template #loggedInDropdown>
-      <div style="padding: 8px; min-width: 120px;">
-        <p style="margin: 0 0 8px 0; font-weight: bold;">Hello, {{ firstName | titlecase }}</p>
-        <hr style="margin: 4px 0;" />
-        <p style="margin: 8px 0; cursor: pointer;" routerLink="/profile">My Profile</p>
-        <p style="margin: 8px 0; cursor: pointer;" (click)="logout()">Logout</p>
-      </div>
-    </ng-template>
-
-    <ng-template #loggedOutDropdown>
-      <div style="padding: 8px; min-width: 120px;">
-        <p style="margin: 8px 0; cursor: pointer;" routerLink="/sign-in">Sign In</p>
-        <p style="margin: 8px 0; cursor: pointer;" routerLink="/sign-up">Sign Up</p>
-      </div>
-    </ng-template>
-
-    <!-- User icon with dropdown logic -->
     <app-socials 
       [iconPath]="ICONS.user_white"   
-      [isDropdown]="true"
-      [dropdownContent]="currentDropdown">
+      [isDropdown]="true">
     </app-socials>
       </div>
 

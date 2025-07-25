@@ -1,5 +1,7 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../../core/auth/services/auth.service';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 
 @Component({
@@ -7,7 +9,8 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
   templateUrl: './socials.component.html',
   styleUrl: './socials.component.scss',
   standalone: true,
-  imports:[NgIf,NgTemplateOutlet,OverlayBadgeModule]
+  imports:[NgIf]
+
 })
 export class SocialsComponent {
   @Input() iconPath: string = '';
@@ -19,6 +22,15 @@ export class SocialsComponent {
   @Input() showBadge: boolean = false;
  
 
+ firstName: string = '';
+  isLoggedIn: boolean = false;
+  private authSubscription?: Subscription;
+
+constructor(    private authService: AuthService){
+  
+}
+
+
   showDropdown = false;
 
 
@@ -28,4 +40,32 @@ export class SocialsComponent {
       this.showDropdown = !this.showDropdown;
     }
   }
+
+    ngOnInit(): void {
+       this.authService.isLoggedIn().subscribe((loggedIn) => {
+    this.isLoggedIn = loggedIn;
+ const user = this.authService.getUserData();
+  this.firstName = user?.given_name ?? 'User';
+
+    
+
+  });
+  }
+  ngOnDestroy() {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+  }
+
+    logout() {
+   this.authService.logout().subscribe({
+      next: () => {
+        console.log('Logout successful');
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+      }
+    });
+  }
+
 }
