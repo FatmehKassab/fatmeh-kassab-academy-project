@@ -7,6 +7,7 @@ import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../core/auth/services/auth.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { IMAGES } from '../../shared/utils/images';
 
 
 @Component({
@@ -25,6 +26,7 @@ import { MessageService } from 'primeng/api';
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent implements OnInit {
+  IMAGES =IMAGES;
   signupForm!: FormGroup;
   isLoading = false;
   errorMessage: string | null = null;
@@ -89,7 +91,9 @@ onSubmit(): void {
           summary: 'Success', 
           detail: 'Sign up successful!' 
         });
-        this.router.navigate(['/sign-in']);
+        setTimeout(() => {
+    this.router.navigate(['/sign-in']);
+  }, 1000);
       },
         error: (err) => {
         this.isLoading = false;
@@ -119,10 +123,5 @@ onSubmit(): void {
            this.f['confirmPassword'].touched;
   }
 
-  get IMAGES() {
-    return {
-      login_illustration: 'images/login_illustration.svg',
-      logo: 'images/logo.svg'
-    };
-  }
+ 
 }
