@@ -52,7 +52,7 @@
 </app-socials> -->
     <ng-template #loggedInDropdown>
       <div style="padding: 8px; min-width: 120px;">
-        <p style="margin: 0 0 8px 0; font-weight: bold;">Hello, {{ userData?.Firstname }}</p>
+        <p style="margin: 0 0 8px 0; font-weight: bold;">Hello, {{ firstName | titlecase }}</p>
         <hr style="margin: 4px 0;" />
         <p style="margin: 8px 0; cursor: pointer;" routerLink="/profile">My Profile</p>
         <p style="margin: 8px 0; cursor: pointer;" (click)="logout()">Logout</p>

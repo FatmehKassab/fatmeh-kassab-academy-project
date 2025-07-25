@@ -6,7 +6,7 @@ import { DrawerService } from '../../../shared/services/drawer.service';
 import { CartService } from '../../../shared/services/cart.service';
 import { FavoritesService } from '../../../shared/services/favorites.service';
 import { Product } from '../../../shared/interfaces/product.model';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Observable, shareReplay, startWith, Subscription } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
@@ -14,7 +14,7 @@ import { AuthService } from '../../auth/services/auth.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [SocialsComponent, RouterModule, AsyncPipe],
+  imports: [SocialsComponent, RouterModule, TitleCasePipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -27,7 +27,7 @@ export class NavbarComponent {
   
   public totalItem: number = 0;
   public totalFavorites: number = 0;
-  username: string | null = null;
+ firstName: string = '';
   isLoggedIn: boolean = false;
   private authSubscription?: Subscription;
 userData: any;
@@ -45,6 +45,8 @@ userData: any;
 
 
   }
+
+  
   ngOnInit(): void {
     this.cartService.getProducts()
       .subscribe(res => {
@@ -53,8 +55,10 @@ userData: any;
       
        this.authService.isLoggedIn().subscribe((loggedIn) => {
     this.isLoggedIn = loggedIn;
-    this.username = this.authService.getUserData()?.Firstname || 'User';
-       console.log(">>>>>",loggedIn,this.isLoggedIn)
+ const user = this.authService.getUserData();
+  this.firstName = user?.given_name ?? 'User';
+
+    
 
   });
   }

@@ -51,6 +51,8 @@ export class AuthService {
    get isLoggedInValue(): boolean {
     return this.isLoggedInSubject.value;
   }
+
+  
   signUp(userData: {
     Firstname: string;
     Lastname: string;
@@ -61,15 +63,30 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-
+ console.log('SIGNUP response:', userData);
     return this.http.post(`${this.API_BASE_URL}/SignUp()`, userData, { headers }).pipe(
       tap((response: any) => {
         if (response.token) {
+           console.log('SIGNUP response:', userData,response,response.user);
           this.storeAuthData(response.token, response.refreshToken, response.user);
         }
       })
+      
     );
   }
+
+
+  decodeToken(token: string): any {
+  try {
+    const payload = token.split('.')[1]; // Get the payload part
+    const decodedPayload = atob(payload); // Decode base64
+    return JSON.parse(decodedPayload);
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+}
+
 
 login(credentials: { Username: string; Password: string }): Observable<any> {
   const headers = new HttpHeaders({
@@ -77,20 +94,22 @@ login(credentials: { Username: string; Password: string }): Observable<any> {
   });
 
   return this.http.post(`${this.API_BASE_URL}/Login()`, credentials, { headers }).pipe(
-   tap((response: any) => {
-  const token = response?.Login?.AccessToken;
-  const refreshToken = response?.Login?.RefreshToken;
-  const user = response?.Login;
+    tap((response: any) => {
+      const token = response?.Login?.AccessToken;
+      const refreshToken = response?.Login?.RefreshToken;
 
-  if (token && refreshToken) {
-    this.storeAuthData(token, refreshToken, user);
-  } else {
-    console.warn('Missing token or refresh token in login response');
-  }
-})
+      if (token && refreshToken) {
+        const decodedUser = this.decodeToken(token);
+        console.log('Decoded JWT payload:', decodedUser);
 
+        this.storeAuthData(token, refreshToken, decodedUser);
+      } else {
+        console.warn('Missing token or refresh token in login response');
+      }
+    })
   );
 }
+
 
 
   // logout(): Observable<any> {
