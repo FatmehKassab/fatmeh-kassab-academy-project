@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
 import { Store } from '@ngrx/store';
 import { selectCartItems, selectCartTotal, selectQuantityByProductId } from '../../store/cart/cart.selectors';
+import { clearCart, deleteProductFromCart, removeCartItem } from '../../store/cart/cart.actions';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class DrawerComponent implements OnInit {
   drawerType: 'cart' | 'favorites' = 'cart';
   products: any[] = [];
   grandTotal: number = 0;
-
+ productId!: number;
+ product: any;
   constructor(
     private drawerService: DrawerService,
     private cartService: CartService,
@@ -59,8 +61,7 @@ export class DrawerComponent implements OnInit {
 
   removeItem(item: any) {
     if (this.drawerType === 'cart') {
-      this.cartService.removeCartItem(item);
-      this.grandTotal = this.cartService.getTotalPrice();
+    this.store.dispatch(deleteProductFromCart({ productId: item.id }));
     } else {
       this.favoritesService.removeFavorite(item);
       this.products = this.favoritesService.favorites();
@@ -69,13 +70,14 @@ export class DrawerComponent implements OnInit {
 
   empty() {
     if (this.drawerType === 'cart') {
-      this.cartService.removeAllCart();
+      this.store.dispatch(clearCart());
       this.grandTotal = 0;
     } else {
       this.favoritesService.clearFavorites();
       this.products = [];
     }
   }
+
 
   // updateQuantity(item: any, change: number) {
   //   if (this.drawerType !== 'cart') return;

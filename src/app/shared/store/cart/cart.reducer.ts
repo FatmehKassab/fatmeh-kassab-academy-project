@@ -104,6 +104,17 @@ on(CartActions.removeCartItem, (state, { productId }) => {
     cartItems: []
   })),
 
+ on(CartActions.deleteProductFromCart, (state, { productId }) => {
+  return {
+    ...state,
+    cartItems: state.cartItems.filter(item => item.id !== productId),
+    quantities: Object.fromEntries(
+      Object.entries(state.quantities).filter(([id]) => +id !== productId)
+    )
+  };
+}),
+
+
   on(CartActions.updateSearch, (state, { searchTerm }) => ({
     ...state,
     search: searchTerm
