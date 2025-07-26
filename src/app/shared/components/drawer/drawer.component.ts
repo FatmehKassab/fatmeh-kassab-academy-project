@@ -30,6 +30,7 @@ export class DrawerComponent implements OnInit {
   totalFavorites: number = 0;
 totalQuantity$!: Observable<number>;
   grandTotal$!: Observable<number>;
+  ICONS = ICONS;
   constructor(
     private drawerService: DrawerService,
     private favoritesService: FavoritesService,
