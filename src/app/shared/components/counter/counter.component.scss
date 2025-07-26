@@ -1,0 +1,40 @@
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 1px 10px;
+  border: 2px solid var(--primary);
+  border-radius: 30px;
+  font-weight: 500;
+
+  button {
+    background-color: transparent;
+    color: var(--secondary);
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: transparent;
+      color: var(--primary);
+    }
+
+    &:disabled {
+      color: grey;
+      cursor: not-allowed;
+      
+      &:hover {
+        color: grey;
+        background-color: transparent;
+      }
+    }
+  }
+
+  span {
+    font-size: 15px;
+    width: 2rem;
+    text-align: center;
+    color: var(--primary);
+  }
+}

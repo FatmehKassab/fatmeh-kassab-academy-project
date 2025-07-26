@@ -6,6 +6,9 @@ import { FavoritesService } from '../../services/favorites.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
+import { selectQuantityByProductId } from '../../store/counter/counter.selectors';
+import { Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'app-drawer',
@@ -23,7 +26,8 @@ export class DrawerComponent implements OnInit {
   constructor(
     private drawerService: DrawerService,
     private cartService: CartService,
-    private favoritesService: FavoritesService
+    private favoritesService: FavoritesService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -31,16 +35,23 @@ export class DrawerComponent implements OnInit {
     this.drawerService.drawerType$.subscribe(type => {
       this.drawerType = type;
 
-      if (type === 'cart') {
-        this.cartService.getProducts().subscribe(res => {
-          this.products = res;
-          this.grandTotal = this.cartService.getTotalPrice();
-        });
-      } else {
-        this.products = this.favoritesService.favorites();
-      }
+     if (type === 'cart') {
+  this.cartService.getProducts().subscribe(res => {
+    this.products = res;
+
+    this.products.forEach((item, i) => {
+      this.store.select(selectQuantityByProductId(item.id)).subscribe(qty => {
+        this.products[i].quantity = qty;
+        this.products[i].total = this.products[i].price * qty;
+        console.log("ggggg",qty,this.products[i].price * qty)
+      });
+    });
+  });
+}
+
     });
   }
+
 
   removeItem(item: any) {
     if (this.drawerType === 'cart') {
@@ -62,15 +73,15 @@ export class DrawerComponent implements OnInit {
     }
   }
 
-  updateQuantity(item: any, change: number) {
-    if (this.drawerType !== 'cart') return;
+  // updateQuantity(item: any, change: number) {
+  //   if (this.drawerType !== 'cart') return;
 
-    const newQuantity = item.quantity + change;
-    if (newQuantity > 0 && newQuantity <= 10) {
-      item.quantity = newQuantity;
-      item.total = item.price * item.quantity;
-      this.cartService.productList.next([...this.cartService.cartItemList]);
-      this.grandTotal = this.cartService.getTotalPrice();
-    }
-  }
+  //   const newQuantity = item.quantity + change;
+  //   if (newQuantity > 0 && newQuantity <= 10) {
+  //     item.quantity = newQuantity;
+  //     item.total = item.price * item.quantity;
+  //     this.cartService.productList.next([...this.cartService.cartItemList]);
+  //     this.grandTotal = this.cartService.getTotalPrice();
+  //   }
+  // }
 }

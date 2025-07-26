@@ -1,9 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-
-
-export const incrementQuantity = createAction(
-  '[Counter] Incremwnt Quantity',
-  props<{ quantity: number }>()
-);
+export const increment = createAction('[Counter] Increment', props<{ productId: number }>());
+export const decrement = createAction('[Counter] Decrement', props<{ productId: number }>());
+export const setQuantity = createAction('[Counter] Set Quantity', props<{ productId: number, quantity: number }>());
 

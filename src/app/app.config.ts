@@ -7,9 +7,10 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { provideStore } from '@ngrx/store';
-import { cartReducer } from './shared/store/cart.reducer';
-import { provideEffects } from '@ngrx/effects';
-import { CartEffects } from './shared/store/cart.effects';
+import { cartReducer } from './shared/store/cart/cart.reducer';
+import { counterReducer } from './shared/store/counter/counter.reducer';
+
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),  provideHttpClient(),provideAnimations(),providePrimeNG({
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
         }
     }
 }), provideStore(cartReducer),
-    provideEffects([CartEffects])
+ provideStore({ counter: counterReducer }),
+   
   ]
 };

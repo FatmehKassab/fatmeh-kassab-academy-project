@@ -1,3 +1,8 @@
- <button  (click)="emitClickMinus()">-</button>
-                  {{quantity}}
-                  <button  (click)="emitClickPlus()">+</button>
+<div class="counter">
+  <button style="margin-bottom: 3px;"
+    [disabled]="(quantity$ | async) === 1"
+    (click)="onMinusClick()">-</button>
+  <span>{{ quantity$ | async }}</span>
+  <button (click)="onPlusClick()"
+    [disabled]="(quantity$ | async) === 10">+</button>
+</div>
