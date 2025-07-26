@@ -1,19 +1,19 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CartState } from './cart.reducer';
 
 export const selectCartState = createFeatureSelector<CartState>('cart');
 
 export const selectCartItems = createSelector(
   selectCartState,
-  (state: CartState) => state.items
+  state => state.cartItems
 );
 
 export const selectCartTotal = createSelector(
-  selectCartState,
-  (state: CartState) => state.total
+  selectCartItems,
+  items => items.reduce((sum, item) => sum + item.total, 0)
 );
 
-export const selectCartItemCount = createSelector(
-  selectCartItems,
-  (items) => items.reduce((count, item) => count + item.quantity, 0)
+export const selectSearchTerm = createSelector(
+  selectCartState,
+  state => state.search
 );

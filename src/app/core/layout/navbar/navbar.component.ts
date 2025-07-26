@@ -6,6 +6,7 @@ import { DrawerService } from '../../../shared/services/drawer.service';
 import { FavoritesService } from '../../../shared/services/favorites.service';
 import { Product } from '../../../shared/interfaces/product.model';
 import { RouterModule } from '@angular/router';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,22 +22,15 @@ export class NavbarComponent {
   @Input() products: Product[] = [];
   @Input() product!: Product;
   
-  public totalItem: number = 0;
-  public totalFavorites: number = 0;
 
   constructor(
     private drawerService: DrawerService,
-    public favoritesService: FavoritesService,
+ 
   ) {
-    effect(() => {
-      this.totalFavorites = this.favoritesService.count();
-    });
-
-
 
   }
 
-  
+
 
   openCartDrawer() {
     this.drawerService.openDrawer('cart');

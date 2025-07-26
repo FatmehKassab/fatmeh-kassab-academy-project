@@ -43,12 +43,12 @@ export class DrawerComponent implements OnInit {
       this.store.select(selectQuantityByProductId(item.id)).subscribe(qty => {
         this.products[i].quantity = qty;
         this.products[i].total = this.products[i].price * qty;
-        console.log("ggggg",qty,this.products[i].price * qty)
       });
     });
   });
+} else if (type === 'favorites') {
+  this.products = this.favoritesService.favorites();
 }
-
     });
   }
 
