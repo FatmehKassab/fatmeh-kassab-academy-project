@@ -26,7 +26,20 @@ private favoritesService = inject(FavoritesService);
  addToCart(product: any) {
   this.store.dispatch(addToCart({ product }));
 }
-  addToFavorites(item: any){
-    this.favoritesService.addToFavorites(item);
+  // addToFavorites(item: any){
+  //   this.favoritesService.addToFavorites(item);
+  // }
+
+  addToFavorites(product: any) {
+  if (this.favoritesService.isFavorite(product)) {
+    this.favoritesService.removeFavorite(product);
+  } else {
+     this.favoritesService.addToFavorites(product);
   }
+}
+
+  isFavorite(product: any): boolean {
+  return this.favoritesService.isFavorite(product); 
+}
+
 }
