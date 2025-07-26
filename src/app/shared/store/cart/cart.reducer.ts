@@ -99,10 +99,12 @@ on(CartActions.removeCartItem, (state, { productId }) => {
 }),
 
 
-  on(CartActions.clearCart, state => ({
-    ...state,
-    cartItems: []
-  })),
+on(CartActions.clearCart, state => ({
+  ...state,
+  cartItems: [],
+  quantities: {}
+})),
+
 
  on(CartActions.deleteProductFromCart, (state, { productId }) => {
   return {
