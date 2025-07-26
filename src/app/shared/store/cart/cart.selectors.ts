@@ -24,3 +24,8 @@ export const selectQuantityByProductId = (productId: number) =>
     (state: CartState) => state.quantities[productId] ?? 1
    
   );
+
+  export const selectTotalQuantity = createSelector(
+  selectCartState,
+  state => Object.values(state.quantities).reduce((acc, qty) => acc + qty, 0)
+);
