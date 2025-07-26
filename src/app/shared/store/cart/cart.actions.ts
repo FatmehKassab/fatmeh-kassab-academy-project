@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CartItem, Product } from '../interfaces/product.model';
+import { CartItem, Product } from '../../interfaces/product.model';
 
 // Local actions
 export const addToCart = createAction(
