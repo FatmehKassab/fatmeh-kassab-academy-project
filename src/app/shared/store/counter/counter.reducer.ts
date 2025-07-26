@@ -12,7 +12,7 @@ export const initialState: CounterState = {
 export const counterReducer = createReducer(
   initialState,
   on(CounterActions.increment, (state, { productId }) => {
-    const current = state.quantities[productId] || 0;
+    const current = state.quantities[productId] ?? 1; 
     return {
       ...state,
       quantities: {
@@ -22,12 +22,12 @@ export const counterReducer = createReducer(
     };
   }),
   on(CounterActions.decrement, (state, { productId }) => {
-    const current = state.quantities[productId] || 0;
+    const current = state.quantities[productId] ?? 1; 
     return {
       ...state,
       quantities: {
         ...state.quantities,
-        [productId]: current > 0 ? current - 1 : current,
+        [productId]: current > 1 ? current - 1 : 1, 
       }
     };
   }),
@@ -35,7 +35,7 @@ export const counterReducer = createReducer(
     ...state,
     quantities: {
       ...state.quantities,
-      [productId]: quantity >= 0 && quantity <= 10 ? quantity : (state.quantities[productId] || 0),
+      [productId]: quantity >= 1 && quantity <= 10 ? quantity : 1, 
     }
   }))
 );

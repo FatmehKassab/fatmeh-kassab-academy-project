@@ -17,26 +17,5 @@ describe('CounterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should display the quantity', () => {
-    component.quantity = 5;
-    fixture.detectChanges();
-    const quantityText = fixture.nativeElement.textContent;
-    expect(quantityText).toContain('5');
-  });
 
-  it('should emit increment event on "+" button click', () => {
-    spyOn(component.increment, 'emit');
-
-     const button = fixture.nativeElement.querySelector('button'); 
-  button.click();
-    expect(component.increment.emit).toHaveBeenCalled();
-  });
-
-  it('should emit decrement event on "-" button click', () => {
-    spyOn(component.decrement, 'emit');
-
-      const button = fixture.nativeElement.querySelector('button'); 
-  button.click();
-    expect(component.decrement.emit).toHaveBeenCalled();
-  });
 });

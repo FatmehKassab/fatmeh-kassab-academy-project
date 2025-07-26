@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
         }
     }
 }), provideStore(cartReducer),
-provideStore(counterReducer),
+ provideStore({ counter: counterReducer }),
    
   ]
 };

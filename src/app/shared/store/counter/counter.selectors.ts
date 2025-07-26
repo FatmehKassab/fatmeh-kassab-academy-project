@@ -6,6 +6,6 @@ export const selectCounterState = createFeatureSelector<CounterState>('counter')
 export const selectQuantityByProductId = (productId: number) =>
   createSelector(
     selectCounterState,
-    state => state.quantities[productId] || 0
+    (state: CounterState) => state.quantities[productId] ?? 1
+   
   );
-
