@@ -4,7 +4,8 @@
     <h2 *ngIf="drawerType === 'favorites'">My Favorites <span style="color: var(--secondary);">({{ totalFavorites }})</span></h2>
   </ng-template>
 
-
+ <div class="drawer-body">
+  <div class="cart-content">
   @if(products.length > 0){
     <app-product-list></app-product-list>
   }
@@ -12,10 +13,11 @@
       <h4>Your {{ drawerType }} is empty</h4>
       <h6>Add item to it now</h6>
     </div>}
-     
+     </div>
 
-    <ng-container *ngIf="products.length != 0 && drawerType === 'cart'">
-    <div><button (click)="empty()">Empty Cart</button>
-<strong>Grand Total: ${{ grandTotal$ | async | number:'1.2-2' }}</strong></div>
-  </ng-container>
+    <div class="total-container" *ngIf="products.length != 0 && drawerType === 'cart'">
+      <p class="total">Total: {{ grandTotal$ | async | number:'1.2-2' }}$</p>
+    <div (click)="empty()">   <img [src]="ICONS.bin" alt="altText" class="bin" /></div>
+  </div>
+  </div>
 </p-drawer>
