@@ -18,7 +18,3 @@
 </div>
 
 </div>
-<ng-container *ngIf="products.length != 0 && drawerType === 'cart'">
-    <div><button (click)="empty()">Empty Cart</button>
-<strong>Grand Total: ${{ grandTotal$ | async | number:'1.2-2' }}</strong></div>
-  </ng-container>
