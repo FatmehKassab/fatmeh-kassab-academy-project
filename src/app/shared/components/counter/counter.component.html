@@ -1,5 +1,8 @@
 <div class="counter">
-  <button (click)="onMinusClick()">-</button>
+  <button style="margin-bottom: 3px;"
+    [disabled]="(quantity$ | async) === 1"
+    (click)="onMinusClick()">-</button>
   <span>{{ quantity$ | async }}</span>
-  <button (click)="onPlusClick()">+</button>
+  <button (click)="onPlusClick()"
+    [disabled]="(quantity$ | async) === 10">+</button>
 </div>

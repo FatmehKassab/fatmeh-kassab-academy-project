@@ -1,30 +1,40 @@
 .counter {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--secondary);
-  border-radius: 0.5rem;
+  justify-content: center;
+  gap: 6px;
+  padding: 1px 10px;
+  border: 2px solid var(--primary);
+  border-radius: 30px;
+  font-weight: 500;
 
   button {
-    background-color: green;
-    color: white;
+    background-color: transparent;
+    color: var(--secondary);
     border: none;
-    padding: 0.3rem 0.7rem;
-    font-size: 1rem;
-    border-radius: 4px;
+    font-size: 15px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darkgreen;
+      background-color: transparent;
+      color: var(--primary);
+    }
+
+    &:disabled {
+      color: grey;
+      cursor: not-allowed;
+      
+      &:hover {
+        color: grey;
+        background-color: transparent;
+      }
     }
   }
 
   span {
-    font-size: 1rem;
+    font-size: 15px;
     width: 2rem;
     text-align: center;
-    color: white;
+    color: var(--primary);
   }
 }
