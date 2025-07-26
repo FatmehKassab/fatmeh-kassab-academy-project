@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { DrawerService } from '../../services/drawer.service';
 import { FavoritesService } from '../../services/favorites.service';
@@ -29,11 +29,16 @@ export class DrawerComponent implements OnInit {
    totalItems: number = 0;
   totalFavorites: number = 0;
 totalQuantity$!: Observable<number>;
+  grandTotal$!: Observable<number>;
   constructor(
     private drawerService: DrawerService,
     private favoritesService: FavoritesService,
     private store: Store
-  ) {  
+  ) {   this.grandTotal$ = this.store.select(selectGrandTotal);
+
+     effect(() => {
+      this.totalFavorites = this.favoritesService.count();
+    });
     
   }
  ngOnInit(): void {
@@ -57,6 +62,13 @@ this.totalQuantity$ = this.store.select(selectTotalQuantity);
   });
     
   }
-
+    empty() {
+    if (this.drawerType === 'cart') {
+      this.store.dispatch(clearCart());
+    } else {
+      this.favoritesService.clearFavorites();
+      this.products = [];
+    }
+  }
 
 }

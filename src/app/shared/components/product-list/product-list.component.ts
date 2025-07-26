@@ -20,12 +20,11 @@ import { ICONS } from '../../utils/icons';
 export class ProductListComponent implements OnInit {
   drawerType: 'cart' | 'favorites' = 'cart';
   @Input() products: any[] = [];
-  grandTotal$!: Observable<number>;
   constructor(
     private drawerService: DrawerService,
     private favoritesService: FavoritesService,
     private store: Store
-  ) {  this.grandTotal$ = this.store.select(selectGrandTotal);
+  ) { 
     
   }
   ICONS = ICONS;
@@ -70,13 +69,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-    empty() {
-    if (this.drawerType === 'cart') {
-      this.store.dispatch(clearCart());
-    } else {
-      this.favoritesService.clearFavorites();
-      this.products = [];
-    }
-  }
+
 
 }

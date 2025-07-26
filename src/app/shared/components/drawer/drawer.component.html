@@ -1,7 +1,7 @@
 <p-drawer [(visible)]="visible" position="right" [style]="{width: '30rem'}">
   <ng-template pTemplate="header">
     <h2 *ngIf="drawerType === 'cart'">My Shopping Cart <span style="color: var(--secondary);">({{ totalItems }})</span></h2>
-    <h2 *ngIf="drawerType === 'favorites'">My Favorites <span style="color: var(--secondary);">({{ products.length }})</span></h2>
+    <h2 *ngIf="drawerType === 'favorites'">My Favorites <span style="color: var(--secondary);">({{ totalFavorites }})</span></h2>
   </ng-template>
 
 
@@ -14,4 +14,8 @@
     </div>}
      
 
+    <ng-container *ngIf="products.length != 0 && drawerType === 'cart'">
+    <div><button (click)="empty()">Empty Cart</button>
+<strong>Grand Total: ${{ grandTotal$ | async | number:'1.2-2' }}</strong></div>
+  </ng-container>
 </p-drawer>
