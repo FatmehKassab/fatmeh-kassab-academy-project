@@ -17,3 +17,10 @@ export const selectSearchTerm = createSelector(
   selectCartState,
   state => state.search
 );
+
+export const selectQuantityByProductId = (productId: number) =>
+  createSelector(
+    selectCartState,
+    (state: CartState) => state.quantities[productId] ?? 1
+   
+  );

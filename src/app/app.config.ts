@@ -8,7 +8,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { provideStore } from '@ngrx/store';
 import { cartReducer } from './shared/store/cart/cart.reducer';
-import { counterReducer } from './shared/store/counter/counter.reducer';
+
 
 
 
@@ -20,8 +20,8 @@ export const appConfig: ApplicationConfig = {
             darkModeSelector: false || 'none'
         }
     }
-}), provideStore(cartReducer),
- provideStore({ counter: counterReducer }),
+}),
+ provideStore({ cart: cartReducer }),
    
   ]
 };

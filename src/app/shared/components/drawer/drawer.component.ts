@@ -6,8 +6,8 @@ import { FavoritesService } from '../../services/favorites.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
-import { selectQuantityByProductId } from '../../store/counter/counter.selectors';
 import { Store } from '@ngrx/store';
+import { selectCartItems, selectCartTotal, selectQuantityByProductId } from '../../store/cart/cart.selectors';
 
 
 @Component({
@@ -30,25 +30,29 @@ export class DrawerComponent implements OnInit {
     private store: Store
   ) {}
 
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.drawerService.drawerVisible$.subscribe(visible => this.visible = visible);
+    
     this.drawerService.drawerType$.subscribe(type => {
       this.drawerType = type;
 
-     if (type === 'cart') {
-  this.cartService.getProducts().subscribe(res => {
-    this.products = res;
-
-    this.products.forEach((item, i) => {
-      this.store.select(selectQuantityByProductId(item.id)).subscribe(qty => {
-        this.products[i].quantity = qty;
-        this.products[i].total = this.products[i].price * qty;
-      });
+      if (type === 'cart') {
+        this.store.select(selectCartItems).subscribe(items => {
+  this.products = [...items];
+ console.log( ">>>>",selectCartItems)
+  this.products.forEach((item, i) => {
+    this.store.select(selectQuantityByProductId(item.id)).subscribe(qty => {
+      this.products[i].quantity = qty;
+      this.products[i].total = this.products[i].price * qty;
     });
   });
-} else if (type === 'favorites') {
-  this.products = this.favoritesService.favorites();
-}
+});
+
+
+      
+      } else if (type === 'favorites') {
+        this.products = this.favoritesService.favorites();
+      }
     });
   }
 

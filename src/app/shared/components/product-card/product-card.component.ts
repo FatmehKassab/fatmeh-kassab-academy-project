@@ -5,6 +5,8 @@ import { SocialsComponent } from "../socials/socials.component";
 import { ICONS } from '../../utils/icons';
 import { CartService } from '../../services/cart.service';
 import { FavoritesService } from '../../services/favorites.service';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../../store/cart/cart.actions';
 
 @Component({
   selector: 'app-product-card',
@@ -20,11 +22,11 @@ export class ProductCardComponent {
 
  ICONS = ICONS;
 private favoritesService = inject(FavoritesService);
- constructor(private cartService: CartService) {}
+ constructor(private cartService: CartService,private store: Store) {}
 
-  addToCart(item: any){
-    this.cartService.addtoCart(item);
-  }
+ addToCart(product: any) {
+  this.store.dispatch(addToCart({ product }));
+}
   addToFavorites(item: any){
     this.favoritesService.addToFavorites(item);
   }
