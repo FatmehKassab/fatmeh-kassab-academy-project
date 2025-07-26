@@ -32,7 +32,7 @@
 
                 </td>
                 <td *ngIf="drawerType === 'cart'">
-                  ${{(item.price * item.quantity) | number:'1.2-2'}}
+                   ${{ getProductTotal(item.id) | async | number:'1.2-2' }}
                 </td>
 
                 <td>
