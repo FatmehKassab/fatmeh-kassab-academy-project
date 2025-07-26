@@ -1,0 +1,24 @@
+<div *ngFor="let item of products; let i = index" class="container">
+<div>
+<img style="width: 50px; " [src]="item.image" alt="">
+</div>
+<div>
+  <p class="category">{{item.category | titlecase}}</p>
+<p class="title">{{item.title}}</p>
+<p *ngIf="drawerType === 'cart'" class="price">{{ getProductTotal(item.id) | async | number:'1.2-2' }}$</p>
+</div>
+<div *ngIf="drawerType === 'cart'">
+   <app-counter [productId]="item.id" [product]="item"></app-counter>
+</div>
+<div>
+    <div  (click)="removeItem(item)">
+    <img [src]="ICONS.bin" alt="altText" class="bin" />
+  </div>
+
+</div>
+
+</div>
+<ng-container *ngIf="products.length != 0 && drawerType === 'cart'">
+    <div><button (click)="empty()">Empty Cart</button>
+<strong>Grand Total: ${{ grandTotal$ | async | number:'1.2-2' }}</strong></div>
+  </ng-container>

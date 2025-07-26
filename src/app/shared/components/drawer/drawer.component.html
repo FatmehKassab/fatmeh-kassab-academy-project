@@ -1,60 +1,17 @@
-<p-drawer [(visible)]="visible" position="right" [style]="{width: '25rem'}">
+<p-drawer [(visible)]="visible" position="right" [style]="{width: '30rem'}">
   <ng-template pTemplate="header">
-    <h2 *ngIf="drawerType === 'cart'">My Shopping Cart</h2>
-    <h2 *ngIf="drawerType === 'favorites'">My Favorites</h2>
+    <h2 *ngIf="drawerType === 'cart'">My Shopping Cart <span style="color: var(--secondary);">({{ totalItems }})</span></h2>
+    <h2 *ngIf="drawerType === 'favorites'">My Favorites <span style="color: var(--secondary);">({{ products.length }})</span></h2>
   </ng-template>
 
-  <ng-container *ngIf="products.length != 0">
-    <div class="container">
-      <div class="card-table">
-        <div class="cart-product">
-          <table class="table table-responsive">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Product</th>
-                <th>Image</th>
-                <th *ngIf="drawerType === 'cart'">Price</th>
-                <th *ngIf="drawerType === 'cart'">Qty</th>
-                <th *ngIf="drawerType === 'cart'">Total</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of products; let i = index">
-                <td>{{i+1}}</td>
-                <td>{{item.title}}</td>
-                <td><img style="width: 50px;" [src]="item.image" alt=""></td>
 
-                <td *ngIf="drawerType === 'cart'">${{item.price | number:'1.2-2'}}</td>
-                <td *ngIf="drawerType === 'cart'">
-                   <app-counter [productId]="item.id" [product]="item"></app-counter>
-
-                </td>
-                <td *ngIf="drawerType === 'cart'">
-                  ${{(item.price * item.quantity) | number:'1.2-2'}}
-                </td>
-
-                <td>
-                  <button (click)="removeItem(item)">Delete</button>
-                </td>
-              </tr>
-              <tr *ngIf="drawerType === 'cart'">
-                <td colspan="5"></td>
-                <td><button (click)="empty()" class="btn btn-danger">Empty Cart</button></td>
-             <td><strong>Grand Total: ${{ grandTotal$ | async | number:'1.2-2' }}</strong></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="products.length == 0">
-    <div class="container">
+  @if(products.length > 0){
+    <app-product-list></app-product-list>
+  }
+    @else{<div>
       <h4>Your {{ drawerType }} is empty</h4>
       <h6>Add item to it now</h6>
-    </div>
-  </ng-container>
+    </div>}
+     
+
 </p-drawer>
