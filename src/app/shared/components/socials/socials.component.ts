@@ -56,7 +56,7 @@ totalQuantity$!: Observable<number>;
       const user = this.authService.getUserData();
       this.firstName = user?.given_name ?? 'User';
 
-        this.totalQuantity$ = this.store.select(selectTotalQuantity);
+        
     });
 
      this.totalQuantity$ = this.store.select(selectTotalQuantity);
