@@ -43,3 +43,14 @@ export const selectGrandTotal = createSelector(
       return total + item.price * qty;
     }, 0)
 );
+
+export const selectProductTotalById = (productId: number) => createSelector(
+  selectCartItems,
+  selectQuantities,
+  (items, quantities) => {
+    const product = items.find(item => item.id === productId);
+    if (!product) return 0;
+    const qty = quantities[productId] || 0;
+    return product.price * qty;
+  }
+);
