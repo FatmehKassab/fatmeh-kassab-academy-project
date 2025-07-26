@@ -62,15 +62,6 @@ export class DrawerComponent implements OnInit {
     }
   }
 
-  updateQuantity(item: any, change: number) {
-    if (this.drawerType !== 'cart') return;
 
-    const newQuantity = item.quantity + change;
-    if (newQuantity > 0 && newQuantity <= 10) {
-      item.quantity = newQuantity;
-      item.total = item.price * item.quantity;
-      this.cartService.productList.next([...this.cartService.cartItemList]);
-      this.grandTotal = this.cartService.getTotalPrice();
-    }
-  }
+
 }
