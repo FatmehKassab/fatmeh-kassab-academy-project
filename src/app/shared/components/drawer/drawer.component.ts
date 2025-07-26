@@ -6,8 +6,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
 import { Store } from '@ngrx/store';
-import { selectCartItems, selectCartTotal, selectQuantityByProductId } from '../../store/cart/cart.selectors';
+import { selectCartItems, selectCartTotal, selectGrandTotal, selectQuantityByProductId } from '../../store/cart/cart.selectors';
 import { clearCart, deleteProductFromCart, removeCartItem } from '../../store/cart/cart.actions';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -21,16 +22,17 @@ export class DrawerComponent implements OnInit {
   visible = false;
   drawerType: 'cart' | 'favorites' = 'cart';
   products: any[] = [];
-  grandTotal: number = 0;
+  grandTotal$!: Observable<number>;
  productId!: number;
  product: any;
   constructor(
     private drawerService: DrawerService,
     private favoritesService: FavoritesService,
     private store: Store
-  ) {}
+  ) {  this.grandTotal$ = this.store.select(selectGrandTotal);}
 
  ngOnInit(): void {
+  
     this.drawerService.drawerVisible$.subscribe(visible => this.visible = visible);
     
     this.drawerService.drawerType$.subscribe(type => {
@@ -54,9 +56,12 @@ export class DrawerComponent implements OnInit {
         this.products = this.favoritesService.favorites();
       }
     });
+
+    
   }
 
 
+  
   removeItem(item: any) {
     if (this.drawerType === 'cart') {
     this.store.dispatch(deleteProductFromCart({ productId: item.id }));
@@ -69,7 +74,7 @@ export class DrawerComponent implements OnInit {
   empty() {
     if (this.drawerType === 'cart') {
       this.store.dispatch(clearCart());
-      this.grandTotal = 0;
+      // this.grandTotal = 0;
     } else {
       this.favoritesService.clearFavorites();
       this.products = [];

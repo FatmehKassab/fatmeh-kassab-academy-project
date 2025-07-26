@@ -42,7 +42,7 @@
               <tr *ngIf="drawerType === 'cart'">
                 <td colspan="5"></td>
                 <td><button (click)="empty()" class="btn btn-danger">Empty Cart</button></td>
-                <td><strong>Grand Total: ${{grandTotal | number:'1.2-2'}}</strong></td>
+             <td><strong>Grand Total: ${{ grandTotal$ | async | number:'1.2-2' }}</strong></td>
               </tr>
             </tbody>
           </table>
