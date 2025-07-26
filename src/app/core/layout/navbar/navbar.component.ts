@@ -22,28 +22,15 @@ export class NavbarComponent {
   @Input() products: Product[] = [];
   @Input() product!: Product;
   
-  public totalItem: number = 0;
-  public totalFavorites: number = 0;
 
   constructor(
     private drawerService: DrawerService,
-    public favoritesService: FavoritesService,
-    private cartService: CartService,
+ 
   ) {
-    effect(() => {
-      this.totalFavorites = this.favoritesService.count();
-    });
-
-
 
   }
 
-    ngOnInit(): void {
-    this.cartService.getProducts()
-      .subscribe(res => {
-        this.totalItem = res.length;
-      })}
-  
+
 
   openCartDrawer() {
     this.drawerService.openDrawer('cart');

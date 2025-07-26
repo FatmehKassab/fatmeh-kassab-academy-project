@@ -23,12 +23,12 @@
     <app-socials  [iconPath]="ICONS.search"></app-socials>
 <app-socials 
   [iconPath]="ICONS.cart"
-  [badgeValue]="totalItem" 
+ drawerType="cart"
   (iconClick)="openCartDrawer()"
   [showBadge]="true"
 ></app-socials>
 
- <app-socials  [iconPath]="ICONS.heart" (iconClick)="openFavoritesDrawer()" [badgeValue]="totalFavorites"  [showBadge]="true"></app-socials>
+ <app-socials  [iconPath]="ICONS.heart" (iconClick)="openFavoritesDrawer()"  drawerType="favorites"  [showBadge]="true"></app-socials>
 
 
     <app-socials 
