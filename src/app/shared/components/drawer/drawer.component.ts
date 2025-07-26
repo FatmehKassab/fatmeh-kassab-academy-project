@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
 import { Store } from '@ngrx/store';
-import { selectCartItems, selectCartTotal, selectGrandTotal, selectQuantityByProductId } from '../../store/cart/cart.selectors';
+import { selectCartItems, selectCartTotal, selectGrandTotal, selectProductTotalById} from '../../store/cart/cart.selectors';
 import { clearCart, deleteProductFromCart, removeCartItem } from '../../store/cart/cart.actions';
 import { Observable } from 'rxjs';
 
@@ -29,7 +29,9 @@ export class DrawerComponent implements OnInit {
     private drawerService: DrawerService,
     private favoritesService: FavoritesService,
     private store: Store
-  ) {  this.grandTotal$ = this.store.select(selectGrandTotal);}
+  ) {  this.grandTotal$ = this.store.select(selectGrandTotal);
+    
+  }
 
  ngOnInit(): void {
   
@@ -39,15 +41,14 @@ export class DrawerComponent implements OnInit {
       this.drawerType = type;
 
       if (type === 'cart') {
+        
         this.store.select(selectCartItems).subscribe(items => {
   this.products = [...items];
  console.log( ">>>>",selectCartItems)
-  this.products.forEach((item, i) => {
-    this.store.select(selectQuantityByProductId(item.id)).subscribe(qty => {
-      this.products[i].quantity = qty;
-      this.products[i].total = this.products[i].price * qty;
-    });
-  });
+ 
+  
+
+
 });
 
 
@@ -61,7 +62,10 @@ export class DrawerComponent implements OnInit {
   }
 
 
-  
+  getProductTotal(productId: number): Observable<number> {
+  return this.store.select(selectProductTotalById(productId));
+}
+
   removeItem(item: any) {
     if (this.drawerType === 'cart') {
     this.store.dispatch(deleteProductFromCart({ productId: item.id }));
