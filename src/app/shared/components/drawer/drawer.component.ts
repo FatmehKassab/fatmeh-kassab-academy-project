@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { DrawerService } from '../../services/drawer.service';
-import { CartService } from '../../services/cart.service';
 import { FavoritesService } from '../../services/favorites.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +26,6 @@ export class DrawerComponent implements OnInit {
  product: any;
   constructor(
     private drawerService: DrawerService,
-    private cartService: CartService,
     private favoritesService: FavoritesService,
     private store: Store
   ) {}

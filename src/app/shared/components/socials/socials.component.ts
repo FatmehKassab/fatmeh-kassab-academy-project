@@ -4,7 +4,6 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { FavoritesService } from '../../services/favorites.service';
-import { CartService } from '../../services/cart.service';
 import { Store } from '@ngrx/store';
 import { selectTotalQuantity } from '../../store/cart/cart.selectors';
 

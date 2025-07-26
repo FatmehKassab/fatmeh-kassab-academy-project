@@ -3,7 +3,6 @@ import { Component, inject, Input } from '@angular/core';
 import { Product, ProductService } from '../../services/product.service';
 import { SocialsComponent } from "../socials/socials.component";
 import { ICONS } from '../../utils/icons';
-import { CartService } from '../../services/cart.service';
 import { FavoritesService } from '../../services/favorites.service';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../store/cart/cart.actions';
@@ -22,7 +21,7 @@ export class ProductCardComponent {
 
  ICONS = ICONS;
 private favoritesService = inject(FavoritesService);
- constructor(private cartService: CartService,private store: Store) {}
+ constructor(private store: Store) {}
 
  addToCart(product: any) {
   this.store.dispatch(addToCart({ product }));
