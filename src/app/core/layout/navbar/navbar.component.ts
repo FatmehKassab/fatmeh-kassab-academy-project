@@ -6,6 +6,7 @@ import { DrawerService } from '../../../shared/services/drawer.service';
 import { FavoritesService } from '../../../shared/services/favorites.service';
 import { Product } from '../../../shared/interfaces/product.model';
 import { RouterModule } from '@angular/router';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -27,6 +28,7 @@ export class NavbarComponent {
   constructor(
     private drawerService: DrawerService,
     public favoritesService: FavoritesService,
+    private cartService: CartService,
   ) {
     effect(() => {
       this.totalFavorites = this.favoritesService.count();
@@ -36,6 +38,11 @@ export class NavbarComponent {
 
   }
 
+    ngOnInit(): void {
+    this.cartService.getProducts()
+      .subscribe(res => {
+        this.totalItem = res.length;
+      })}
   
 
   openCartDrawer() {
