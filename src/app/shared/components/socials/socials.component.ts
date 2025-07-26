@@ -9,7 +9,7 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
   templateUrl: './socials.component.html',
   styleUrl: './socials.component.scss',
   standalone: true,
-  imports:[NgIf]
+  imports:[NgIf,OverlayBadgeModule]
 
 })
 export class SocialsComponent {
