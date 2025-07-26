@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { DrawerService } from '../../services/drawer.service';
-import { CartService } from '../../services/cart.service';
 import { FavoritesService } from '../../services/favorites.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
-import { selectQuantityByProductId } from '../../store/counter/counter.selectors';
 import { Store } from '@ngrx/store';
+import { selectCartItems, selectCartTotal, selectGrandTotal, selectQuantityByProductId } from '../../store/cart/cart.selectors';
+import { clearCart, deleteProductFromCart, removeCartItem } from '../../store/cart/cart.actions';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -21,42 +22,49 @@ export class DrawerComponent implements OnInit {
   visible = false;
   drawerType: 'cart' | 'favorites' = 'cart';
   products: any[] = [];
-  grandTotal: number = 0;
-
+  grandTotal$!: Observable<number>;
+ productId!: number;
+ product: any;
   constructor(
     private drawerService: DrawerService,
-    private cartService: CartService,
     private favoritesService: FavoritesService,
     private store: Store
-  ) {}
+  ) {  this.grandTotal$ = this.store.select(selectGrandTotal);}
 
-  ngOnInit(): void {
+ ngOnInit(): void {
+  
     this.drawerService.drawerVisible$.subscribe(visible => this.visible = visible);
+    
     this.drawerService.drawerType$.subscribe(type => {
       this.drawerType = type;
 
-     if (type === 'cart') {
-  this.cartService.getProducts().subscribe(res => {
-    this.products = res;
-
-    this.products.forEach((item, i) => {
-      this.store.select(selectQuantityByProductId(item.id)).subscribe(qty => {
-        this.products[i].quantity = qty;
-        this.products[i].total = this.products[i].price * qty;
-      });
+      if (type === 'cart') {
+        this.store.select(selectCartItems).subscribe(items => {
+  this.products = [...items];
+ console.log( ">>>>",selectCartItems)
+  this.products.forEach((item, i) => {
+    this.store.select(selectQuantityByProductId(item.id)).subscribe(qty => {
+      this.products[i].quantity = qty;
+      this.products[i].total = this.products[i].price * qty;
     });
   });
-} else if (type === 'favorites') {
-  this.products = this.favoritesService.favorites();
-}
+});
+
+
+      
+      } else if (type === 'favorites') {
+        this.products = this.favoritesService.favorites();
+      }
     });
+
+    
   }
 
 
+  
   removeItem(item: any) {
     if (this.drawerType === 'cart') {
-      this.cartService.removeCartItem(item);
-      this.grandTotal = this.cartService.getTotalPrice();
+    this.store.dispatch(deleteProductFromCart({ productId: item.id }));
     } else {
       this.favoritesService.removeFavorite(item);
       this.products = this.favoritesService.favorites();
@@ -65,13 +73,14 @@ export class DrawerComponent implements OnInit {
 
   empty() {
     if (this.drawerType === 'cart') {
-      this.cartService.removeAllCart();
-      this.grandTotal = 0;
+      this.store.dispatch(clearCart());
+      // this.grandTotal = 0;
     } else {
       this.favoritesService.clearFavorites();
       this.products = [];
     }
   }
+
 
   // updateQuantity(item: any, change: number) {
   //   if (this.drawerType !== 'cart') return;

@@ -1,10 +1,11 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, effect, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, effect, EventEmitter, Input, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { FavoritesService } from '../../services/favorites.service';
-import { CartService } from '../../services/cart.service';
+import { Store } from '@ngrx/store';
+import { selectTotalQuantity } from '../../store/cart/cart.selectors';
 
 @Component({
   selector: 'app-socials',
@@ -28,20 +29,17 @@ export class SocialsComponent {
 
   totalItems: number = 0;
   totalFavorites: number = 0;
-
+totalQuantity$!: Observable<number>;
   constructor(
     private authService: AuthService,
     public favoritesService: FavoritesService,
-    private cartService: CartService,
+    private store: Store
   ) {
     effect(() => {
       this.totalFavorites = this.favoritesService.count();
     });
   }
 
-  get badgeValue(): number {
-    return this.drawerType === 'cart' ? this.totalItems : this.totalFavorites;
-  }
 
   showDropdown = false;
 
@@ -58,10 +56,17 @@ export class SocialsComponent {
       const user = this.authService.getUserData();
       this.firstName = user?.given_name ?? 'User';
 
-      this.cartService.getProducts().subscribe((res) => {
-        this.totalItems = res.length;
-      });
+        this.totalQuantity$ = this.store.select(selectTotalQuantity);
     });
+
+     this.totalQuantity$ = this.store.select(selectTotalQuantity);
+  this.totalQuantity$.subscribe(quantity => {
+    this.totalItems = quantity;
+  });
+  }
+
+  get badgeValue(): number {
+    return this.drawerType === 'cart' ? this.totalItems : this.totalFavorites;
   }
 
   ngOnDestroy() {

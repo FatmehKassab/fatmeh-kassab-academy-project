@@ -28,7 +28,8 @@
 
                 <td *ngIf="drawerType === 'cart'">${{item.price | number:'1.2-2'}}</td>
                 <td *ngIf="drawerType === 'cart'">
-                    <app-counter [productId]="item.id"></app-counter>
+                   <app-counter [productId]="item.id" [product]="item"></app-counter>
+
                 </td>
                 <td *ngIf="drawerType === 'cart'">
                   ${{(item.price * item.quantity) | number:'1.2-2'}}
@@ -41,7 +42,7 @@
               <tr *ngIf="drawerType === 'cart'">
                 <td colspan="5"></td>
                 <td><button (click)="empty()" class="btn btn-danger">Empty Cart</button></td>
-                <td><strong>Grand Total: ${{grandTotal | number:'1.2-2'}}</strong></td>
+             <td><strong>Grand Total: ${{ grandTotal$ | async | number:'1.2-2' }}</strong></td>
               </tr>
             </tbody>
           </table>

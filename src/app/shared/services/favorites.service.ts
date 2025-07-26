@@ -4,11 +4,11 @@ import { Injectable, signal, computed } from '@angular/core';
   providedIn: 'root'
 })
 export class FavoritesService {
- private favoriteItems = signal<any[]>([]);
- public favorites = computed(() => this.favoriteItems());
+  private favoriteItems = signal<any[]>([]);
+  public favorites = computed(() => this.favoriteItems());
+  public count = computed(() => this.favoriteItems().length);
 
   constructor() {}
-
 
   addToFavorites(product: any): void {
     const exists = this.favoriteItems().some(item => item.id === product.id);
@@ -17,16 +17,17 @@ export class FavoritesService {
     }
   }
 
-
   removeFavorite(product: any): void {
-    this.favoriteItems.update(items => items.filter(item => item.id !== product.id));
+    this.favoriteItems.update(items =>
+      items.filter(item => item.id !== product.id)
+    );
   }
-
 
   clearFavorites(): void {
     this.favoriteItems.set([]);
   }
 
-  
-  count = computed(() => this.favoriteItems().length);
+  isFavorite(product: any): boolean {
+    return this.favoriteItems().some(p => p.id === product.id);
+  }
 }

@@ -6,7 +6,6 @@ import { DrawerService } from '../../../shared/services/drawer.service';
 import { FavoritesService } from '../../../shared/services/favorites.service';
 import { Product } from '../../../shared/interfaces/product.model';
 import { RouterModule } from '@angular/router';
-import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-navbar',

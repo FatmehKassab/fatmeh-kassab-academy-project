@@ -3,8 +3,9 @@ import { Component, inject, Input } from '@angular/core';
 import { Product, ProductService } from '../../services/product.service';
 import { SocialsComponent } from "../socials/socials.component";
 import { ICONS } from '../../utils/icons';
-import { CartService } from '../../services/cart.service';
 import { FavoritesService } from '../../services/favorites.service';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../../store/cart/cart.actions';
 
 @Component({
   selector: 'app-product-card',
@@ -20,12 +21,25 @@ export class ProductCardComponent {
 
  ICONS = ICONS;
 private favoritesService = inject(FavoritesService);
- constructor(private cartService: CartService) {}
+ constructor(private store: Store) {}
 
-  addToCart(item: any){
-    this.cartService.addtoCart(item);
+ addToCart(product: any) {
+  this.store.dispatch(addToCart({ product }));
+}
+  // addToFavorites(item: any){
+  //   this.favoritesService.addToFavorites(item);
+  // }
+
+  addToFavorites(product: any) {
+  if (this.favoritesService.isFavorite(product)) {
+    this.favoritesService.removeFavorite(product);
+  } else {
+     this.favoritesService.addToFavorites(product);
   }
-  addToFavorites(item: any){
-    this.favoritesService.addToFavorites(item);
-  }
+}
+
+  isFavorite(product: any): boolean {
+  return this.favoritesService.isFavorite(product); 
+}
+
 }

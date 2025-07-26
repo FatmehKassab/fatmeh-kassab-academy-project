@@ -22,7 +22,16 @@ export const removeCartItem = createAction(
 
 export const clearCart = createAction('[Cart] Clear Cart');
 
+export const deleteProductFromCart = createAction(
+  '[Cart] Delete Product',
+  props<{ productId: number }>()
+);
+
+
 export const updateSearch = createAction(
   '[Cart] Update Search',
   props<{ searchTerm: string }>()
 );
+
+export const setQuantity = createAction(
+  '[Cart] Set Quantity', props<{ productId: number, quantity: number }>());
