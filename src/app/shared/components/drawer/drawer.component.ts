@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
 import { Store } from '@ngrx/store';
-import { selectCartItems, selectCartTotal, selectGrandTotal, selectProductTotalById, selectTotalQuantity} from '../../store/cart/cart.selectors';
+import { selectCartItems, selectCartTotal, selectGrandTotal, selectTotalQuantity} from '../../store/cart/cart.selectors';
 import { clearCart, deleteProductFromCart, removeCartItem } from '../../store/cart/cart.actions';
 import { Observable } from 'rxjs';
 import { ICONS } from '../../utils/icons';

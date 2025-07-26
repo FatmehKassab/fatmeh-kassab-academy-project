@@ -6,7 +6,7 @@ import { AsyncPipe, CommonModule, DecimalPipe, NgFor, NgIf, TitleCasePipe } from
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
 import { Store } from '@ngrx/store';
-import { selectCartItems, selectCartTotal, selectGrandTotal, selectProductTotalById} from '../../store/cart/cart.selectors';
+import { selectCartItems, selectCartTotal, selectGrandTotal} from '../../store/cart/cart.selectors';
 import { clearCart, deleteProductFromCart, removeCartItem } from '../../store/cart/cart.actions';
 import { Observable } from 'rxjs';
 import { ICONS } from '../../utils/icons';
