@@ -6,6 +6,7 @@ export const ICONS = {
   chevron_right:'icons/chevron_right',
   email:'icons/email.svg',
   filled_heart:'icons/filled_heart.svg',
+  heart:'icons/heart.svg',
   hide: 'icons/hide.svg',
   instagram:'icons/instagram.svg',
   minus:'icons/minus.svg',

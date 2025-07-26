@@ -1,3 +1,36 @@
-<div class="circle-icon">
-  <img [src]="iconPath" [alt]="altText" />
+<p-overlaybadge
+  *ngIf="showBadge && badgeValue; else noBadge"
+  pOverlayBadge
+  [value]="badgeValue"
+  severity="danger"
+  class="inline-block relative"
+  (click)="onClick()"
+>
+  <div class="circle-icon">
+    <img [src]="iconPath" [alt]="altText" />
+  </div>
+</p-overlaybadge>
+
+
+<ng-template #noBadge>
+  <div class="circle-icon" (click)="onClick()">
+    <img [src]="iconPath" [alt]="altText" />
+  </div>
+</ng-template>
+
+
+<div *ngIf="isDropdown && showDropdown" class="dropdown-box">
+ @if (isLoggedIn) {
+    <div style="padding: 8px; min-width: 120px;">
+      <p style="margin: 0 0 8px 0; font-weight: bold;">TitleCasePipe</p>
+      <hr style="margin: 4px 0;">
+      <p style="margin: 8px 0; cursor: pointer;" routerLink="/profile">My Profile</p>
+      <p style="margin: 8px 0; cursor: pointer;" (click)="logout()">Logout</p>
+    </div>
+} @else {
+    <div style="padding: 8px; min-width: 120px;">
+      <p style="margin: 8px 0; cursor: pointer;" routerLink="/sign-in">Sign In</p>
+      <p style="margin: 8px 0; cursor: pointer;" routerLink="/sign-up">Sign Up</p>
+    </div>
+}
 </div>

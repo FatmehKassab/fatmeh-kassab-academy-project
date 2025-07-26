@@ -8,21 +8,33 @@
         />
       </div>
       <ul class="nav-links">
-    <li routerLinkActive="active" >
+    <li  >
       <a routerLink="/">Home</a>
     </li>
-    <li routerLinkActive="active">
+    <li>
       <a routerLink="/about">About</a>
     </li>
-    <li routerLinkActive="active">
+    <li >
       <a routerLink="/products">Products</a>
     </li>
   </ul>
 
       <div class="socials">
     <app-socials  [iconPath]="ICONS.search"></app-socials>
-    <app-socials  [iconPath]="ICONS.cart"></app-socials>
-    <app-socials  [iconPath]="ICONS.user_white"></app-socials>
+<app-socials 
+  [iconPath]="ICONS.cart"
+  [badgeValue]="totalItem" 
+  (iconClick)="openCartDrawer()"
+  [showBadge]="true"
+></app-socials>
+
+ <app-socials  [iconPath]="ICONS.heart" (iconClick)="openFavoritesDrawer()" [badgeValue]="totalFavorites"  [showBadge]="true"></app-socials>
+
+
+    <app-socials 
+      [iconPath]="ICONS.user_white"   
+      [isDropdown]="true">
+    </app-socials>
       </div>
 
 </nav>

@@ -6,6 +6,7 @@ import { TextInputComponent } from "../../shared/components/inputs/text-input/te
 import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../core/auth/services/auth.service';
+import { IMAGES } from '../../shared/utils/images';
 
 interface SignInForm {
   email: string;
@@ -26,6 +27,7 @@ interface SignInForm {
   styleUrl: './sign-in.component.scss'
 })
 export class SignInComponent implements OnInit {
+  IMAGES =IMAGES;
   signinForm!: FormGroup;
   isLoading = false;
   errorMessage: string | null = null;
@@ -79,10 +81,4 @@ export class SignInComponent implements OnInit {
     return this.signinForm.controls;
   }
 
-  get IMAGES() {
-    return {
-      login_illustration: 'images/login_illustration.svg',
-      logo: 'images/logo.svg'
-    };
-  }
 }
