@@ -1,5 +1,5 @@
-<div class="product-list">
-  <div *ngFor="let product of products" class="product-card">
+<div  class="product-list">
+  <div *ngFor="let product of products" [routerLink]="['/products', product.id]" class="product-card">
     <div class="hover-content">
       <app-socials [iconPath]="ICONS.plus" class="social-icon" (click)="addToCart(product)"></app-socials>
        <app-socials  [iconPath]="isFavorite(product) ? ICONS.filled_heart : ICONS.heart" class="social-icon" (click)="addToFavorites(product)"></app-socials>

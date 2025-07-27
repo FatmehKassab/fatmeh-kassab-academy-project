@@ -6,12 +6,13 @@ import { ICONS } from '../../utils/icons';
 import { FavoritesService } from '../../services/favorites.service';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../store/cart/cart.actions';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
 
  standalone: true,
-  imports: [CommonModule, SocialsComponent],
+  imports: [CommonModule, SocialsComponent,RouterModule],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
 })
@@ -26,9 +27,6 @@ private favoritesService = inject(FavoritesService);
  addToCart(product: any) {
   this.store.dispatch(addToCart({ product }));
 }
-  // addToFavorites(item: any){
-  //   this.favoritesService.addToFavorites(item);
-  // }
 
   addToFavorites(product: any) {
   if (this.favoritesService.isFavorite(product)) {
