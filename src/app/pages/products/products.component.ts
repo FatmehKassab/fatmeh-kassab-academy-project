@@ -66,7 +66,9 @@ export class ProductsComponent implements OnInit {
         this.selectedCategories.has(p.category)
       );
     }
-    this.sortProducts();
+     this.first = 0; 
+  this.sortProducts();
+  this.updatePagedProducts();
   }
 
   onCategoryChange(checked: boolean, category: string): void {
@@ -102,6 +104,7 @@ export class ProductsComponent implements OnInit {
       default:
         break;
     }
+    this.updatePagedProducts(); 
   }
 
   rowsPerPage = 8;
