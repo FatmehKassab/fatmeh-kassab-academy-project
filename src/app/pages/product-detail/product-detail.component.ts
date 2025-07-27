@@ -2,13 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../shared/interfaces/product.model';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../shared/services/product.service';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { TitleService } from '../../shared/services/title.service';
+import { RatingModule } from 'primeng/rating';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
   standalone:true,
-  imports: [NgIf],
+  imports: [NgIf,RatingModule,CommonModule,
+    FormsModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })

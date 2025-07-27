@@ -1,0 +1,60 @@
+.product-container{
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: var(--white);
+  margin: 20px 40px;
+display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+
+}
+
+
+.product-image {
+  width: 50%;
+
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+
+.product-details {
+width: 50%;
+  height: 100%;
+   display: flex;
+
+  justify-content: space-between;
+  gap: 20px;
+  flex-direction: column;
+  h1 {
+
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--dark-navy2);
+  }
+  
+  .price {
+    font-weight: bold;
+    color: var(--primary);
+    display: flex;
+    justify-content: end;
+  }
+  
+  .category {
+    font-size: 1rem;
+    color: #757575;
+    text-transform: capitalize;
+  }
+}
+
+
+:host ::ng-deep .p-rating-option-active .p-rating-icon{
+    color: gold;
+}
