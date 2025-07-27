@@ -2,6 +2,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { ICONS } from '../../utils/icons';
 
 @Component({
   selector: 'app-page-title',
@@ -13,6 +14,8 @@ import { filter } from 'rxjs/operators';
 export class PageTitleComponent implements OnInit {
   title: string = '';
   shouldShowTitle: boolean = true;
+
+   ICONS = ICONS;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
