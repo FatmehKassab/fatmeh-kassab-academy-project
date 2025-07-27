@@ -1,3 +1,6 @@
-<div class="page-title-container" *ngIf="title">
-  <h1 class="main-title">{{ title }}</h1>
+<div class="page-title-container" *ngIf="title && shouldShowTitle">
+
+    <img [src]="ICONS.chevron_right" alt="altText" class="icon"/>
+
+  <label  class="main-title">{{ title }}</label>
 </div>
