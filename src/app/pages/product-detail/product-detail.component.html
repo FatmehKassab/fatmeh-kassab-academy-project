@@ -1,0 +1,19 @@
+<div *ngIf="product" class="product-container" >
+    <div class="product-image"><img [src]="product.image" [alt]="product.title" width="400px" ></div>
+    <div class="product-details"> 
+  <h1>{{ product.title }}</h1>
+  <p class="category">({{ product.category }})</p>
+  <p>size</p>
+  <p>color</p>
+  <h1>{{ product.price }}$</h1>
+  <p>{{ product.description }}</p>
+  <p-rating 
+      [ngModel]="product.rating?.rate" 
+      [readonly]="true" 
+      [stars]="5">
+    </p-rating>
+
+    <p>{{ product.rating?.count }} reviews</p>
+
+
+</div>

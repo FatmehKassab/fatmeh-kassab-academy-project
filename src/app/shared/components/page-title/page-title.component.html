@@ -1,6 +1,11 @@
-<div class="page-title-container" *ngIf="title && shouldShowTitle">
+<div class="page-title-container" *ngIf="mainTitle && shouldShowTitle">
+  <img [src]="ICONS.chevron_right" alt="altText" class="icon" />
 
-    <img [src]="ICONS.chevron_right" alt="altText" class="icon"/>
+  <label class="main-title">{{ mainTitle }}</label>
 
-  <label  class="main-title">{{ title }}</label>
+
+  @if(dynamicTitle){
+  <img [src]="ICONS.chevron_right_double" alt="altText" class="icon" />
+    <label class="second-title">{{ dynamicTitle }}</label>
+  }
 </div>
