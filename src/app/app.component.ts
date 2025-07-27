@@ -6,11 +6,13 @@ import { SignUpComponent } from "./pages/sign-up/sign-up.component";
 import { SignInComponent } from "./pages/sign-in/sign-in.component";
 import { PageTitleComponent } from "./shared/components/page-title/page-title.component";
 import { DrawerComponent } from "./shared/components/drawer/drawer.component";
+import { NavbarComponent } from "./core/layout/navbar/navbar.component";
+import { FooterComponent } from "./core/layout/footer/footer.component";
 
 @Component({
   selector: 'app-root',
    standalone: true,
-  imports: [RouterOutlet, PageTitleComponent, DrawerComponent],
+  imports: [RouterOutlet, PageTitleComponent, DrawerComponent, NavbarComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
