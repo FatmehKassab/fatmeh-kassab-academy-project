@@ -6,11 +6,14 @@ import { Product, ProductService } from '../../shared/services/product.service';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from "../../core/layout/footer/footer.component";
 import { FormsModule } from '@angular/forms';
+import { PaginatorModule } from 'primeng/paginator';
+
+
 
 @Component({
   selector: 'app-products',
   standalone:true,
-  imports: [NavbarComponent, ProductCardComponent, CommonModule, BooleanInputComponent, FooterComponent,FormsModule],
+  imports: [ProductCardComponent, CommonModule, BooleanInputComponent,FormsModule,PaginatorModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -39,6 +42,8 @@ export class ProductsComponent implements OnInit {
     this.productService.getAllCategories().subscribe(data => {
       this.categories = data;
     });
+
+     this.updatePagedProducts();
   }
 
   toggleCategory(event: Event, category: string): void {
@@ -61,7 +66,9 @@ export class ProductsComponent implements OnInit {
         this.selectedCategories.has(p.category)
       );
     }
-    this.sortProducts();
+     this.first = 0; 
+  this.sortProducts();
+  this.updatePagedProducts();
   }
 
   onCategoryChange(checked: boolean, category: string): void {
@@ -97,5 +104,24 @@ export class ProductsComponent implements OnInit {
       default:
         break;
     }
+    this.updatePagedProducts(); 
   }
+
+  rowsPerPage = 8;
+first = 0;
+pagedProducts: Product[] = [];
+
+
+
+updatePagedProducts() {
+  const start = this.first;
+  const end = this.first + this.rowsPerPage;
+  this.pagedProducts = this.filteredProducts.slice(start, end);
+}
+
+onPageChange(event: any) {
+  this.first = event.first;
+  this.updatePagedProducts();
+}
+
 }

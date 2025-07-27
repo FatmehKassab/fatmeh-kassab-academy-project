@@ -39,3 +39,14 @@
 }
 }
 
+:host ::ng-deep .p-paginator {
+  margin-top: 2rem;
+  justify-content: center;
+  background-color: transparent;
+}
+
+:host ::ng-deep .p-paginator-page.p-paginator-page-selected {
+  background-color:var(--secondary);
+  color: white;
+}
+
