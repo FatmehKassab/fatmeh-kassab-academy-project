@@ -39,13 +39,7 @@
     </small>
   </div>
 
-  <div class="p-field">
-    <label for="inStock">In Stock</label>
-    <input  id="inStock" type="number" formControlName="inStock" required />
-    <small *ngIf="productForm.get('inStock')?.invalid && productForm.get('inStock')?.touched" class="p-error">
-      Valid stock quantity is required
-    </small>
-  </div>
+
 </form>
 
 <div class="p-dialog-footer">

@@ -23,7 +23,7 @@ private router: Router
  this.router.events
        .pipe(filter(event => event instanceof NavigationEnd))
        .subscribe((event: NavigationEnd) => {
-         const hiddenRoutes = ['/sign-in', '/sign-up'];
+         const hiddenRoutes = ['/sign-in', '/sign-up','/admin'];
          this.showFooter = !hiddenRoutes.includes(event.url);
        });
    }
