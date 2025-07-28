@@ -7,18 +7,18 @@
        <div class="admin">
         <app-sidemenu></app-sidemenu>
       
-    
-                <!-- <button (click)="openAddDialog()">Add Product</button> -->
+    <div  style="width: 100%;">  <button (click)="openAddDialog()">Add Product</button>
      
  <ag-grid-angular style="width: 100%; height: 80vh; padding: 20px;"
       [rowData]="rowData"
       [columnDefs]="colDefs"
       (gridReady)="onGridReady($event)"
-      (cellValueChanged)="onCellValueChanged($event)"
+
        [pagination]="true">
     </ag-grid-angular>
 
-            <p-confirmDialog [style]="{width: '400px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '400px'}"></p-confirmDialog></div>
+              
 
         
        </div>

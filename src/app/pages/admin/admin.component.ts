@@ -27,19 +27,28 @@ export class AdminComponent {
   ref: DynamicDialogRef | undefined;
 
   colDefs: ColDef[] = [
-    { field: 'id', headerName: 'ID',  },
-    { field: 'title', headerName: 'Product Name',},
-    { field: 'category', headerName: 'Category',  },
-    { field: 'price', headerName: 'Price',  valueFormatter: params => `$${params.value}` },
+    { field: 'id', headerName: 'ID' },
+    { 
+      field: 'title', 
+      headerName: 'Product Name',
+      cellRenderer: (params: any) => `
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="${params.data.image}" alt="${params.data.title}" style="width: 40px; height: 40px; object-fit: contain;" />
+          <span>${params.data.title}</span>
+        </div>
+      `,
+      autoHeight: true
+    },
+    { field: 'category', headerName: 'Category' },
+    { field: 'price', headerName: 'Price', valueFormatter: params => `$${params.value}` },
     { 
       field: 'actions', 
-      headerName: 'Actions', 
-     
+      headerName: 'Actions',
       cellRenderer: (params: any) => `
-        <button c data-action="edit">
+        <button data-action="edit">
           edit
         </button>
-        <button  data-action="delete">
+        <button data-action="delete">
           delete
         </button>
       `,
@@ -67,7 +76,7 @@ export class AdminComponent {
 
   loadProducts(): void {
     this.loading = true;
-    this.productService.getProducts().subscribe({
+    this.productService.getAllProducts().subscribe({
       next: (products) => {
         this.rowData = [...products];
         this.loading = false;
@@ -92,32 +101,6 @@ export class AdminComponent {
   onGridReady(params: GridReadyEvent): void {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
-  }
-
-  onCellValueChanged(event: any): void {
-    if (event.colDef.field === 'inStock') {
-      const product = event.data;
-      this.productService.updateProduct(product.id, { inStock: product.inStock })
-        .subscribe({
-          next: (updatedProduct) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'Stock updated'
-            });
-            this.gridApi.applyTransaction({ update: [updatedProduct] });
-          },
-          error: (err) => {
-            console.error('Error updating stock:', err);
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Failed to update stock'
-            });
-            this.gridApi.applyTransaction({ update: [event.oldValue] });
-          }
-        });
-    }
   }
 
   onActionClick(event: CellClickedEvent): void {

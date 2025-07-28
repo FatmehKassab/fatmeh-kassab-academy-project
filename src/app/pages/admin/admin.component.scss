@@ -4,3 +4,13 @@
     height: 100vh;
 
 }
+.bin {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.bin:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}

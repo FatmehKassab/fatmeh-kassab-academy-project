@@ -40,7 +40,6 @@ export class ProductFormComponent implements OnInit {
       description: ['', Validators.required],
       category: ['', Validators.required],
       image: ['', Validators.required],
-      inStock: ['', [Validators.required, Validators.min(0)]]
     });
 
   

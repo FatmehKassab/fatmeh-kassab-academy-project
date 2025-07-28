@@ -41,14 +41,6 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.apiUrl}/category/${category}`);
   }
 
-   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl).pipe(
-      map(products => products.map(product => ({
-        ...product,
-        inStock: Math.floor(Math.random() * 100) // Add random stock for demo
-      })))
-    );
-  }
 
   addProduct(product: Omit<Product, 'id'>): Observable<Product> {
     // Note: FakeStoreAPI doesn't actually persist changes
