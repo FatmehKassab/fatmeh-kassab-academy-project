@@ -43,7 +43,7 @@ export class PageTitleComponent implements OnInit {
         }
 
         const currentUrl = this.router.url;
-        const excludedRoutes = ['/sign-in', '/sign-up', '/home'];
+        const excludedRoutes = ['/sign-in', '/sign-up', '/home','/admin'];
         this.shouldShowTitle = !excludedRoutes.includes(currentUrl);
       });
   }

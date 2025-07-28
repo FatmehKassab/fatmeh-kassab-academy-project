@@ -31,7 +31,7 @@ export class NavbarComponent {
 this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        const hiddenRoutes = ['/sign-in', '/sign-up'];
+        const hiddenRoutes = ['/sign-in', '/sign-up','/admin'];
         this.showNavbar = !hiddenRoutes.includes(event.url);
       });
   }
