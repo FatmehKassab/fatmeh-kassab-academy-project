@@ -8,13 +8,14 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { SidemenuComponent } from "../../shared/components/sidemenu/sidemenu.component";
 
 ModuleRegistry.registerModules([AllCommunityModule, PaginationModule]);
 
 @Component({
   standalone: true,
   selector: 'app-admin',
-  imports: [AgGridAngular, CommonModule, ConfirmDialogModule],
+  imports: [AgGridAngular, CommonModule, ConfirmDialogModule, SidemenuComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
   providers: [ConfirmationService, MessageService, DialogService]
@@ -26,20 +27,19 @@ export class AdminComponent {
   ref: DynamicDialogRef | undefined;
 
   colDefs: ColDef[] = [
-    { field: 'id', headerName: 'ID', width: 80 },
-    { field: 'title', headerName: 'Title', flex: 1 },
-    { field: 'category', headerName: 'Category', width: 150 },
-    { field: 'price', headerName: 'Price', width: 120, valueFormatter: params => `$${params.value}` },
-    { field: 'inStock', headerName: 'In Stock', width: 120, editable: true },
+    { field: 'id', headerName: 'ID',  },
+    { field: 'title', headerName: 'Product Name',},
+    { field: 'category', headerName: 'Category',  },
+    { field: 'price', headerName: 'Price',  valueFormatter: params => `$${params.value}` },
     { 
       field: 'actions', 
       headerName: 'Actions', 
-      width: 200,
+     
       cellRenderer: (params: any) => `
-        <button class="p-button p-button-sm p-button-rounded p-button-text p-button-primary mr-2" data-action="edit">
+        <button c data-action="edit">
           edit
         </button>
-        <button class="p-button p-button-sm p-button-rounded p-button-text p-button-danger" data-action="delete">
+        <button  data-action="delete">
           delete
         </button>
       `,
@@ -114,7 +114,6 @@ export class AdminComponent {
               summary: 'Error',
               detail: 'Failed to update stock'
             });
-            // Revert the change if the update fails
             this.gridApi.applyTransaction({ update: [event.oldValue] });
           }
         });
