@@ -19,9 +19,9 @@ export const authGuard: CanActivateFn = (route, state) => {
       detail: 'You do not have permission to access this page.'
     });
 
-    setTimeout(() => {
-      router.navigate(['/sign-in']);
-    }, 2000);
+  
+      router.navigate(['/home']);
+
 
     return false;
   }

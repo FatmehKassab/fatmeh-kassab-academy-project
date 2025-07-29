@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserData } from '../../../shared/interfaces/user_data.model';
 
 const environment = {
   production: false,
@@ -39,11 +40,11 @@ isAdmin(): boolean {
     const token = this.getToken();
     this.isLoggedInSubject.next(!!token); 
   }
-  getUserData(): any {
-    const userData = localStorage.getItem(this.USER_DATA_KEY);
-    console.log(">>>>",userData)
-    return userData ? JSON.parse(userData) : null;
-  }
+getUserData(): UserData | null {
+  const userData = localStorage.getItem(this.USER_DATA_KEY);
+  return userData ? JSON.parse(userData) : null;
+}
+
 
   isLoggedIn(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
@@ -118,12 +119,14 @@ login(credentials: { Username: string; Password: string }): Observable<any> {
 logout(): Observable<any> {
   const token = this.getToken();
   const refreshToken = localStorage.getItem(this.REFRESH_TOKEN_KEY);
+  const isAdmin = this.isAdmin();
 
   if (!refreshToken) {
     console.warn('No refresh token found in storage — forcing logout');
     this.clearUserData();
     this.isLoggedInSubject.next(false);
-    this.router.navigate(['/sign-in']);
+    if(isAdmin ){    this.router.navigate(['/sign-in']);}
+
     return new Observable(); 
   }
 
@@ -141,7 +144,7 @@ logout(): Observable<any> {
     tap(() => {
       this.clearUserData();
       this.isLoggedInSubject.next(false);
-      this.router.navigate(['/sign-in']);
+     if(isAdmin ){    this.router.navigate(['/sign-in']);}
     })
   );
 }
