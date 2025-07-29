@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgIf, NgTemplateOutlet, TitleCasePipe } from '@angular/common';
 import { Component, effect, EventEmitter, Input, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../../core/auth/services/auth.service';
@@ -6,13 +6,14 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { FavoritesService } from '../../services/favorites.service';
 import { Store } from '@ngrx/store';
 import { selectTotalQuantity } from '../../store/cart/cart.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-socials',
   templateUrl: './socials.component.html',
   styleUrl: './socials.component.scss',
   standalone: true,
-  imports: [NgIf, OverlayBadgeModule]
+  imports: [NgIf, OverlayBadgeModule,TitleCasePipe]
 })
 export class SocialsComponent {
   @Input() iconPath: string = '';
@@ -33,7 +34,8 @@ totalQuantity$!: Observable<number>;
   constructor(
     private authService: AuthService,
     public favoritesService: FavoritesService,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {
     effect(() => {
       this.totalFavorites = this.favoritesService.count();
@@ -83,4 +85,8 @@ totalQuantity$!: Observable<number>;
       }
     });
   }
+
+  navigateTo(route: string) {
+  this.router.navigate([route]);
+}
 }
