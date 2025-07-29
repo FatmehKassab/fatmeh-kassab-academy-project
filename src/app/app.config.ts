@@ -8,6 +8,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { provideStore } from '@ngrx/store';
 import { cartReducer } from './shared/store/cart/cart.reducer';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
         }
     }
 }),
- provideStore({ cart: cartReducer }),
+ provideStore({ cart: cartReducer }),MessageService
    
   ]
 };

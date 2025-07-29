@@ -1,12 +1,42 @@
 .sidemenu {
-    width: 200px;
-    height: 100vh;
-    background-color: var(--white);
-    border-radius: 30px;
-    .logo {
-        width: 100%;
-       display: flex;
-       align-items: center;
-       justify-content: center;
+  width: 200px;
+  height: calc(100vh - 90px);
+  background-color: var(--white);
+  overflow: hidden;
+
+  .logo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .label {
+    width: 60%;
+  }
+
+  .icon-label {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    padding: 10px 0;
+    border-radius: 10px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+
+    &:hover {
+      background-color: var(--background);
+      cursor: pointer;
     }
+  }
 }

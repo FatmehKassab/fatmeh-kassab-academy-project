@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { AgGridAngular } from "ag-grid-angular";
-import type { CellClickedEvent, ColDef, GridApi, GridReadyEvent } from "ag-grid-community";
+import type { CellClickedEvent, ColDef, GridApi, GridOptions, GridReadyEvent } from "ag-grid-community";
 import { AllCommunityModule, ModuleRegistry, PaginationModule } from "ag-grid-community";
 import { ProductService } from '../../shared/services/product.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -9,13 +9,14 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { SidemenuComponent } from "../../shared/components/sidemenu/sidemenu.component";
+import { ButtonComponent } from "../../shared/components/button/button.component";
 
 ModuleRegistry.registerModules([AllCommunityModule, PaginationModule]);
 
 @Component({
   standalone: true,
   selector: 'app-admin',
-  imports: [AgGridAngular, CommonModule, ConfirmDialogModule, SidemenuComponent],
+  imports: [AgGridAngular, CommonModule, ConfirmDialogModule, SidemenuComponent, ButtonComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
   providers: [ConfirmationService, MessageService, DialogService]
@@ -26,8 +27,13 @@ export class AdminComponent {
   loading = false;
   ref: DynamicDialogRef | undefined;
 
+
+    gridOptions: GridOptions = {
+  getRowId: params => params.data.id,
+
+};
   colDefs: ColDef[] = [
-    { field: 'id', headerName: 'ID' },
+    { field: 'id', headerName: 'ID',width:20 },
     { 
       field: 'title', 
       headerName: 'Product Name',
@@ -39,18 +45,17 @@ export class AdminComponent {
       `,
       autoHeight: true
     },
-    { field: 'category', headerName: 'Category' },
-    { field: 'price', headerName: 'Price', valueFormatter: params => `$${params.value}` },
+    { field: 'category', headerName: 'Category',filter: true, width:150 },
+    { field: 'price', headerName: 'Price', valueFormatter: params => `$${params.value}` ,width:50},
     { 
       field: 'actions', 
       headerName: 'Actions',
+      width:150,
       cellRenderer: (params: any) => `
-        <button data-action="edit">
-          edit
-        </button>
-        <button data-action="delete">
-          delete
-        </button>
+       <div style="display: flex; gap: 10px;  align-items: center;">
+      <img src="icons/edit.svg" data-action="edit" alt="Edit" style="width: 20px; height: 20px; cursor: pointer;" />
+      <img src="/icons/bin.svg" data-action="delete" alt="Delete" style="width: 20px; height: 20px; cursor: pointer;" />
+    </div>
       `,
       onCellClicked: (event: CellClickedEvent) => this.onActionClick(event)
     }

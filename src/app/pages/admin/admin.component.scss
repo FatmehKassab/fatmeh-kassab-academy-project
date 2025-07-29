@@ -1,7 +1,7 @@
 .admin{
     display: flex;
     width: screen;
-    height: 100vh;
+    // height: 100vh;
 
 }
 .bin {
@@ -13,4 +13,11 @@
 
 .bin:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button{
+  width: 100%;
+ display: flex;
+ justify-content: end;
+padding:20px 40px 0 0;
 }

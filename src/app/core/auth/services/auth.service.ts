@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserData } from '../../../shared/interfaces/user_data.model';
 
 const environment = {
   production: false,
@@ -16,6 +17,8 @@ export class AuthService {
   private readonly USER_DATA_KEY = 'user_data';
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly API_BASE_URL = `${environment.apiUrl}/User`;
+  private readonly ADMIN_EMAIL = 'admin_fatmeh@gmail.com';
+  private readonly ADMIN_PASSWORD = 'Admin@123';
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {
@@ -23,7 +26,10 @@ export class AuthService {
     console.log(this.isLoggedInSubject)
   }
 
-
+isAdmin(): boolean {
+  const user = this.getUserData();
+  return user?.email === this.ADMIN_EMAIL;
+}
 
   getToken(): string | null {
       console.log("tken1",this.AUTH_TOKEN_KEY)
@@ -34,11 +40,11 @@ export class AuthService {
     const token = this.getToken();
     this.isLoggedInSubject.next(!!token); 
   }
-  getUserData(): any {
-    const userData = localStorage.getItem(this.USER_DATA_KEY);
-    console.log(userData)
-    return userData ? JSON.parse(userData) : null;
-  }
+getUserData(): UserData | null {
+  const userData = localStorage.getItem(this.USER_DATA_KEY);
+  return userData ? JSON.parse(userData) : null;
+}
+
 
   isLoggedIn(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
@@ -110,32 +116,18 @@ login(credentials: { Username: string; Password: string }): Observable<any> {
   );
 }
 
-
-
-  // logout(): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   });
-
-  //   return this.http.post(`${this.API_BASE_URL}/Logout()`, {}, { headers }).pipe(
-  //     tap(() => {
-  //       this.clearUserData();
-  //       this.isLoggedInSubject.next(false);
-  //       this.router.navigate(['/sign-in']);
-  //     })
-  //   );
-  // }
-
 logout(): Observable<any> {
   const token = this.getToken();
   const refreshToken = localStorage.getItem(this.REFRESH_TOKEN_KEY);
+  const isAdmin = this.isAdmin();
 
   if (!refreshToken) {
     console.warn('No refresh token found in storage — forcing logout');
     this.clearUserData();
     this.isLoggedInSubject.next(false);
-    this.router.navigate(['/sign-in']);
-    return new Observable(); // empty observable, prevents API call
+    if(isAdmin ){    this.router.navigate(['/sign-in']);}
+
+    return new Observable(); 
   }
 
   const headers = new HttpHeaders({
@@ -152,7 +144,7 @@ logout(): Observable<any> {
     tap(() => {
       this.clearUserData();
       this.isLoggedInSubject.next(false);
-      this.router.navigate(['/sign-in']);
+     if(isAdmin ){    this.router.navigate(['/sign-in']);}
     })
   );
 }

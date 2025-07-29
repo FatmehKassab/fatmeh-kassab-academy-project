@@ -7,13 +7,15 @@
        <div class="admin">
         <app-sidemenu></app-sidemenu>
       
-    <div  style="width: 100%;">  <button (click)="openAddDialog()">Add Product</button>
+    <div  style="width: 100%;">
+        <div class="button">        <app-button title="Add Product" width="fit" (click)="openAddDialog()"></app-button></div>
+  
      
  <ag-grid-angular style="width: 100%; height: 80vh; padding: 20px;"
       [rowData]="rowData"
       [columnDefs]="colDefs"
       (gridReady)="onGridReady($event)"
-
+[gridOptions]="gridOptions"
        [pagination]="true">
     </ag-grid-angular>
 

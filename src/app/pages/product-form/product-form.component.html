@@ -1,57 +1,63 @@
-<form [formGroup]="productForm" class="product-form p-fluid">
+<form [formGroup]="productForm" class="product-form">
   <div class="p-field">
     <label for="title">Title</label>
-    <input  id="title" formControlName="title" required />
-    <small *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched" class="p-error">
+    <input  id="title" formControlName="title" required class="input"/>
+    <p *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched" class="error">
       Title is required
+    </p>
+  </div>
+ <div class="p-field">
+    <label for="category">Category</label>
+    <input id="category" formControlName="category" required class="input" />
+    <small *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched" class="error">
+      Category is required
     </small>
   </div>
-
   <div class="p-field">
     <label for="price">Price</label>
-    <input id="price" type="number" formControlName="price" required />
-    <small *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="p-error">
+    <input id="price" type="number" formControlName="price" required class="input" />
+    <small *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="error">
       Valid price is required
     </small>
   </div>
 
-  <div class="p-field">
-    <label for="description">Description</label>
-    <textarea  id="description" formControlName="description" required rows="3"></textarea>
-    <small *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="p-error">
-      Description is required
-    </small>
-  </div>
+  
 
-  <div class="p-field">
-    <label for="category">Category</label>
-    <input id="category" formControlName="category" required />
-    <small *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched" class="p-error">
-      Category is required
-    </small>
-  </div>
+ 
 
   <div class="p-field">
     <label for="image">Image URL</label>
-    <input id="image" formControlName="image" required />
-    <small *ngIf="productForm.get('image')?.invalid && productForm.get('image')?.touched" class="p-error">
+    <input id="image" formControlName="image" required class="input"/>
+    <small *ngIf="productForm.get('image')?.invalid && productForm.get('image')?.touched" class="error">
       Image URL is required
+    </small>
+  </div>
+  <div class="p-field">
+    <label for="description">Description</label>
+    <textarea  id="description" formControlName="description" required rows="4" class="input"></textarea>
+    <small *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="error">
+      Description is required
     </small>
   </div>
 
 
 </form>
 
-<div class="p-dialog-footer">
-  <button
-   
-        
-          (click)="onCancel()">Cancel</button>
-  <button
-        
-        
-          (click)="onSubmit()"
-          [disabled]="!productForm.valid">{{ isEditMode ? 'Update' : 'Add' }}</button>
+<div style="display: flex; gap: 10px; justify-content: end; margin-top: 10px;">
+  <app-button
+   title="Cancel"
+        bgColor="red"
+          (click)="onCancel()"
+          width="fit"
+                   ></app-button>
+        <app-button
+  [title]="isEditMode ? 'Update' : 'Add'"
+width="fit"
+  (click)="onSubmit()"
+   [disabled]="!productForm.valid"
+></app-button>
+
+ 
 </div>
 <!-- <div> <form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate> 
       <div class="inputs-row"> 

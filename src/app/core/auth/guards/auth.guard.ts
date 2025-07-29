@@ -1,20 +1,28 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-
+import { MessageService } from 'primeng/api';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
+  const messageService = inject(MessageService);
 
   const token = authService.getToken();
-  console.log("tken",token)
   const isLoggedIn = !!token;
+  const isAdmin = authService.isAdmin();
 
-  authService['isLoggedInSubject'].next(isLoggedIn);
+  if (!isLoggedIn || !isAdmin) {
+    messageService.add({
+      severity: 'warn',
+      summary: 'Access Denied',
+      detail: 'You do not have permission to access this page.'
+    });
 
-  if (!isLoggedIn) {
-    router.navigate(['/sign-in']);
+  
+      router.navigate(['/home']);
+
+
     return false;
   }
 

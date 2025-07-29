@@ -8,11 +8,12 @@ import { PageTitleComponent } from "./shared/components/page-title/page-title.co
 import { DrawerComponent } from "./shared/components/drawer/drawer.component";
 import { NavbarComponent } from "./core/layout/navbar/navbar.component";
 import { FooterComponent } from "./core/layout/footer/footer.component";
+import { Toast } from "primeng/toast";
 
 @Component({
   selector: 'app-root',
    standalone: true,
-  imports: [RouterOutlet, PageTitleComponent, DrawerComponent, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet, PageTitleComponent, DrawerComponent, NavbarComponent, FooterComponent, Toast],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
