@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent, data: { title: 'Not Found' } },
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
   { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
-  { path: 'admin', component: AdminComponent,canActivate: [authGuard], data: { title: 'Admin' } },
+  { path: 'admin', component: AdminComponent, data: { title: 'Admin' } }, 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: 'about', component: AboutComponent, data: { title: 'About' } },
   // {  path: 'products',
