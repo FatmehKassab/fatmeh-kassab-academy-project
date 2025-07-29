@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { AgGridAngular } from "ag-grid-angular";
-import type { CellClickedEvent, ColDef, GridApi, GridReadyEvent } from "ag-grid-community";
+import type { CellClickedEvent, ColDef, GridApi, GridOptions, GridReadyEvent } from "ag-grid-community";
 import { AllCommunityModule, ModuleRegistry, PaginationModule } from "ag-grid-community";
 import { ProductService } from '../../shared/services/product.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -26,6 +26,11 @@ export class AdminComponent {
   loading = false;
   ref: DynamicDialogRef | undefined;
 
+
+    gridOptions: GridOptions = {
+  getRowId: params => params.data.id,
+
+};
   colDefs: ColDef[] = [
     { field: 'id', headerName: 'ID' },
     { 
