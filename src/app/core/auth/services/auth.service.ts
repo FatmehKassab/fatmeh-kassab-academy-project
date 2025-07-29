@@ -16,6 +16,8 @@ export class AuthService {
   private readonly USER_DATA_KEY = 'user_data';
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly API_BASE_URL = `${environment.apiUrl}/User`;
+  private readonly ADMIN_EMAIL = 'admin_fatmeh@gmail.com';
+  private readonly ADMIN_PASSWORD = 'Admin@123';
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {
@@ -23,7 +25,10 @@ export class AuthService {
     console.log(this.isLoggedInSubject)
   }
 
-
+isAdmin(): boolean {
+  const user = this.getUserData();
+  return user?.email === this.ADMIN_EMAIL;
+}
 
   getToken(): string | null {
       console.log("tken1",this.AUTH_TOKEN_KEY)
@@ -36,7 +41,7 @@ export class AuthService {
   }
   getUserData(): any {
     const userData = localStorage.getItem(this.USER_DATA_KEY);
-    console.log(userData)
+    console.log(">>>>",userData)
     return userData ? JSON.parse(userData) : null;
   }
 
@@ -110,22 +115,6 @@ login(credentials: { Username: string; Password: string }): Observable<any> {
   );
 }
 
-
-
-  // logout(): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   });
-
-  //   return this.http.post(`${this.API_BASE_URL}/Logout()`, {}, { headers }).pipe(
-  //     tap(() => {
-  //       this.clearUserData();
-  //       this.isLoggedInSubject.next(false);
-  //       this.router.navigate(['/sign-in']);
-  //     })
-  //   );
-  // }
-
 logout(): Observable<any> {
   const token = this.getToken();
   const refreshToken = localStorage.getItem(this.REFRESH_TOKEN_KEY);
@@ -135,7 +124,7 @@ logout(): Observable<any> {
     this.clearUserData();
     this.isLoggedInSubject.next(false);
     this.router.navigate(['/sign-in']);
-    return new Observable(); // empty observable, prevents API call
+    return new Observable(); 
   }
 
   const headers = new HttpHeaders({
