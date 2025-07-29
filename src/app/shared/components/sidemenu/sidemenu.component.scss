@@ -1,6 +1,6 @@
 .sidemenu {
   width: 200px;
-  height: 100vh;
+  height: calc(100vh - 90px);
   background-color: var(--white);
   overflow: hidden;
 

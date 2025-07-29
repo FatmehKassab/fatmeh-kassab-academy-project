@@ -16,6 +16,7 @@ export class ButtonComponent {
   @Input() bgColor: string = "var(--primary)";
   @Input() width: string = '100%'; 
   @Input() textColor: string = "var(--white)"; 
+  @Input() disabled: boolean = false;
 
   @Output() onClick = new EventEmitter<void>();
 

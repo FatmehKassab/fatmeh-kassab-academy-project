@@ -14,16 +14,11 @@ import { ButtonComponent } from '../../shared/components/button/button.component
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
    imports: [
-
-  CommonModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
-// TextInputComponent,
-// ButtonComponent
-
-  
-  ],
+    ButtonComponent
+],
 })
 export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
