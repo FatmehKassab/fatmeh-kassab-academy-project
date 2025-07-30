@@ -40,11 +40,21 @@ export class ProductFormComponent implements OnInit {
   
   }
 
+
+
   ngOnInit(): void {
-    if ( this.config.data.product) {
-      this.productForm.patchValue(this.config.data.product);
-    }
+       const { product, mode } = this.config.data;
+
+  if (product) {
+    this.productForm.patchValue(product);
   }
+
+  if (mode === 'edit') {
+    this.isEditMode = true;
+  }
+    
+  }
+
 
   onSubmit(): void {
     if (this.productForm.valid) {

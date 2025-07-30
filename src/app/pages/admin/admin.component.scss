@@ -21,3 +21,7 @@
  justify-content: end;
 padding:20px 40px 0 0;
 }
+:host ::ng-deep .ag-root-wrapper {
+  overflow-x: hidden !important;
+}
+
