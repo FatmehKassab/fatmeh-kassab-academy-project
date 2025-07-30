@@ -1,1 +1,62 @@
-<p>profile works!</p>
+<div class="account-settings-container">
+  <div class="sidebar">
+    <div
+      class="tab"
+      [class.active]="activeTab === 'account'"
+      (click)="setActiveTab('account')"
+    >
+      <div>Account Setting</div>
+      <small>Personal information & Address</small>
+    </div>
+    <div
+      class="tab"
+      [class.active]="activeTab === 'privacy'"
+      (click)="setActiveTab('privacy')"
+    >
+      <div>Privacy & Security</div>
+      <small>Change password</small>
+    </div>
+    <div
+      class="tab"
+      [class.active]="activeTab === 'deactivate'"
+      (click)="setActiveTab('deactivate')"
+    >
+      <div>Deactivate Account</div>
+      <small>Delete Account</small>
+    </div>
+    <div
+      class="tab"
+      [class.active]="activeTab === 'orders'"
+      (click)="setActiveTab('orders')"
+    >
+      <div>My Orders</div>
+      <small>Tracking & Delivery</small>
+    </div>
+
+  </div>
+
+  @if(activeTab === 'account'){
+    <div class="content">
+    <div class="header-card">
+      <div class="avatar">
+        <i class="fa fa-user"></i>
+        <span class="plus">+</span>
+      </div>
+      <div class="info">
+        <p class="name">Fatmeh Kassab</p>
+        <p class="email">202110346.edu.lb</p>
+      </div>
+      <div class="phone">+961 01 258967</div>
+      <div class="edit-icon">
+        <i class="fa fa-pen"></i>
+      </div>
+    </div>
+  </div>}
+@else if(activeTab === 'privacy'){
+<div>privacy</div>
+}@else if(activeTab === 'deactivate'){
+<div>deactivate</div>
+}@else {
+    <div>orders</div>
+}
+</div>
