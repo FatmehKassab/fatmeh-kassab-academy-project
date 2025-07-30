@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { AgGridAngular } from "ag-grid-angular";
-import type { CellClickedEvent, ColDef, GridApi, GridOptions, GridReadyEvent } from "ag-grid-community";
-import { AllCommunityModule, ModuleRegistry, PaginationModule } from "ag-grid-community";
+import type { CellClickedEvent, ColDef, GridApi, GridOptions, GridReadyEvent, Theme } from "ag-grid-community";
+import { AllCommunityModule, ModuleRegistry, PaginationModule, themeQuartz } from "ag-grid-community";
 import { ProductService } from '../../shared/services/product.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -38,21 +38,31 @@ export class AdminComponent {
       field: 'title', 
       headerName: 'Product Name',
       cellRenderer: (params: any) => `
-        <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px; ">
           <img src="${params.data.image}" alt="${params.data.title}" style="width: 40px; height: 40px; object-fit: contain;" />
           <span>${params.data.title}</span>
         </div>
       `,
       autoHeight: true
     },
-    { field: 'category', headerName: 'Category',filter: true, width:150 },
-    { field: 'price', headerName: 'Price', valueFormatter: params => `$${params.value}` ,width:50},
+    { field: 'category', headerName: 'Category',filter: true, width:100 },
+   
+    { field: 'price', headerName: 'Price', valueFormatter: params => `$${params.value}` ,width:80,
+    cellRenderer: (params: any) => {
+     const isExpensive = params.value > 100;
+     const color = isExpensive ? "var(--secondary)" : "green";
+    return `<span style="padding: 4px 12px; border-radius: 16px; color: ${color}; border: 2px solid ${color}; font-size: 12px; font-weight:bold;">
+      ${params.value}
+    </span>`;
+  }},
+    { field: 'description', headerName: 'Description', tooltipField: "description",editable: true,width:150 },
+    
     { 
       field: 'actions', 
       headerName: 'Actions',
-      width:150,
+      width:70,
       cellRenderer: (params: any) => `
-       <div style="display: flex; gap: 10px;  align-items: center;">
+       <div style="display: flex; gap: 10px;  align-items: center;justify-content:end; padding-top:20px; padding-right:20px;">
       <img src="icons/edit.svg" data-action="edit" alt="Edit" style="width: 20px; height: 20px; cursor: pointer;" />
       <img src="/icons/bin.svg" data-action="delete" alt="Delete" style="width: 20px; height: 20px; cursor: pointer;" />
     </div>
@@ -222,4 +232,19 @@ export class AdminComponent {
       }
     });
   }
+
+
+   theme: Theme | "legacy" = myTheme;
 }
+
+const myTheme = themeQuartz.withParams({
+  backgroundColor: "var(--white)",
+  foregroundColor: "var(--primary)",
+  headerTextColor: "var(--white)",
+  headerBackgroundColor: "var(--primary)",
+  oddRowBackgroundColor: "rgb(0, 0, 0, 0.03)",
+  cellFontFamily: 'monospace',
+  rowVerticalPaddingScale:2,
+  
+  
+});
