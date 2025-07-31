@@ -1,0 +1,78 @@
+
+
+  <div class="checkout-container">
+  <div class="left-section">
+    <label class="label">Address :</label>
+    <div class="address-input" rows="4"></div>
+
+    <p class="label">Choose a delivery option</p>
+    <div class="delivery-option">
+      <span>Standard Shipping</span>
+      <span class="price">4.00$</span>
+    </div>
+
+    <label class="label">Payment :</label>
+    <div class="address-input" rows="4"></div>
+  </div>
+
+  <div class="right-section">
+    <div style="display: flex; justify-content: space-between;">  <h3>Order Summary</h3>
+  <span style="font-size: 18px;">Items<span style="color: var(--secondary);">({{ totalItems }})</span></span></div>
+  
+
+    <div class="item-card" >
+      @if(products.length > 0){
+    <app-product-list style="width: 100%;"></app-product-list>
+  }
+    </div>
+
+    <div class="summary-line">
+      <span>Delivery :</span>
+      <span class="price">4.00$</span>
+    </div>
+<ng-container *ngIf="grandTotal$ | async as grandTotal">
+  <div class="summary-line total">
+    <span>Total :</span>
+    <span class="price">{{ (grandTotal + 4) | number: '1.2-2' }} $</span>
+  </div>
+</ng-container>
+
+
+
+     <div style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
+        <app-text-input  [showPlaceholder]="true" style="width: 85%;"></app-text-input>
+     <app-button
+            title="Apply"
+            type="submit"
+            bgColor="var(--secondary)"
+style="width:13%"
+          >
+           
+          </app-button></div>
+
+<div style="display: flex; justify-content: space-between; gap:10px; margin-top: 20px;">
+    <app-button
+            title="Continue Shopping"
+            type="submit"
+style="width: 50%;"
+(click)="navigateTo('/products')"
+          >
+           
+          </app-button>
+           <app-button
+            title="Checkout"
+            type="submit"
+            bgColor="var(--secondary)"
+            style="width: 50%;"
+(click)="confirmOrder()"
+          >
+           
+          </app-button>
+</div>
+    
+           
+
+
+  
+  </div>
+</div>

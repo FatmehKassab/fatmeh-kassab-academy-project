@@ -19,11 +19,13 @@ import {
 } from '../../store/cart/cart.actions';
 import { Observable } from 'rxjs';
 import { ICONS } from '../../utils/icons';
+import { Router } from '@angular/router';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-drawer',
   standalone: true,
-  imports: [DrawerModule, CommonModule, FormsModule, ProductListComponent],
+  imports: [DrawerModule, CommonModule, FormsModule, ProductListComponent,ButtonComponent],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss'
 })
@@ -42,7 +44,8 @@ export class DrawerComponent implements OnInit {
   constructor(
     private drawerService: DrawerService,
     private favoritesService: FavoritesService,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {
     this.grandTotal$ = this.store.select(selectGrandTotal);
      effect(() => {
@@ -95,4 +98,7 @@ export class DrawerComponent implements OnInit {
       this.products = [];
     }
   }
+  navigateTo(route: string) {
+  this.router.navigate([route]);
+}
 }
