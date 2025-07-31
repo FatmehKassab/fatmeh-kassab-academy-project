@@ -20,4 +20,11 @@
     <div (click)="empty()">   <img [src]="ICONS.bin" alt="altText" class="bin" /></div>
   </div>
   </div>
+   <app-button
+          title="Checkout"
+          type="submit"
+          bgColor="var(--secondary)"
+          style="width: 50%;"
+          (click)="navigateTo('/checkout')"
+        ></app-button>
 </p-drawer>

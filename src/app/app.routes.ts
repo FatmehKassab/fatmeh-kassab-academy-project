@@ -10,8 +10,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 export const routes: Routes = [
+  { path: 'checkout', component: CheckoutComponent, data: { title: 'Checkout' } },
   { path: 'not-found', component: NotFoundComponent, data: { title: 'Not Found' } },
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
   { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
