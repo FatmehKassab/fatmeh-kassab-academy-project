@@ -5,58 +5,224 @@
       [class.active]="activeTab === 'account'"
       (click)="setActiveTab('account')"
     >
-      <div>Account Setting</div>
-      <small>Personal information & Address</small>
+      <p class="title">Account Setting</p>
+      <span class="small">Personal information & Address</span>
     </div>
     <div
       class="tab"
       [class.active]="activeTab === 'privacy'"
       (click)="setActiveTab('privacy')"
     >
-      <div>Privacy & Security</div>
-      <small>Change password</small>
+      <p class="title">Privacy & Security</p>
+       <span class="small">Change password</span>
     </div>
     <div
       class="tab"
       [class.active]="activeTab === 'deactivate'"
       (click)="setActiveTab('deactivate')"
     >
-      <div>Deactivate Account</div>
-      <small>Delete Account</small>
+      <p class="title">Deactivate Account</p>
+       <span class="small">Delete Account</span>
     </div>
-    <div
+    <!-- <div
       class="tab"
       [class.active]="activeTab === 'orders'"
       (click)="setActiveTab('orders')"
     >
-      <div>My Orders</div>
-      <small>Tracking & Delivery</small>
-    </div>
-
+      <p class="title">My Orders</p>
+       <span class="small">Tracking & Delivery</span>
+    </div> -->
   </div>
 
-  @if(activeTab === 'account'){
-    <div class="content">
-    <div class="header-card">
-      <div class="avatar">
-        <i class="fa fa-user"></i>
+  <div class="content">
+    <!-- Account Tab -->
+    @if(activeTab === 'account'){<div>
+      <div class="header-card"> <div class="avatar">
         <span class="plus">+</span>
       </div>
       <div class="info">
         <p class="name">Fatmeh Kassab</p>
-        <p class="email">202110346.edu.lb</p>
+        <p class="email">fatmeh.gmail.com</p>
+      </div></div>
+     
+       <div class="address-card">
+      <p class="label">Address</p>
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-grid">
+    <div class="form-group">
+      <app-text-input
+        label="Country"
+        [value]="f['country'].value"
+        (valueChange)="f['country'].setValue($event)"
+        [showPlaceholder]="true"
+      ></app-text-input>
+      <div *ngIf="f['country'].touched && f['country'].invalid" class="error">
+        Country is required.
       </div>
-      <div class="phone">+961 01 258967</div>
-      <div class="edit-icon">
-        <i class="fa fa-pen"></i>
+
+      <app-text-input
+        label="City"
+        [value]="f['city'].value"
+        (valueChange)="f['city'].setValue($event)"
+        [showPlaceholder]="true"
+      ></app-text-input>
+      <div *ngIf="f['city'].touched && f['city'].invalid" class="error">
+        City is required.
       </div>
     </div>
+
+    <div class="form-group">
+      <app-text-input
+        label="Street"
+        [value]="f['street'].value"
+        (valueChange)="f['street'].setValue($event)"
+        [showPlaceholder]="true"
+      ></app-text-input>
+      <div *ngIf="f['street'].touched && f['street'].invalid" class="error">
+        Street is required.
+      </div>
+
+      <app-text-input
+        label="Building"
+        [value]="f['building'].value"
+        (valueChange)="f['building'].setValue($event)"
+        [showPlaceholder]="true"
+      ></app-text-input>
+      <div *ngIf="f['building'].touched && f['building'].invalid" class="error">
+        Building is required.
+      </div>
+    </div>
+
+    <div class="form-group" style="grid-column: span 2;">
+      <app-text-input
+        label="Floor"
+        [value]="f['floor'].value"
+        (valueChange)="f['floor'].setValue($event)"
+        [showPlaceholder]="true"
+      ></app-text-input>
+      <div *ngIf="f['floor'].touched && f['floor'].invalid" class="error">
+        Floor is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container" style="display: flex; justify-content: space-between; margin-top: 2rem;">
+    <app-button
+      title="Cancel"
+      type="button"
+
+ 
+      (click)="addressForm.reset()"
+    ></app-button>
+
+    <app-button
+      title="Save changes"
+      type="submit"
+      bgColor="var(--secondary)"
+     
+    ></app-button>
+  </div>
+</form>
+
+
+   
+      </div>
+
   </div>}
+
 @else if(activeTab === 'privacy'){
-<div>privacy</div>
+ <div class="address-card">
+      <p class="label">Change Password</p>
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-grid">
+      <app-text-input
+        label="New Password"
+        type="password"
+        [value]="f['country'].value"
+        (valueChange)="f['country'].setValue($event)"
+        [showPlaceholder]="true"
+         style="width: 50%;"
+      ></app-text-input>
+      <div *ngIf="f['country'].touched && f['country'].invalid" class="error">
+        Country is required.
+      </div>
+
+      <app-text-input
+        label="Confirm Password"
+        type="password"
+        [value]="f['city'].value"
+        (valueChange)="f['city'].setValue($event)"
+        [showPlaceholder]="true"
+        style="width: 50%;"
+      ></app-text-input>
+      <div *ngIf="f['city'].touched && f['city'].invalid" class="error">
+        City is required.
+      </div>
+    </div>
+
+   
+
+   
+
+  <div class="button-container" style="display: flex; justify-content: space-between; margin-top: 2rem;">
+    <app-button
+      title="Cancel"
+      type="button"
+
+ 
+      (click)="addressForm.reset()"
+    ></app-button>
+
+    <app-button
+      title="Save changes"
+      type="submit"
+      bgColor="var(--secondary)"
+     
+    ></app-button>
+  </div>
+</form>
+</div>
 }@else if(activeTab === 'deactivate'){
-<div>deactivate</div>
-}@else {
-    <div>orders</div>
+ <div class="address-card">
+      <p class="label">Delete Account</p>
+      <p class="label">This action cannot be undone!</p>
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" >
+   
+
+      <app-text-input
+        label="Tell us why"
+        [value]="f['city'].value"
+        (valueChange)="f['city'].setValue($event)"
+        [showPlaceholder]="true"
+        style="width: 50%;"
+      ></app-text-input>
+    
+
+
+   
+
+   
+
+  <div class="button-container" style="display: flex; justify-content: space-between; margin-top: 2rem;">
+    <app-button
+      title="Cancel"
+      type="button"
+
+ 
+      (click)="addressForm.reset()"
+    ></app-button>
+
+    <app-button
+      title="Delete Account"
+      type="submit"
+      bgColor="var(--secondary)"
+     
+    ></app-button>
+  </div>
+</form>
+</div>
 }
+<!-- @else {
+    <div>orders</div>
+} -->
 </div>
