@@ -16,8 +16,11 @@ import { MessageService } from 'primeng/api';
 export class ProfileComponent implements OnInit {
   activeTab: string = 'account'; 
   addressForm!: FormGroup;
-
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router,private messageService: MessageService) {}
+ firstName: string = '';
+ public user: any;
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router,private messageService: MessageService,
+     private authService: AuthService,
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -34,6 +37,8 @@ export class ProfileComponent implements OnInit {
     });
 
     this.initializeForm();
+
+       this.user = this.authService.getUserData();
   }
 
   setActiveTab(tab: string) {
@@ -54,6 +59,8 @@ export class ProfileComponent implements OnInit {
       floor: ['', Validators.required],
     });
   }
+
+
 
   onSubmit(): void {
     if (this.addressForm.valid) {
