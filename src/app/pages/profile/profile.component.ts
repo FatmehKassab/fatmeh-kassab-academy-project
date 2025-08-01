@@ -6,10 +6,11 @@ import { AuthService } from '../../core/auth/services/auth.service';
 import { TextInputComponent } from "../../shared/components/inputs/text-input/text-input.component";
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { MessageService } from 'primeng/api';
+import { ActiveTabComponent } from '../../shared/components/active-tab/active-tab.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [NgIf, TextInputComponent, ReactiveFormsModule,ButtonComponent],
+  imports: [NgIf, TextInputComponent, ReactiveFormsModule,ButtonComponent,ActiveTabComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -18,29 +19,22 @@ export class ProfileComponent implements OnInit {
   addressForm!: FormGroup;
  firstName: string = '';
  public user: any;
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router,private messageService: MessageService,
+  constructor( private fb: FormBuilder,private messageService: MessageService,
      private authService: AuthService,
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const tab = params['tab'];
-      if (tab) {
-        this.activeTab = tab;
-      } else {
-        this.router.navigate([], {
-          relativeTo: this.route,
-          queryParams: { tab: this.activeTab },
-          queryParamsHandling: 'merge',
-        });
-      }
-    });
+   
 
     this.initializeForm();
 
        this.user = this.authService.getUserData();
 
         }
+
+        onTabChanged(tab: string) {
+    this.activeTab = tab;
+  }
 
   deleteAccount(){
     this.authService.deleteAccount().subscribe({
@@ -63,14 +57,7 @@ export class ProfileComponent implements OnInit {
 
   }
   
-  setActiveTab(tab: string) {
-    this.activeTab = tab;
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { tab },
-      queryParamsHandling: 'merge',
-    });
-  }
+
 
   private initializeForm(): void {
     this.addressForm = this.fb.group({
