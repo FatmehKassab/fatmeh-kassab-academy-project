@@ -149,6 +149,32 @@ logout(): Observable<any> {
   );
 }
 
+deleteAccount(): Observable<any> {
+  const token = this.getToken();
+  const user = this.getUserData();
+
+  if (!user?.sub) {
+    console.error('KeycloakId (sub) is missing in user data');
+    throw new Error('KeycloakId is required');
+  }
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+
+  const payload = {
+    KeycloakId: user.sub 
+  };
+
+  return this.http.post(`${this.API_BASE_URL}/DeleteAccount()`, payload, { headers }).pipe(
+    tap(() => {
+      this.clearUserData();
+      this.isLoggedInSubject.next(false);
+      this.router.navigate(['/sign-up']);
+    })
+  );
+}
 
 
 private storeAuthData(token: string, refreshToken: string, userData: any): void {

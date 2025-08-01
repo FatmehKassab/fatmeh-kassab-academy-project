@@ -39,8 +39,30 @@ export class ProfileComponent implements OnInit {
     this.initializeForm();
 
        this.user = this.authService.getUserData();
-  }
 
+        }
+
+  deleteAccount(){
+    this.authService.deleteAccount().subscribe({
+  next: () => {
+    this.messageService.add({ 
+          severity: 'success', 
+          summary: 'Success', 
+          detail: 'Account Deleted Successfully!' 
+        });
+  },
+  error: (err) => {
+     const msg = err.error?.message || 'Deleting account failed. Please try again.';
+    this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Error', 
+          detail:  msg
+        });
+  }
+});
+
+  }
+  
   setActiveTab(tab: string) {
     this.activeTab = tab;
     this.router.navigate([], {
