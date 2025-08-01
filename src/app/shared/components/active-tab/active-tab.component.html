@@ -1,0 +1,9 @@
+<div
+  class="tab"
+  *ngFor="let tabItem of tabs"
+  [class.active]="activeTab === tabItem.key"
+  (click)="setActiveTab(tabItem.key)"
+>
+  <p class="title">{{ tabItem.title }}</p>
+  <span class="small">{{ tabItem.subtitle }}</span>
+</div>

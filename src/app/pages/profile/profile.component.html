@@ -1,37 +1,7 @@
 <div class="account-settings-container">
   <div class="sidebar">
-    <div
-      class="tab"
-      [class.active]="activeTab === 'account'"
-      (click)="setActiveTab('account')"
-    >
-      <p class="title">Account Setting</p>
-      <span class="small">Personal information & Address</span>
-    </div>
-    <div
-      class="tab"
-      [class.active]="activeTab === 'privacy'"
-      (click)="setActiveTab('privacy')"
-    >
-      <p class="title">Privacy & Security</p>
-       <span class="small">Change password</span>
-    </div>
-    <div
-      class="tab"
-      [class.active]="activeTab === 'deactivate'"
-      (click)="setActiveTab('deactivate')"
-    >
-      <p class="title">Deactivate Account</p>
-       <span class="small">Delete Account</span>
-    </div>
-    <!-- <div
-      class="tab"
-      [class.active]="activeTab === 'orders'"
-      (click)="setActiveTab('orders')"
-    >
-      <p class="title">My Orders</p>
-       <span class="small">Tracking & Delivery</span>
-    </div> -->
+    <app-active-tab  [activeTab]="activeTab"
+      (tabChanged)="onTabChanged($event)"></app-active-tab>
   </div>
 
   <div class="content">
@@ -41,8 +11,8 @@
         <span class="plus">+</span>
       </div>
       <div class="info">
-        <p class="name">Fatmeh Kassab</p>
-        <p class="email">fatmeh.gmail.com</p>
+        <p class="name">{{ user?.name }}</p>
+        <p class="email">{{ user?.email }}</p>
       </div></div>
      
        <div class="address-card">
@@ -216,7 +186,7 @@
       title="Delete Account"
       type="submit"
       bgColor="var(--secondary)"
-     
+     (click)="deleteAccount()"
     ></app-button>
   </div>
 </form>
