@@ -1,0 +1,33 @@
+.item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f7f9fb;
+  border-radius: 10px;
+}
+
+.text-content {
+  max-width: 50%;
+  h1 {
+    font-size: 2rem;
+    color: #0b1f45;
+  }
+  p {
+    margin-top: 1rem;
+    color: #333;
+  }
+  .start-button {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #e3e9f2;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+}
+
+.image-content img {
+  max-width: 250px;
+  object-fit: contain;
+}
