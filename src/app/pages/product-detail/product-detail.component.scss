@@ -58,3 +58,43 @@ width: 50%;
 :host ::ng-deep .p-rating-option-active .p-rating-icon{
     color: gold;
 }
+
+.size-box {
+  width: 60px;
+  height: 35px;
+  border-radius: 10px;
+  border: 2px solid var(--dark-navy2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  color: var(--dark-navy2);
+}
+
+.size-box:hover {
+  border-color:  var(--secondary);
+ color:  var(--secondary);
+}
+
+.size-box.selected {
+  border-color: var(--secondary);
+  background-color:  var(--secondary);
+  color: #fff;
+}
+
+.p-accordionheader{
+  padding: 10px 10px 10px 0;
+  color: var(--dark-navy2);
+}
+.p-accordioncontent-content{
+   color: var(--dark-navy2);
+}
+
+.label{
+  color: var(--dark-navy2);
+font-size: 16px;
+font-weight: bold;
+margin-bottom: 10px;
+}

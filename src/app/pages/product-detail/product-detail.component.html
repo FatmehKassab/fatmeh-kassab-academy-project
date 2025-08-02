@@ -3,10 +3,45 @@
     <div class="product-details"> 
   <h1>{{ product.title }}</h1>
   <p class="category">({{ product.category }})</p>
-  <p>size</p>
-  <p>color</p>
-  <h1>{{ product.price }}$</h1>
-  <p>{{ product.description }}</p>
+ <h1>{{ product.price }}$</h1>
+  <div>
+  <p class="label">Size</p>
+  <div style="display: flex; gap:10px;">
+    <div 
+      *ngFor="let size of sizes" 
+      [ngClass]="{
+        'size-box': true,
+        'selected': selectedSize === size
+      }"
+      (click)="selectSize(size)">
+      {{ size }}
+    </div>
+  </div>
+</div>
+
+<div>
+  <p class="label">Color</p>
+      <div style="display: flex; gap:10px;">
+        <div *ngFor="let color of colors"
+             [style.background]="color.hex.value"
+             style="width: 40px; height: 40px; border-radius: 10px; cursor: pointer;">
+        </div>
+      </div>
+    </div>
+ 
+    <p-accordion  value="0">
+    <p-accordion-panel  value="0">
+        <p-accordion-header>Description</p-accordion-header>
+        <p-accordion-content>
+            <p class="m-0">
+                 {{ product.description }}
+            </p>
+        </p-accordion-content>
+    </p-accordion-panel>
+  </p-accordion>
+
+    
+
   <p-rating 
       [ngModel]="product.rating?.rate" 
       [readonly]="true" 
