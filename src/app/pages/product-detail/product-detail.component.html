@@ -28,6 +28,20 @@
         </div>
       </div>
     </div>
+    
+    <div style="width: fit-content;">
+  <p class="label">Quantity</p>
+    <div *ngFor="let item of products; let i = index">
+   <app-counter [productId]="item.id" [product]="item" ></app-counter>
+
+<div>
+ 
+
+</div>
+
+</div>
+
+    </div>
  
     <p-accordion  value="0">
     <p-accordion-panel  value="0">
@@ -40,15 +54,46 @@
     </p-accordion-panel>
   </p-accordion>
 
-    
+     <div class="button-container">
+      <app-socials  [iconPath]="isFavorite(product) ? ICONS.filled_heart : ICONS.heart" class="social-icon" (click)="addToFavorites(product)"></app-socials>
+           <app-button
+            title="Add to cart"
+            type="submit"
+style="width: 100%;"
+          >
+          </app-button>
+          <app-button
+            title="Checkout"
+            type="submit"
+            bgColor="var(--secondary)"
+style="width: 100%;"
+          >
+          </app-button>
+        </div>
+</div>
+</div>
 
-  <p-rating 
+<div class="reviews-container">
+  <h1 class="reviews-title">Reviews</h1>
+
+  <div class="rating-summary">
+    <p class="rating-score">({{ product.rating?.rate }})</p>
+    <p-rating 
       [ngModel]="product.rating?.rate" 
       [readonly]="true" 
       [stars]="5">
     </p-rating>
+  </div>
 
-    <p>{{ product.rating?.count }} reviews</p>
+  <p class="rating-based">
+    Based on {{ product.rating?.count }} reviews, 80% who purchased would recommend this
+  </p>
 
+  <p class="rating-snapshot-title">Rating snapshot</p>
 
+  <div class="rating-row"><span>1 (0)</span><p-progressbar [value]="0" /></div>
+  <div class="rating-row"><span>2 (2)</span><p-progressbar [value]="20" /></div>
+  <div class="rating-row"><span>3 (3)</span><p-progressbar [value]="30" /></div>
+  <div class="rating-row"><span>4 (7)</span><p-progressbar [value]="70" /></div>
+  <div class="rating-row"><span>5 (2)</span><p-progressbar [value]="20" /></div>
 </div>
