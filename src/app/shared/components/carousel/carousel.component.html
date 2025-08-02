@@ -1,13 +1,20 @@
-<p-carousel  [numVisible]="3" [numScroll]="3" [circular]="false">
+<p-carousel [value]="slides" [numVisible]="1" [numScroll]="1" [showIndicators]="false" autoplayInterval="10000">
   <ng-template pTemplate="item" let-item>
     <div class="item-container">
       <div class="text-content">
-        <h1><strong><em>Style, Tech & Beyond</em></strong></h1>
-        <p>Own the moment and redefine your style with ModaFusion<br>New arrivals that slay — shop now!</p>
-        <button class="start-button">Start Shopping</button>
+        <h1>"{{ item.title }}"</h1>
+        <p>{{ item.description }}</p>
+        <button class="start-button">{{ item.button }}</button>
       </div>
-      <div class="image-content">
-        <img [src]="item.image" [alt]="item.alt" />
+      <div class="image-content" style=" display: flex; align-items: end;">
+        <div> <img [src]="IMAGES.ring" alt="slide image" />
+          <img [src]="IMAGES.headphones" alt="slide image" /></div>
+       
+          <div style="display: flex;"> 
+            <img [src]="IMAGES.man" alt="slide image" style="max-width:50vh" />
+        <img [src]="IMAGES.woman" alt="slide image" style="max-width: 50vh; "/></div>
+       
+           
       </div>
     </div>
   </ng-template>

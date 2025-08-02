@@ -2,20 +2,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
-  background-color: #f7f9fb;
+  padding: 0 20px;
+  background-color: var(--background);
   border-radius: 10px;
 }
 
 .text-content {
-  max-width: 50%;
+  width: 40%;
   h1 {
-    font-size: 2rem;
-    color: #0b1f45;
+    font-size:45px;
+    color: var(--primary);
+    font-weight: bolder;
+    font-style: italic;
   }
   p {
     margin-top: 1rem;
-    color: #333;
+     color: var(--primary);
   }
   .start-button {
     margin-top: 1.5rem;
@@ -27,7 +29,11 @@
   }
 }
 
-.image-content img {
-  max-width: 250px;
+.image-content {
+      width: 60%;
+}
+
+img {
+  max-width: 30vh;
   object-fit: contain;
 }
