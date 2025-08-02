@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { IMAGES } from '../../utils/images';
+import { ButtonComponent } from '../button/button.component';
 @Component({
   selector: 'app-carousel',
-  imports: [CarouselModule],
+  imports: [CarouselModule,ButtonComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss'
 })

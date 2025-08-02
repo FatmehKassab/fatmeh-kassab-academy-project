@@ -1,10 +1,16 @@
-<p-carousel [value]="slides" [numVisible]="1" [numScroll]="1" [showIndicators]="false" autoplayInterval="10000">
+<p-carousel [value]="slides" [numVisible]="1" [numScroll]="1" [showIndicators]="false" autoplayInterval="5000">
   <ng-template pTemplate="item" let-item>
     <div class="item-container">
       <div class="text-content">
         <h1>"{{ item.title }}"</h1>
         <p>{{ item.description }}</p>
-        <button class="start-button">{{ item.button }}</button>
+        <div class="start-button "><app-button
+          title="{{ item.button }}"
+          type="submit"
+textColor="var(--primary)"
+bgColor="#e3e9f2"
+        ></app-button></div>
+        
       </div>
       <div class="image-content" style=" display: flex; align-items: end;">
         <div> <img [src]="IMAGES.ring" alt="slide image" />
