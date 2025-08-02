@@ -1,0 +1,10 @@
+<div class="categories-wrapper">
+  <h2 class="section-title">OUR CATEGORIES</h2>
+
+  <div class="categories-grid">
+    <div class="category-card" *ngFor="let category of categories">
+      <img [src]="IMAGES.mantop" [alt]="category.name" class="category-image" />
+      <p class="category-name">{{ category.name }}</p>
+    </div>
+  </div>
+</div>
