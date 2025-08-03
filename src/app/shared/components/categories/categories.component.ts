@@ -1,30 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IMAGES } from '../../utils/images';
-import { NgFor } from '@angular/common';
+import { NgFor, TitleCasePipe } from '@angular/common';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-categories',
-  imports: [NgFor],
+  imports: [NgFor, TitleCasePipe],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
-export class CategoriesComponent {
+export class CategoriesComponent implements OnInit {
 IMAGES =IMAGES;
-categories = [
-    {
-      name: "Men’s clothing",
-      image: "mantop"
-    },
-    {
-      name: "Women’s clothing",
-      image: "womantop"
-    },
-    {
-      name: "Jewelry",
-      image: "earrings"
-    },
-    {
-      name: "Electronics",
-      image: "tv"
-    }]
+categories: string[] = [];
+
+images = [
+  this.IMAGES.tv,
+  this.IMAGES.earrings,
+  this.IMAGES.mantop,
+  this.IMAGES.womantop,
+  
+]
+constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+
+ this.productService.getAllCategories().subscribe(data => {
+  console.log(">>>>>>>>",data)
+      this.categories = data;
+    });
+  }
 }

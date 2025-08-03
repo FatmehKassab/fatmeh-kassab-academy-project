@@ -1,13 +1,13 @@
 .categories-wrapper {
   text-align: center;
   padding: 3rem 1rem;
-  background-color: #fff;
+  background-color: var(--white);
 }
 
 .section-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1c2a4d;
+  color: var(--primary);
   margin-bottom: 2rem;
 }
 
@@ -19,13 +19,11 @@
 }
 
 .category-card {
-  background-color: #0b2d5c;
-  border-radius: 20px;
-  padding: 1.5rem;
-  width: 160px;
+ 
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   transition: transform 0.2s ease;
   cursor: pointer;
 
@@ -33,14 +31,37 @@
     transform: translateY(-5px);
   }
 
-  .category-image {
-    max-width: 100px;
+
+
+  .image-container{
+     background-color: var(--primary);
+  border-radius: 20px;
+  padding: 1.5rem;
+  width: 160px;
+      display: flex;
+
+  align-items: center;
+  justify-content: center;
+    height: 70%;
+
+      .category-image {
+    width: 70px;
     height: auto;
-    margin-bottom: 1rem;
+   
+  }
   }
 
+    .category-container{
+        display: flex;
+
+  align-items: center;
+  justify-content: center;
+    height: 30%;
+  }
+
+
   .category-name {
-    color: #fff;
+    color: var(--primary);
     font-weight: 600;
   }
 }
