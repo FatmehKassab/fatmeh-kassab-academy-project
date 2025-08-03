@@ -1,0 +1,11 @@
+<div class="categories-wrapper">
+  <h2 class="section-title">OUR CATEGORIES</h2>
+
+  <div class="categories-grid">
+    <div class="category-card" *ngFor="let category of categories; let i = index">
+      <div class="image-container"> <img [src]="images[i]" [alt]="category" class="category-image" /></div>
+     
+      <div class="category-container"><p class="category-name">{{ category | titlecase }}</p></div>
+    </div>
+  </div>
+</div>

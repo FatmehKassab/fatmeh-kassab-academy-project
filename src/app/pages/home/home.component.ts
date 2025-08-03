@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../core/layout/navbar/navbar.component';
 import { CarouselComponent } from '../../shared/components/carousel/carousel.component';
+import { CategoriesComponent } from "../../shared/components/categories/categories.component";
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselComponent],
+  imports: [CarouselComponent, CategoriesComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
