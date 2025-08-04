@@ -22,7 +22,8 @@ import { ExploreComponent } from '../../shared/components/explore/explore.compon
 @Component({
   selector: 'app-product-detail',
   standalone:true,
-  imports: [NgIf,RatingModule,CommonModule, FormsModule, AccordionModule, ButtonComponent,SocialsComponent,CounterComponent, ProgressBarModule,ExploreComponent ],
+  imports: [NgIf,RatingModule,CommonModule, FormsModule, AccordionModule, ButtonComponent,SocialsComponent,CounterComponent, ProgressBarModule,
+    ExploreComponent],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
