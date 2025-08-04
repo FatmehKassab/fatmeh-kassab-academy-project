@@ -9,7 +9,10 @@
 </p-drawer> -->
 
 <p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '70%', height: '50%' }">
-    <span class="p-text-secondary block mb-8">search</span>
-   
+   <app-search-input
+  placeholder="Search products..."
+  (searchChange)="onSearch($event)"
+></app-search-input>
+
     
 </p-dialog>
