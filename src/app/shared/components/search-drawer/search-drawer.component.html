@@ -1,0 +1,30 @@
+<!-- 
+
+<p-drawer [(visible)]="visible" position="top" >
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat.
+    </p>
+</p-drawer> -->
+
+<p-dialog
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '70%', height: '80%' }"
+>
+  <app-search-input
+    placeholder="Search products..."
+    (searchChange)="onSearch($event)"
+  ></app-search-input>
+
+  <div *ngIf="filteredProducts.length === 0">No products found.</div>
+
+  <ul *ngIf="filteredProducts.length > 0">
+    <app-product-card [products]="filteredProducts" class="products"></app-product-card>
+    <!-- <li *ngFor="let product of filteredProducts">
+      {{ product.title }}
+    </li> -->
+  </ul>
+</p-dialog>
+

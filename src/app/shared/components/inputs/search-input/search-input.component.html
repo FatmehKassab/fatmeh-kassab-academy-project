@@ -1,0 +1,31 @@
+<div class="text-input">
+  <input
+    type="search"
+    [id]="inputId"
+    [value]="value"
+    (input)="onInputChange($event)"
+    [placeholder]="placeholder"
+    [class.border-full]="fullBorder"
+    [class.border-bottom]="!fullBorder"
+    class="input"
+    autocomplete="off"
+  />
+
+
+
+  <button
+    *ngIf="hasValue"
+    type="button"
+    class="clear-button"
+    (click)="clearInput()"
+    aria-label="Clear search"
+  >
+    ✕
+  </button>
+
+  <img
+    [src]="ICONS.search"
+    alt="Search icon"
+    class="search-icon"
+  />
+</div>
