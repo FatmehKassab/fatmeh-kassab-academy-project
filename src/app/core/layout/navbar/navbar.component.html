@@ -36,7 +36,7 @@
       </div>
   }
   @else{ <div class="socials">
-    <app-socials  [iconPath]="ICONS.search"></app-socials>
+    <app-socials  [iconPath]="ICONS.search" (iconClick)="openSearchDrawer()"></app-socials>
 <app-socials 
   [iconPath]="ICONS.cart"
  drawerType="cart"

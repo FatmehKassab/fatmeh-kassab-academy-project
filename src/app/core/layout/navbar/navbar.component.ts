@@ -9,6 +9,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../auth/services/auth.service';
+import { SearchDrawerService } from '../../../shared/services/searchDrawer.service';
 
 @Component({
   selector: 'app-navbar',
@@ -26,7 +27,7 @@ export class NavbarComponent {
 
 
   constructor(
-    private drawerService: DrawerService,private router: Router, private authService: AuthService
+    private drawerService: DrawerService,private router: Router, private authService: AuthService,  private searchDrawerService: SearchDrawerService
  
   ) {
 this.router.events
@@ -54,6 +55,10 @@ this.router.events
     this.drawerService.openDrawer('favorites');
   }
 
+  openSearchDrawer() {
+        console.log("drawerrrr111")
+  this.searchDrawerService.openSearchDrawer();
+}
 
 
 }
