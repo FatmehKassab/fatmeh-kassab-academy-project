@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { Product, ProductService } from '../../services/product.service';
+import { ProductService } from '../../services/product.service';
 import { SocialsComponent } from "../socials/socials.component";
 import { ICONS } from '../../utils/icons';
 import { FavoritesService } from '../../services/favorites.service';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../store/cart/cart.actions';
 import { RouterModule } from '@angular/router';
+import { Product } from '../../interfaces/product.model';
 
 @Component({
   selector: 'app-product-card',

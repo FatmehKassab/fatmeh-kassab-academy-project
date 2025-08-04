@@ -4,10 +4,11 @@ import { CarouselComponent } from '../../shared/components/carousel/carousel.com
 import { CategoriesComponent } from "../../shared/components/categories/categories.component";
 import { CtaComponent } from '../../shared/components/cta/cta.component';
 import { FaqComponent } from '../../shared/components/faq/faq.component';
+import { ExploreComponent } from '../../shared/components/explore/explore.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselComponent, CategoriesComponent,CtaComponent, FaqComponent],
+  imports: [CarouselComponent, CategoriesComponent,CtaComponent, FaqComponent,ExploreComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
