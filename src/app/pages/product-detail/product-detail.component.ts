@@ -16,12 +16,13 @@ import { CounterComponent } from '../../shared/components/counter/counter.compon
 import { Store } from '@ngrx/store';
 import { selectCartItems } from '../../shared/store/cart/cart.selectors';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ExploreComponent } from '../../shared/components/explore/explore.component';
 
 
 @Component({
   selector: 'app-product-detail',
   standalone:true,
-  imports: [NgIf,RatingModule,CommonModule, FormsModule, AccordionModule, ButtonComponent,SocialsComponent,CounterComponent, ProgressBarModule ],
+  imports: [NgIf,RatingModule,CommonModule, FormsModule, AccordionModule, ButtonComponent,SocialsComponent,CounterComponent, ProgressBarModule,ExploreComponent ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
@@ -58,29 +59,31 @@ selectSize(size: string) {
   isFavorite(product: any): boolean {
   return this.favoritesService.isFavorite(product); 
 }
-  ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id')!;
+ngOnInit(): void {
+
+  this.route.params.subscribe(params => {
+    const id = +params['id'];
     if (id) {
       this.productService.getProductById(id).subscribe(product => {
         this.product = product;
-           this.customTitleService.setTitles('Products', product.title);
-      });
-      
-    }
+        this.customTitleService.setTitles('Products', product.title);
 
-    this.colorService.getRandomColors(5).subscribe((res: any) => {
-      this.colors = res.colors;
-    });
-
-              
-          this.store.select(selectCartItems).subscribe(items => {
-    this.products = [...items];
-   
     
-  
-  
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   });
-  }
+
+
+  this.colorService.getRandomColors(5).subscribe((res: any) => {
+    this.colors = res.colors;
+  });
+
+  this.store.select(selectCartItems).subscribe(items => {
+    this.products = [...items];
+  });
+}
+
 
 
   

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from "../../core/layout/navbar/navbar.component";
 import { ProductCardComponent } from "../../shared/components/product-card/product-card.component";
 import { BooleanInputComponent } from "../../shared/components/inputs/boolean-input/boolean-input.component";
-import { Product, ProductService } from '../../shared/services/product.service';
+import { ProductService } from '../../shared/services/product.service';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from "../../core/layout/footer/footer.component";
 import { FormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
+import { Product } from '../../shared/interfaces/product.model';
 
 
 

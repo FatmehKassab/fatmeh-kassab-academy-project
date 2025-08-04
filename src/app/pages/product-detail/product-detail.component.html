@@ -77,16 +77,16 @@ style="width: 100%;"
   <h1 class="reviews-title">Reviews</h1>
 
   <div class="rating-summary">
-    <p class="rating-score">({{ product.rating?.rate }})</p>
+    <p class="rating-score">({{ product.rating.rate }})</p>
     <p-rating 
-      [ngModel]="product.rating?.rate" 
+      [ngModel]="product.rating.rate" 
       [readonly]="true" 
       [stars]="5">
     </p-rating>
   </div>
 
   <p class="rating-based">
-    Based on {{ product.rating?.count }} reviews, 80% who purchased would recommend this
+    Based on {{ product.rating.count }} reviews, 80% who purchased would recommend this
   </p>
 
   <p class="rating-snapshot-title">Rating snapshot</p>
@@ -97,3 +97,5 @@ style="width: 100%;"
   <div class="rating-row"><span>4 (7)</span><p-progressbar [value]="70" /></div>
   <div class="rating-row"><span>5 (2)</span><p-progressbar [value]="20" /></div>
 </div>
+<app-explore [category]="product.category"></app-explore>
+
