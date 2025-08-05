@@ -7,6 +7,7 @@ import { TextInputComponent } from "../../shared/components/inputs/text-input/te
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { MessageService } from 'primeng/api';
 import { ActiveTabComponent } from '../../shared/components/active-tab/active-tab.component';
+import { AddressService } from '../../shared/services/address.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,10 +18,12 @@ import { ActiveTabComponent } from '../../shared/components/active-tab/active-ta
 export class ProfileComponent implements OnInit {
   activeTab: string = 'account'; 
   addressForm!: FormGroup;
+   isEditing = true; 
+  submittedAddress: any = null;
  firstName: string = '';
  public user: any;
   constructor( private fb: FormBuilder,private messageService: MessageService,
-     private authService: AuthService,
+     private authService: AuthService,private addressService: AddressService
   ) {}
 
   ngOnInit() {
@@ -29,6 +32,14 @@ export class ProfileComponent implements OnInit {
     this.initializeForm();
 
        this.user = this.authService.getUserData();
+        const savedAddress = this.getSavedAddressFromProfile(); // Example method
+    if (savedAddress) {
+      this.addressForm.patchValue(savedAddress);
+      this.submittedAddress = savedAddress;
+      this.isEditing = false;
+    }
+
+    
 
         }
 
@@ -57,7 +68,28 @@ export class ProfileComponent implements OnInit {
 
   }
   
+onSubmitForm() {
+    if (this.addressForm.valid) {
+      this.submittedAddress = this.addressForm.value;
+      this.isEditing = false;
 
+      this.addressService.setAddress(this.submittedAddress); 
+    }
+  }
+
+  editAddress() {
+    this.isEditing = true;
+  }
+
+  saveAddressToProfile(address: any) {
+    // TODO: implement actual saving logic
+    console.log('Saving to profile:', address);
+  }
+
+  getSavedAddressFromProfile() {
+    // Mocked example — replace with real profile retrieval
+    return null;
+  }
 
   private initializeForm(): void {
     this.addressForm = this.fb.group({

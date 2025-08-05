@@ -10,6 +10,7 @@ import { TextInputComponent } from '../../shared/components/inputs/text-input/te
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { clearCart } from '../../shared/store/cart/cart.actions';
 import { MessageService } from 'primeng/api';
+import { AddressService } from '../../shared/services/address.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,7 +23,10 @@ export class CheckoutComponent implements OnInit {
     totalItems: number = 0;
       totalQuantity$!: Observable<number>;
         grandTotal$!: Observable<number>;
- constructor(private store: Store,private router: Router,private messageService: MessageService) {  this.grandTotal$ = this.store.select(selectGrandTotal)}
+         address: any;
+ constructor(private store: Store,private router: Router,private messageService: MessageService,
+  private addressService: AddressService
+ ) {  this.grandTotal$ = this.store.select(selectGrandTotal)}
 
 
 ngOnInit(): void {
@@ -34,6 +38,8 @@ this.totalQuantity$ = this.store.select(selectTotalQuantity);
     this.totalQuantity$.subscribe(quantity => {
       this.totalItems = quantity;
     });
+
+     this.address = this.addressService.getAddress();
 
 }
 
