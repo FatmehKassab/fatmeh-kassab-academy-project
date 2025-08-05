@@ -12,6 +12,7 @@ import { clearCart } from '../../shared/store/cart/cart.actions';
 import { MessageService } from 'primeng/api';
 import { AddressService } from '../../shared/services/address.service';
 import { AddressComponentComponent } from '../../shared/components/address-component/address-component.component';
+import { IMAGES } from '../../shared/utils/images';
 
 @Component({
   selector: 'app-checkout',
@@ -20,6 +21,7 @@ import { AddressComponentComponent } from '../../shared/components/address-compo
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent implements OnInit {
+  IMAGES=IMAGES;
   products: any[] = [];
     totalItems: number = 0;
       totalQuantity$!: Observable<number>;

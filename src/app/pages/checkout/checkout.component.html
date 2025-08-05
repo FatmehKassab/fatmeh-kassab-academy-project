@@ -3,27 +3,26 @@
   <div class="checkout-container">
   <div class="left-section">
     <app-address-component></app-address-component>
-  <!-- <div class="address-input" *ngIf="address">
-  <p><strong>Country:</strong> {{ address.country }}</p>
-  <p><strong>City:</strong> {{ address.city }}</p>
-  <p><strong>Street:</strong> {{ address.street }}</p>
-  <p><strong>Building:</strong> {{ address.building }}</p>
-  <p><strong>Floor:</strong> {{ address.floor }}</p>
-</div>
 
-<div *ngIf="!address" class="address-input">
-  <p>No address selected yet.</p>
-</div> -->
-
-
-    <p class="label">Choose a delivery option</p>
+    <p class="label">Delivery:</p>
     <div class="delivery-option">
       <span>Standard Shipping</span>
       <span class="price">4.00$</span>
     </div>
 
     <label class="label">Payment :</label>
-    <div class="address-input" rows="4"></div>
+    <div class="payment-input" rows="4">
+      <p>Cash on delivery</p>
+      <p>-------------- or --------------</p>
+      <div class="image-container">
+  <img
+    [src]="IMAGES.whish"
+    alt="whish"
+    class="fit-image"
+  />
+</div>
+
+    </div>
   </div>
 
   <div class="right-section">
@@ -50,8 +49,8 @@
 
 
 
-     <div style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
-        <app-text-input  [showPlaceholder]="true" style="width: 85%;"></app-text-input>
+     <div style="display: flex; align-items: end; width: 100%; justify-content: space-between;">
+        <app-text-input label="Enter promo code" [showPlaceholder]="true" style="width: 85%;"></app-text-input>
      <app-button
             title="Apply"
             type="submit"
