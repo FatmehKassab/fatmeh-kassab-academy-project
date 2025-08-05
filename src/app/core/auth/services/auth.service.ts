@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserData } from '../../../shared/interfaces/user_data.model';
 
@@ -20,7 +20,7 @@ export class AuthService {
   private readonly ADMIN_EMAIL = 'admin_fatmeh@gmail.com';
   private readonly ADMIN_PASSWORD = 'Admin@123';
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
-
+  public authStateChanged = new Subject<void>();
   constructor(private http: HttpClient, private router: Router) {
     this.initializeAuthState();
     console.log(this.isLoggedInSubject)
@@ -28,8 +28,15 @@ export class AuthService {
 
 isAdmin(): boolean {
   const user = this.getUserData();
-  return user?.email === this.ADMIN_EMAIL;
+  const isAdmin = user?.email === this.ADMIN_EMAIL;
+
+  if (isAdmin) {
+    this.router.navigate(['/admin']);
+  }
+
+  return isAdmin;
 }
+
 
   getToken(): string | null {
       console.log("tken1",this.AUTH_TOKEN_KEY)
@@ -107,7 +114,7 @@ login(credentials: { Username: string; Password: string }): Observable<any> {
       if (token && refreshToken) {
         const decodedUser = this.decodeToken(token);
         console.log('Decoded JWT payload:', decodedUser);
-
+        this.authStateChanged.next();
         this.storeAuthData(token, refreshToken, decodedUser);
       } else {
         console.warn('Missing token or refresh token in login response');
@@ -144,6 +151,7 @@ logout(): Observable<any> {
     tap(() => {
       this.clearUserData();
       this.isLoggedInSubject.next(false);
+      this.authStateChanged.next();
      if(isAdmin ){    this.router.navigate(['/sign-in']);}
     })
   );
@@ -182,6 +190,7 @@ private storeAuthData(token: string, refreshToken: string, userData: any): void 
   localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken); 
   localStorage.setItem(this.USER_DATA_KEY, JSON.stringify(userData));
   this.isLoggedInSubject.next(true);
+  this.authStateChanged.next(); 
 }
 
 
@@ -189,6 +198,7 @@ private storeAuthData(token: string, refreshToken: string, userData: any): void 
     localStorage.removeItem(this.AUTH_TOKEN_KEY);
     localStorage.removeItem(this.REFRESH_TOKEN_KEY);
     localStorage.removeItem(this.USER_DATA_KEY);
+
     
   }
 

@@ -17,7 +17,7 @@
      
        <div class="address-card">
       <p class="label">Address</p>
-<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
+@if(isEditing){<form [formGroup]="addressForm" (ngSubmit)="onSubmitForm()" novalidate>
   <div class="form-grid">
     <div class="form-group">
       <app-text-input
@@ -92,7 +92,19 @@
      
     ></app-button>
   </div>
-</form>
+</form>}@else { 
+  <div class="address-display">
+    <p><strong>Country:</strong> {{ submittedAddress?.country }}</p>
+    <p><strong>City:</strong> {{ submittedAddress?.city }}</p>
+    <p><strong>Street:</strong> {{ submittedAddress?.street }}</p>
+    <p><strong>Building:</strong> {{ submittedAddress?.building }}</p>
+    <p><strong>Floor:</strong> {{ submittedAddress?.floor }}</p>
+
+    <!-- ✏️ Edit Icon/Button -->
+    <button type="button" (click)="editAddress()" class="edit-btn">
+      ✏️ Edit
+    </button>
+  </div>}
 
 
    
