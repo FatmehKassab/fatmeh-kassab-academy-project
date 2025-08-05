@@ -15,14 +15,13 @@
         <p class="email">{{ user?.email }}</p>
       </div></div>
      
-<app-address-component></app-address-component>
-
+<app-address-component [isProfile]="true"></app-address-component>
   </div>}
 
 @else if(activeTab === 'privacy'){
  <div class="address-card">
       <p class="label">Change Password</p>
-<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
+<form [formGroup]="passwordForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-grid">
       <app-text-input
         label="New Password"
@@ -59,7 +58,7 @@
       type="button"
 
  
-      (click)="addressForm.reset()"
+      (click)="passwordForm.reset()"
     ></app-button>
 
     <app-button
@@ -75,7 +74,7 @@
  <div class="address-card">
       <p class="label">Delete Account</p>
       <p class="label">This action cannot be undone!</p>
-<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" >
+<form [formGroup]="passwordForm" (ngSubmit)="onSubmit()" >
    
 
       <app-text-input
@@ -98,7 +97,7 @@
       type="button"
 
  
-      (click)="addressForm.reset()"
+      (click)="passwordForm.reset()"
     ></app-button>
 
     <app-button

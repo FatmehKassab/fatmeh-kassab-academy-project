@@ -1,71 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { TextInputComponent } from '../inputs/text-input/text-input.component';
 import { AddressService } from '../../services/address.service';
 import { NgIf } from '@angular/common';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-address-component',
-  imports: [NgIf,TextInputComponent, ReactiveFormsModule,ButtonComponent],
+  imports: [NgIf, TextInputComponent, ReactiveFormsModule, ButtonComponent],
   templateUrl: './address-component.component.html',
   styleUrl: './address-component.component.scss'
 })
-export class AddressComponentComponent {
-activeTab: string = 'account'; 
+export class AddressComponentComponent implements OnInit {
+  @Input() isProfile: boolean = false;
   addressForm!: FormGroup;
-   isEditing = true; 
+  isEditing = true;
   submittedAddress: any = null;
- firstName: string = '';
- public user: any;
-  constructor( private fb: FormBuilder
-   ,private addressService: AddressService
+
+  constructor(
+    private fb: FormBuilder,
+    private addressService: AddressService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
-   
-
-    this.initializeForm();
-
-  
-        const savedAddress = this.getSavedAddressFromProfile(); 
-    if (savedAddress) {
-      this.addressForm.patchValue(savedAddress);
-      this.submittedAddress = savedAddress;
-      this.isEditing = false;
-    }
-
-    
-
-        }
-
-
-  
-  
-onSubmitForm() {
-    if (this.addressForm.valid) {
-      this.submittedAddress = this.addressForm.value;
-      this.isEditing = false;
-
-      this.addressService.setAddress(this.submittedAddress); 
-    }
-  }
-
-  editAddress() {
-    this.isEditing = true;
-  }
-
-  saveAddressToProfile(address: any) {
-    // TODO: implement actual saving logic
-    console.log('Saving to profile:', address);
-  }
-
-  getSavedAddressFromProfile() {
-    // Mocked example — replace with real profile retrieval
-    return null;
-  }
-
-  private initializeForm(): void {
     this.addressForm = this.fb.group({
       country: ['', Validators.required],
       city: ['', Validators.required],
@@ -73,7 +32,37 @@ onSubmitForm() {
       building: ['', Validators.required],
       floor: ['', Validators.required],
     });
+    
+
+    const savedAddress = this.addressService.getAddress();
+    if (savedAddress) {
+      this.addressForm.patchValue(savedAddress);
+      this.submittedAddress = savedAddress;
+      if (this.isProfile) {
+        this.isEditing = false; 
+      }
+    }
   }
+
+  onSubmitForm() {
+    if (this.addressForm.valid) {
+      this.submittedAddress = this.addressForm.value;
+      this.isEditing = false;
+      this.addressService.setAddress(this.submittedAddress);
+             this.messageService.add({ 
+          severity: 'success', 
+          summary: 'Success', 
+          detail: 'Address Changed Successfully!' 
+        });
+    }
+  }
+
+  editAddress() {
+    this.isEditing = true;
+  }
+
+
+
 
 
   get f() {

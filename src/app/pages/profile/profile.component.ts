@@ -18,28 +18,18 @@ import { AddressComponentComponent } from "../../shared/components/address-compo
 })
 export class ProfileComponent implements OnInit {
   activeTab: string = 'account'; 
-  addressForm!: FormGroup;
-   isEditing = true; 
-  submittedAddress: any = null;
+  passwordForm!: FormGroup;
  firstName: string = '';
  public user: any;
   constructor( private fb: FormBuilder,private messageService: MessageService,
-     private authService: AuthService,private addressService: AddressService
+     private authService: AuthService
   ) {}
 
   ngOnInit() {
    
 
-    this.initializeForm();
 
        this.user = this.authService.getUserData();
-        const savedAddress = this.getSavedAddressFromProfile(); // Example method
-    if (savedAddress) {
-      this.addressForm.patchValue(savedAddress);
-      this.submittedAddress = savedAddress;
-      this.isEditing = false;
-    }
-
     
 
         }
@@ -68,55 +58,22 @@ export class ProfileComponent implements OnInit {
 });
 
   }
-  
-onSubmitForm() {
-    if (this.addressForm.valid) {
-      this.submittedAddress = this.addressForm.value;
-      this.isEditing = false;
-
-      this.addressService.setAddress(this.submittedAddress); 
-    }
-  }
-
-  editAddress() {
-    this.isEditing = true;
-  }
-
-  saveAddressToProfile(address: any) {
-    // TODO: implement actual saving logic
-    console.log('Saving to profile:', address);
-  }
-
-  getSavedAddressFromProfile() {
-    // Mocked example — replace with real profile retrieval
-    return null;
-  }
-
-  private initializeForm(): void {
-    this.addressForm = this.fb.group({
-      country: ['', Validators.required],
-      city: ['', Validators.required],
-      street: ['', Validators.required],
-      building: ['', Validators.required],
-      floor: ['', Validators.required],
-    });
-  }
 
 
 
   onSubmit(): void {
-    if (this.addressForm.valid) {
+    if (this.passwordForm.valid) {
        this.messageService.add({ 
           severity: 'success', 
           summary: 'Success', 
           detail: 'Address Changed Successfully!' 
         });
     } else {
-      this.addressForm.markAllAsTouched();
+      this.passwordForm.markAllAsTouched();
     }
   }
 
   get f() {
-    return this.addressForm.controls;
+    return this.passwordForm.controls;
   }
 }

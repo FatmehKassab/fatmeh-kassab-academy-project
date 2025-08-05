@@ -1,94 +1,97 @@
-       <div class="address-card">
-      <p class="label">Address</p>
-@if(isEditing){<form [formGroup]="addressForm" (ngSubmit)="onSubmitForm()" novalidate>
-  <div class="form-grid">
-    <div class="form-group">
-      <app-text-input
-        label="Country"
-        [value]="f['country'].value"
-        (valueChange)="f['country'].setValue($event)"
-        [showPlaceholder]="true"
-      ></app-text-input>
-      <div *ngIf="f['country'].touched && f['country'].invalid" class="error">
-        Country is required.
+<div class="address-card">
+  <p class="label">Address</p>
+  
+  @if(isEditing) {
+    <form [formGroup]="addressForm" (ngSubmit)="onSubmitForm()" novalidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <app-text-input
+            label="Country"
+            [value]="f['country'].value"
+            (valueChange)="f['country'].setValue($event)"
+            [showPlaceholder]="true"
+          ></app-text-input>
+          <div *ngIf="f['country'].touched && f['country'].invalid" class="error">
+            Country is required.
+          </div>
+
+          <app-text-input
+            label="City"
+            [value]="f['city'].value"
+            (valueChange)="f['city'].setValue($event)"
+            [showPlaceholder]="true"
+          ></app-text-input>
+          <div *ngIf="f['city'].touched && f['city'].invalid" class="error">
+            City is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <app-text-input
+            label="Street"
+            [value]="f['street'].value"
+            (valueChange)="f['street'].setValue($event)"
+            [showPlaceholder]="true"
+          ></app-text-input>
+          <div *ngIf="f['street'].touched && f['street'].invalid" class="error">
+            Street is required.
+          </div>
+
+          <app-text-input
+            label="Building"
+            [value]="f['building'].value"
+            (valueChange)="f['building'].setValue($event)"
+            [showPlaceholder]="true"
+          ></app-text-input>
+          <div *ngIf="f['building'].touched && f['building'].invalid" class="error">
+            Building is required.
+          </div>
+        </div>
+
+        <div class="form-group" style="grid-column: span 2;">
+          <app-text-input
+            label="Floor"
+            [value]="f['floor'].value"
+            (valueChange)="f['floor'].setValue($event)"
+            [showPlaceholder]="true"
+          ></app-text-input>
+          <div *ngIf="f['floor'].touched && f['floor'].invalid" class="error">
+            Floor is required.
+          </div>
+        </div>
       </div>
 
-      <app-text-input
-        label="City"
-        [value]="f['city'].value"
-        (valueChange)="f['city'].setValue($event)"
-        [showPlaceholder]="true"
-      ></app-text-input>
-      <div *ngIf="f['city'].touched && f['city'].invalid" class="error">
-        City is required.
+      <div class="button-container" style="display: flex; justify-content: space-between; margin-top: 2rem;">
+        <app-button
+          title="Cancel"
+          type="button"
+          (click)="addressForm.reset()"
+        ></app-button>
+
+        <app-button
+          title="Save changes"
+          type="submit"
+          bgColor="var(--secondary)"
+        ></app-button>
       </div>
+    </form>
+  } @else { 
+    <div class="address-display">
+      @if(submittedAddress) {
+        <p><strong>Country:</strong> {{ submittedAddress.country }}</p>
+        <p><strong>City:</strong> {{ submittedAddress.city }}</p>
+        <p><strong>Street:</strong> {{ submittedAddress.street }}</p>
+        <p><strong>Building:</strong> {{ submittedAddress.building }}</p>
+        <p><strong>Floor:</strong> {{ submittedAddress.floor }}</p>
+      } @else {
+        <p>No address saved yet.</p>
+      }
+
+      <!-- @if(isProfile) { -->
+        <button type="button" (click)="editAddress()" class="edit-btn">
+          ✏️ Edit
+        </button>
+      <!-- } -->
     </div>
-
-    <div class="form-group">
-      <app-text-input
-        label="Street"
-        [value]="f['street'].value"
-        (valueChange)="f['street'].setValue($event)"
-        [showPlaceholder]="true"
-      ></app-text-input>
-      <div *ngIf="f['street'].touched && f['street'].invalid" class="error">
-        Street is required.
-      </div>
-
-      <app-text-input
-        label="Building"
-        [value]="f['building'].value"
-        (valueChange)="f['building'].setValue($event)"
-        [showPlaceholder]="true"
-      ></app-text-input>
-      <div *ngIf="f['building'].touched && f['building'].invalid" class="error">
-        Building is required.
-      </div>
-    </div>
-
-    <div class="form-group" style="grid-column: span 2;">
-      <app-text-input
-        label="Floor"
-        [value]="f['floor'].value"
-        (valueChange)="f['floor'].setValue($event)"
-        [showPlaceholder]="true"
-      ></app-text-input>
-      <div *ngIf="f['floor'].touched && f['floor'].invalid" class="error">
-        Floor is required.
-      </div>
-    </div>
-  </div>
-
-  <div class="button-container" style="display: flex; justify-content: space-between; margin-top: 2rem;">
-    <app-button
-      title="Cancel"
-      type="button"
-
- 
-      (click)="addressForm.reset()"
-    ></app-button>
-
-    <app-button
-      title="Save changes"
-      type="submit"
-      bgColor="var(--secondary)"
-     
-    ></app-button>
-  </div>
-</form>}@else { 
-  <div class="address-display">
-    <p><strong>Country:</strong> {{ submittedAddress?.country }}</p>
-    <p><strong>City:</strong> {{ submittedAddress?.city }}</p>
-    <p><strong>Street:</strong> {{ submittedAddress?.street }}</p>
-    <p><strong>Building:</strong> {{ submittedAddress?.building }}</p>
-    <p><strong>Floor:</strong> {{ submittedAddress?.floor }}</p>
-
-    <!-- ✏️ Edit Icon/Button -->
-    <button type="button" (click)="editAddress()" class="edit-btn">
-      ✏️ Edit
-    </button>
-  </div>}
-
-
-   
-      </div>
+  }
+</div>
