@@ -1,6 +1,10 @@
-<div class="address-card">
+    @if(!isProfile) {
+  <p class="label-checkout">Address:</p>
+        }
+<div class="address-card" [class.not-profile]="!isProfile">
+    @if(isProfile) {
   <p class="label">Address</p>
-  
+        }
   @if(isEditing) {
     <form [formGroup]="addressForm" (ngSubmit)="onSubmitForm()" novalidate>
       <div class="form-grid">

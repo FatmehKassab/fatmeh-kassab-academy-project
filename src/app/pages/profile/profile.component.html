@@ -21,7 +21,7 @@
 @else if(activeTab === 'privacy'){
  <div class="address-card">
       <p class="label">Change Password</p>
-<form [formGroup]="passwordForm" (ngSubmit)="onSubmit()" novalidate>
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-grid">
       <app-text-input
         label="New Password"
@@ -58,7 +58,7 @@
       type="button"
 
  
-      (click)="passwordForm.reset()"
+      (click)="addressForm.reset()"
     ></app-button>
 
     <app-button
@@ -74,7 +74,7 @@
  <div class="address-card">
       <p class="label">Delete Account</p>
       <p class="label">This action cannot be undone!</p>
-<form [formGroup]="passwordForm" (ngSubmit)="onSubmit()" >
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" >
    
 
       <app-text-input
@@ -97,7 +97,7 @@
       type="button"
 
  
-      (click)="passwordForm.reset()"
+      (click)="addressForm.reset()"
     ></app-button>
 
     <app-button

@@ -7,30 +7,29 @@ import { TextInputComponent } from "../../shared/components/inputs/text-input/te
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { MessageService } from 'primeng/api';
 import { ActiveTabComponent } from '../../shared/components/active-tab/active-tab.component';
-import { AddressService } from '../../shared/services/address.service';
-import { AddressComponentComponent } from "../../shared/components/address-component/address-component.component";
+import { AddressComponentComponent } from '../../shared/components/address-component/address-component.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [NgIf, TextInputComponent, ReactiveFormsModule, ButtonComponent, ActiveTabComponent, AddressComponentComponent],
+  imports: [NgIf, TextInputComponent, ReactiveFormsModule,ButtonComponent,ActiveTabComponent,AddressComponentComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
   activeTab: string = 'account'; 
-  passwordForm!: FormGroup;
+  addressForm!: FormGroup;
  firstName: string = '';
  public user: any;
   constructor( private fb: FormBuilder,private messageService: MessageService,
-     private authService: AuthService
+     private authService: AuthService,
   ) {}
 
   ngOnInit() {
    
 
+    this.initializeForm();
 
        this.user = this.authService.getUserData();
-    
 
         }
 
@@ -58,22 +57,34 @@ export class ProfileComponent implements OnInit {
 });
 
   }
+  
+
+
+  private initializeForm(): void {
+    this.addressForm = this.fb.group({
+      country: ['', Validators.required],
+      city: ['', Validators.required],
+      street: ['', Validators.required],
+      building: ['', Validators.required],
+      floor: ['', Validators.required],
+    });
+  }
 
 
 
   onSubmit(): void {
-    if (this.passwordForm.valid) {
+    if (this.addressForm.valid) {
        this.messageService.add({ 
           severity: 'success', 
           summary: 'Success', 
           detail: 'Address Changed Successfully!' 
         });
     } else {
-      this.passwordForm.markAllAsTouched();
+      this.addressForm.markAllAsTouched();
     }
   }
 
   get f() {
-    return this.passwordForm.controls;
+    return this.addressForm.controls;
   }
 }
