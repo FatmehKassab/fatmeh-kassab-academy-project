@@ -11,10 +11,11 @@ import { ButtonComponent } from '../../shared/components/button/button.component
 import { clearCart } from '../../shared/store/cart/cart.actions';
 import { MessageService } from 'primeng/api';
 import { AddressService } from '../../shared/services/address.service';
+import { AddressComponentComponent } from '../../shared/components/address-component/address-component.component';
 
 @Component({
   selector: 'app-checkout',
-  imports: [ProductListComponent,CommonModule,TextInputComponent,ButtonComponent],
+  imports: [ProductListComponent,CommonModule,TextInputComponent,ButtonComponent, AddressComponentComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })

@@ -8,10 +8,11 @@ import { ButtonComponent } from '../../shared/components/button/button.component
 import { MessageService } from 'primeng/api';
 import { ActiveTabComponent } from '../../shared/components/active-tab/active-tab.component';
 import { AddressService } from '../../shared/services/address.service';
+import { AddressComponentComponent } from "../../shared/components/address-component/address-component.component";
 
 @Component({
   selector: 'app-profile',
-  imports: [NgIf, TextInputComponent, ReactiveFormsModule,ButtonComponent,ActiveTabComponent],
+  imports: [NgIf, TextInputComponent, ReactiveFormsModule, ButtonComponent, ActiveTabComponent, AddressComponentComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })

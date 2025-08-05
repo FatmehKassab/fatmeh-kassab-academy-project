@@ -2,8 +2,8 @@
 
   <div class="checkout-container">
   <div class="left-section">
-    <label class="label">Address :</label>
-  <div class="address-input" *ngIf="address">
+    <app-address-component></app-address-component>
+  <!-- <div class="address-input" *ngIf="address">
   <p><strong>Country:</strong> {{ address.country }}</p>
   <p><strong>City:</strong> {{ address.city }}</p>
   <p><strong>Street:</strong> {{ address.street }}</p>
@@ -13,7 +13,7 @@
 
 <div *ngIf="!address" class="address-input">
   <p>No address selected yet.</p>
-</div>
+</div> -->
 
 
     <p class="label">Choose a delivery option</p>
