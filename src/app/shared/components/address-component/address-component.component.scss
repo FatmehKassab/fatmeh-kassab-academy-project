@@ -1,0 +1,52 @@
+  .address-card{
+     background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 2rem;
+  width: 100%;
+  
+   &.not-profile {
+
+    width: 100%;
+background-color: var(--background);
+    border-radius: 8px;
+    padding: 1rem;
+
+
+  
+  }
+      .label{
+          font-size: 24px;
+      color: var(--primary);
+      }
+
+      .form-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+
+  > * {
+    flex: 1; 
+    min-width: 0; 
+  }
+}
+
+
+
+  .label-checkout {
+    font-weight: 500;
+    margin-top: 20px;
+    display: block;
+  }
+
+  }

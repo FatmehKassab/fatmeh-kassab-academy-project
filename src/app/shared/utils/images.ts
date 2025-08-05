@@ -7,6 +7,7 @@ export const IMAGES = {
   mantop: 'images/mantop.png',
   ring: 'images/ring.png',
   tv: 'images/tv.png',
+  whish: 'images/whish.jpg',
   woman: 'images/woman.png',
   womantop: 'images/womantop.png'
 };
