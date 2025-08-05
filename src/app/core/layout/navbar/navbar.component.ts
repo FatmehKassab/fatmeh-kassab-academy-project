@@ -6,7 +6,7 @@ import { DrawerService } from '../../../shared/services/drawer.service';
 import { FavoritesService } from '../../../shared/services/favorites.service';
 import { Product } from '../../../shared/interfaces/product.model';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../auth/services/auth.service';
 import { SearchDrawerService } from '../../../shared/services/searchDrawer.service';
@@ -37,12 +37,25 @@ this.router.events
         this.showNavbar = !hiddenRoutes.includes(event.url);
       });
 
-   this.admin = this.authService.isAdmin(); 
-  console.log("hhhh",this.admin)
+  
+  }
+
+   ngOnInit() {
+    this.admin = this.authService.isAdmin();
+    this.authSubscription = this.authService.authStateChanged.subscribe(() => {
+      this.admin = this.authService.isAdmin();
+      console.log("Admin status updated:", this.admin);
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 
   showNavbar = true;
-  
+  private authSubscription!: Subscription;
   
   admin: boolean = false;
 
