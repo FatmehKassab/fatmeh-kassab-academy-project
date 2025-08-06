@@ -1,4 +1,5 @@
 export const IMAGES = {
+  about: 'images/about.jpg',
   earrings: 'images/earrings.png',
   headphones: 'images/headphones.png',
   login_illustration: 'images/login_illustration.svg',
