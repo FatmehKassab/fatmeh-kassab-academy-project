@@ -10,24 +10,32 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { SidemenuComponent } from "../../shared/components/sidemenu/sidemenu.component";
 import { ButtonComponent } from "../../shared/components/button/button.component";
+import { AgCharts } from 'ag-charts-angular';
+// Chart Options Type Interface
+import { AgChartOptions } from 'ag-charts-community';
+import { ICONS } from '../../shared/utils/icons';
 
 ModuleRegistry.registerModules([AllCommunityModule, PaginationModule]);
 
 @Component({
   standalone: true,
   selector: 'app-admin',
-  imports: [AgGridAngular, CommonModule, ConfirmDialogModule, SidemenuComponent, ButtonComponent],
+  imports: [AgGridAngular, CommonModule, ConfirmDialogModule, SidemenuComponent, ButtonComponent,AgCharts],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
   providers: [ConfirmationService, MessageService, DialogService]
 })
 export class AdminComponent {
+  ICONS=ICONS;
+  currentView: string = 'products'; 
   private gridApi!: GridApi;
   rowData: any[] = [];
   loading = false;
   ref: DynamicDialogRef | undefined;
 
-
+  onMenuItemClick(menuItem:any): void {
+    this.currentView = menuItem.toLowerCase();
+  }
     gridOptions: GridOptions = {
   getRowId: params => params.data.id,
 
@@ -76,14 +84,27 @@ export class AdminComponent {
     filter: true,
     resizable: true
   };
-
+  public chartOptions: AgChartOptions;
   constructor(
     private productService: ProductService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private dialogService: DialogService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    
+  ) { this.chartOptions = {
+      // Data: Data to be displayed in the chart
+      data: [
+        { month: 'Jan', avgTemp: 2.3, iceCreamSales: 162000 },
+        { month: 'Mar', avgTemp: 6.3, iceCreamSales: 302000 },
+        { month: 'May', avgTemp: 16.2, iceCreamSales: 800000 },
+        { month: 'Jul', avgTemp: 22.8, iceCreamSales: 1254000 },
+        { month: 'Sep', avgTemp: 14.5, iceCreamSales: 950000 },
+        { month: 'Nov', avgTemp: 8.9, iceCreamSales: 200000 },
+      ],
+      // Series: Defines which chart type and data to use
+      series: [{ type: 'bar', xKey: 'month', yKey: 'iceCreamSales' }]
+    };}
 
   ngOnInit(): void {
     this.loadProducts();

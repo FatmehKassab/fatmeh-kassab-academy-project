@@ -1,30 +1,31 @@
-<!-- <ag-grid-angular  style="width: 80%; height: 500px; padding: 20px;"
+<div class="admin">
+  <app-sidemenu (menuItemClick)="onMenuItemClick($event)"></app-sidemenu>
+
+  <div style="width: 100%;">
+    <!-- Dashboard Charts -->
+    <div *ngIf="currentView === 'dashboard'" style="padding: 20px;">
+      <ag-charts
+        style="height: 100%"
+        [options]="chartOptions">
+      </ag-charts>
+    </div>
+
+    <!-- Product Table -->
+    <div *ngIf="currentView === 'products'">
+      <div class="button">
+        <app-button title="Add Product" width="fit" (click)="openAddDialog()"></app-button>
+      </div>
+
+      <ag-grid-angular style="width: 100%; height: 80vh; padding: 20px;"
         [rowData]="rowData"
-        [columnDefs]="colDefs" 
-      [pagination]="true"
-    
-       /> -->
-       <div class="admin">
-        <app-sidemenu></app-sidemenu>
-      
-    <div  style="width: 100%;">
-        <div class="button">        <app-button title="Add Product" width="fit" (click)="openAddDialog()"></app-button></div>
-  
-     
- <ag-grid-angular style="width: 100%; height: 80vh; padding: 20px;"
-      [rowData]="rowData"
-      [columnDefs]="colDefs"
-      (gridReady)="onGridReady($event)"
-[gridOptions]="gridOptions"
-       [pagination]="true"
-       [theme]="theme">
-       
-    </ag-grid-angular>
+        [columnDefs]="colDefs"
+        (gridReady)="onGridReady($event)"
+        [gridOptions]="gridOptions"
+        [pagination]="true"
+        [theme]="theme">
+      </ag-grid-angular>
 
-            <p-confirmDialog [style]="{width: '400px'}"></p-confirmDialog></div>
-              
-
-        
-       </div>
-      
-            
+      <p-confirmDialog [style]="{width: '400px'}"></p-confirmDialog>
+    </div>
+  </div>
+</div>
