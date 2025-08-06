@@ -32,6 +32,11 @@
   color: var(--primary);
 }
 
+.sort-options{
+display: flex;
+flex-direction: column;
+}
+
 .sort-select:focus {
   outline: none;
   border-color: var(--primary);

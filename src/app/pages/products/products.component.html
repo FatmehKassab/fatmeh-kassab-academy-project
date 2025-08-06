@@ -12,9 +12,19 @@
     <!-- Sort Dropdown -->
     <div class="sort-container">
       <h1 style="font-size: 20px; color: var(--primary); margin-top: 20px;">Sort By</h1>
-      <select [(ngModel)]="selectedSortOption" (change)="onSortChange()" class="sort-select">
-        <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
+    <div class="sort-options">
+  <label *ngFor="let option of sortOptions" class="flex items-center gap-2">
+    <input
+      type="radio"
+      name="sortOption"
+      [value]="option.value"
+      [(ngModel)]="selectedSortOption"
+      (change)="onSortChange()"
+    />
+    {{ option.label }}
+  </label>
+</div>
+
     </div>
   </div>
 
