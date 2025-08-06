@@ -1,5 +1,5 @@
 <div class="product-container">
-  <!-- Filters -->
+
   <div class="filters">
     <h1 style="font-size: 20px; color: var(--primary);">Categories</h1>
     <app-boolean-input
@@ -9,21 +9,20 @@
       (valueChange)="onCategoryChange($event, category)"
     ></app-boolean-input>
 
-    <!-- Sort Dropdown -->
+
     <div class="sort-container">
       <h1 style="font-size: 20px; color: var(--primary); margin-top: 20px;">Sort By</h1>
     <div class="sort-options">
-  <label *ngFor="let option of sortOptions" class="flex items-center gap-2">
-    <input
-      type="radio"
-      name="sortOption"
-      [value]="option.value"
-      [(ngModel)]="selectedSortOption"
-      (change)="onSortChange()"
-    />
-    {{ option.label }}
-  </label>
+  <app-radio-input
+    *ngFor="let option of sortOptions"
+    [label]="option.label"
+    [value]="option.value"
+    [selectedValue]="selectedSortOption"
+    name="sortOption"
+    (valueChange)="onSortOptionChange($event)">
+  </app-radio-input>
 </div>
+
 
     </div>
   </div>

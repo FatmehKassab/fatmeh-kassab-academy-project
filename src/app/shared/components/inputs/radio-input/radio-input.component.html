@@ -1,0 +1,10 @@
+<label class="radio-label">
+  <input
+    type="radio"
+    [name]="name"
+    [value]="value"
+    [checked]="value === selectedValue"
+    (change)="onChange()"
+  />
+  {{ label }}
+</label>

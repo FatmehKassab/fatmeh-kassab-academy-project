@@ -8,13 +8,14 @@ import { FooterComponent } from "../../core/layout/footer/footer.component";
 import { FormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { Product } from '../../shared/interfaces/product.model';
+import { RadioInputComponent } from "../../shared/components/inputs/radio-input/radio-input.component";
 
 
 
 @Component({
   selector: 'app-products',
   standalone:true,
-  imports: [ProductCardComponent, CommonModule, BooleanInputComponent,FormsModule,PaginatorModule],
+  imports: [ProductCardComponent, CommonModule, BooleanInputComponent, FormsModule, PaginatorModule, RadioInputComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -124,5 +125,10 @@ onPageChange(event: any) {
   this.first = event.first;
   this.updatePagedProducts();
 }
+onSortOptionChange(value: string): void {
+  this.selectedSortOption = value;
+  this.sortProducts();
+}
+
 
 }
