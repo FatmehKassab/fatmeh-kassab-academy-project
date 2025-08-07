@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { SocialsComponent } from "../../../shared/components/socials/socials.component";
 import { IMAGES } from '../../../shared/utils/images';
 import { ICONS } from '../../../shared/utils/icons';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
-  imports: [SocialsComponent,NgIf],
+  imports: [SocialsComponent,NgIf,RouterModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
