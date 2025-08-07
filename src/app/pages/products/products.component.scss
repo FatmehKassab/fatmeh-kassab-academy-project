@@ -1,48 +1,82 @@
-.product-container{
-    width: screen;
+.product-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+
+  .filters {
+    width: 10%;
+    padding-right: 60px;
+    white-space: nowrap;
     display: flex;
-    justify-content: space-between;
-    padding: 40px;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-    
-    .filters{
-        width: 10%;
-        padding-right:60px;
-        white-space: nowrap;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-     
-        
+  .products {
+    width: 90%;
+  }
+
+  .sort-container {
+    margin-top: 20px;
+
+    .sort-options {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--primary);
     }
-    .products{
-        width: 90%;
-    }
-
-    .sort-container {
-  margin-top: 20px;
-
-
-.sort-options{
-  margin-top: 10px;
-display: flex;
-flex-direction: column;
- gap: 10px;
- color: var(--primary);
-}
-
-
-}
+  }
 }
 
 :host ::ng-deep .p-paginator {
   margin-top: 2rem;
   justify-content: center;
   background-color: transparent;
+   padding: 0px;
 }
 
 :host ::ng-deep .p-paginator-page.p-paginator-page-selected {
-  background-color:var(--secondary);
+  background-color: var(--secondary);
   color: white;
 }
 
+.filtering {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .filters {
+    width: 100% !important;
+    display: none !important;
+    padding: 20px;
+    background-color: var(--white);
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 10px;
+  }
+
+  .filters.open {
+    display: flex !important;
+  }
+
+  .products {
+    width: 100%;
+  }
+
+  .filtering {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+
+  }
+}

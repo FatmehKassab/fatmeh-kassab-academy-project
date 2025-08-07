@@ -3,19 +3,21 @@ import { NavbarComponent } from "../../core/layout/navbar/navbar.component";
 import { ProductCardComponent } from "../../shared/components/product-card/product-card.component";
 import { BooleanInputComponent } from "../../shared/components/inputs/boolean-input/boolean-input.component";
 import { ProductService } from '../../shared/services/product.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { FooterComponent } from "../../core/layout/footer/footer.component";
 import { FormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { Product } from '../../shared/interfaces/product.model';
 import { RadioInputComponent } from "../../shared/components/inputs/radio-input/radio-input.component";
+import { SocialsComponent } from "../../shared/components/socials/socials.component";
+import { ICONS } from '../../shared/utils/icons';
 
 
 
 @Component({
   selector: 'app-products',
   standalone:true,
-  imports: [ProductCardComponent, CommonModule, BooleanInputComponent, FormsModule, PaginatorModule, RadioInputComponent],
+  imports: [ProductCardComponent, CommonModule, BooleanInputComponent, FormsModule, PaginatorModule, RadioInputComponent, SocialsComponent, NgClass],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -31,6 +33,8 @@ export class ProductsComponent implements OnInit {
     { value: 'name-desc', label: 'Name: Z to A' }
   ];
   selectedSortOption = 'price-asc';
+  ICONS=ICONS;
+    menuOpen = false;
 
   constructor(private productService: ProductService) {}
 

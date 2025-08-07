@@ -1,43 +1,45 @@
 <div class="product-container">
+  <!-- Filter toggle icon on small screens -->
+  <app-socials
+    [iconPath]="ICONS.filters"
+    (iconClick)="menuOpen = !menuOpen"
+    class="filtering">
+  </app-socials>
 
-  <div class="filters">
+  <!-- Filters -->
+  <div class="filters" [ngClass]="{ open: menuOpen }">
     <h1 style="font-size: 20px; color: var(--primary);">Categories</h1>
     <app-boolean-input
       *ngFor="let category of categories"
       [label]="category"
       [value]="selectedCategories.has(category)"
-      (valueChange)="onCategoryChange($event, category)"
-    ></app-boolean-input>
-
+      (valueChange)="onCategoryChange($event, category)">
+    </app-boolean-input>
 
     <div class="sort-container">
       <h1 style="font-size: 20px; color: var(--primary); margin-top: 20px;">Sort By</h1>
-    <div class="sort-options">
-  <app-radio-input
-    *ngFor="let option of sortOptions"
-    [label]="option.label"
-    [value]="option.value"
-    [selectedValue]="selectedSortOption"
-    name="sortOption"
-    (valueChange)="onSortOptionChange($event)">
-  </app-radio-input>
-</div>
-
-
+      <div class="sort-options">
+        <app-radio-input
+          *ngFor="let option of sortOptions"
+          [label]="option.label"
+          [value]="option.value"
+          [selectedValue]="selectedSortOption"
+          name="sortOption"
+          (valueChange)="onSortOptionChange($event)">
+        </app-radio-input>
+      </div>
     </div>
   </div>
 
-<div>
-  <app-product-card [products]="pagedProducts" class="products"></app-product-card>
-   <!-- Paginator -->
-  <p-paginator 
-    [rows]="rowsPerPage"
-    [totalRecords]="filteredProducts.length"
-    [first]="first"
-    (onPageChange)="onPageChange($event)">
-  </p-paginator>
+  <!-- Products and paginator -->
+  <div class="products">
+    <app-product-card [products]="pagedProducts"></app-product-card>
+
+    <p-paginator 
+      [rows]="rowsPerPage"
+      [totalRecords]="filteredProducts.length"
+      [first]="first"
+      (onPageChange)="onPageChange($event)">
+    </p-paginator>
   </div>
-
-
 </div>
- 

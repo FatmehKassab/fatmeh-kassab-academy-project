@@ -8,6 +8,7 @@ export const ICONS = {
   edit:'icons/edit.svg',
   email:'icons/email.svg',
   filled_heart:'icons/filled_heart.svg',
+  filters:'icons/filters.svg',
   heart:'icons/heart.svg',
   hide: 'icons/hide.svg',
   instagram:'icons/instagram.svg',
