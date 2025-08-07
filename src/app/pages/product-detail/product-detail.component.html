@@ -29,19 +29,15 @@
       </div>
     </div>
     
-    <div style="width: fit-content;">
-  <p class="label">Quantity</p>
-    <div *ngFor="let item of products; let i = index">
-   <app-counter [productId]="item.id" [product]="item" ></app-counter>
-
-<div>
+    @if((productQuantity$ | async) ?? 0 > 0){
+  <div style="width: fit-content;">
  
-
+    <div *ngFor="let item of products; let i = index">
+       <p class="label">Quantity</p>
+   <app-counter [productId]="item.id" [product]="item" ></app-counter>
 </div>
 
-</div>
-
-    </div>
+    </div>}
  
     <p-accordion  value="0">
     <p-accordion-panel  value="0">
@@ -60,6 +56,7 @@
             title="Add to cart"
             type="submit"
 style="width: 100%;"
+(click)="addToCart(product);"
           >
           </app-button>
           <app-button
