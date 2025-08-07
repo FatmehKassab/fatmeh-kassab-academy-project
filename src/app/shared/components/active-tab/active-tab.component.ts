@@ -1,9 +1,10 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-active-tab',
+   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [NgFor],
   templateUrl: './active-tab.component.html',
