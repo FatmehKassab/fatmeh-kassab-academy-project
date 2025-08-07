@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonComponent } from "../button/button.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cta',
@@ -8,5 +9,9 @@ import { ButtonComponent } from "../button/button.component";
   styleUrl: './cta.component.scss'
 })
 export class CtaComponent {
+  private route =inject(Router)
+  navigateTo(path: string) {
+    this.route.navigate([path]);
+  }
 
 }
