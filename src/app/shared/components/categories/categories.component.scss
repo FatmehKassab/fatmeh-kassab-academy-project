@@ -42,11 +42,12 @@
 
   align-items: center;
   justify-content: center;
-    height: 70%;
+    height: 160px;
 
       .category-image {
     width: 70px;
     height: auto;
+    object-fit: fill;
    
   }
   }

@@ -1,13 +1,13 @@
 <div class="cta-container">
     <h1 class="cta-text">GET 10% OFF ON YOUR FIRST ODRDER
 WHEN YOU SIGN IN</h1>
-<div   style="width: 20%">
+<div   style="width: 20%; min-width: 200px">
  <app-button
             title="Sign In"
             type="submit"
             bgColor="var(--secondary)"
-    
-          
+      (click)="navigateTo('/sign-in')"
+        
           >
           </app-button>
 </div>

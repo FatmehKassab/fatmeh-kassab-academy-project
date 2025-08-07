@@ -92,9 +92,10 @@
       }
 
       <!-- @if(isProfile) { -->
-        <button type="button" (click)="editAddress()" class="edit-btn">
-          ✏️ Edit
-        </button>
+        <div  (click)="editAddress()" class="edit-btn">
+           <img [src]="ICONS.edit" alt="edit" class="icon" />
+           <span> Edit</span>
+        </div>
       <!-- } -->
     </div>
   }

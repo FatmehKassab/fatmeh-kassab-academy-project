@@ -1,40 +1,42 @@
 .account-settings-container {
   display: flex;
   padding: 2rem;
+  color: var(--primary);
+  gap: 2rem;
 
-.sidebar {
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  .sidebar {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
-  .tab {
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
+    .tab {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
 
-    &.active {
-      background: var(--primary);
-      color: var(--white);
+      &.active {
+        background: var(--primary);
+        color: var(--white);
 
-      .small , .title {
-        color: var(--white); 
+        .small,
+        .title {
+          color: var(--white);
+        }
+      }
+
+      .small {
+        font-size: 12px;
+        color: var(--primary);
+      }
+      .title {
+        font-size: 16px;
+        color: var(--primary);
       }
     }
-
-    .small {
-      font-size: 12px;
-      color: var(--primary);
-    }
-       .title {
-      font-size: 16px;
-      color: var(--primary);
-    }
   }
-}
-
 
   .content {
     flex: 1;
@@ -88,49 +90,104 @@
           color: gray;
         }
       }
-
-      
     }
-.error {
-  font-size: 0.75rem;
-  color: red;
-  margin-top: 0.25rem;
-}
-  }
 
-  .address-card{
-     background: white;
+    .error {
+      font-size: 0.75rem;
+      color: red;
+      margin-top: 0.25rem;
+    }
+
+    .address-card {
+      background: white;
       border-radius: 10px;
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 2rem;
       margin-bottom: 2rem;
-  width: 100%;
-      .label{
-          font-size: 24px;
-      color: var(--primary);
+      width: 100%;
+
+      .label {
+        font-size: 24px;
+        color: var(--primary);
       }
 
       .form-grid {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
-}
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
 
-.form-group {
-  display: flex;
-  width: 100%;
-  gap: 20px;
+      .form-group {
+        display: flex;
+        width: 100%;
+        gap: 20px;
 
-  > * {
-    flex: 1; 
-    min-width: 0; 
+        > * {
+          flex: 1;
+          min-width: 0;
+        }
+      }
+    }
   }
 }
 
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .account-settings-container {
+    flex-direction: column;
+    padding: 1rem;
 
+    .sidebar {
+      width: 100%;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
 
+      .tab {
+        flex: 1 0 auto;
+        min-width: 120px;
+        text-align: center;
+        padding: 0.75rem 1rem;
+      }
+    }
+
+    .content {
+      margin-left: 0;
+      width: 100%;
+
+      .header-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .account-settings-container {
+    padding: 0.5rem;
+
+    .sidebar {
+      gap: 0.25rem;
+
+      .tab {
+        font-size: 14px;
+        padding: 0.5rem;
+        min-width: 100px;
+      }
+    }
+
+    .content {
+      .address-card {
+        .label {
+          font-size: 20px;
+        }
+      }
+    }
   }
 }

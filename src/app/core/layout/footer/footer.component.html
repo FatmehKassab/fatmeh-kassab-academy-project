@@ -16,20 +16,21 @@ sells fashion and electronics.</p>
     <div class="lists">
            <ul class="list">
         <span class="label">Store</span>
-            <li>Home</li>
-            <li>About</li>
-            <li>Products</li>
+            <li routerLink="/home">Home</li>
+            <li routerLink="/about">About</li>
+            <li routerLink="/products">Products</li>
         </ul>
         <ul class="list">
         <span class="label">My Account</span>
-            <li>Sign up</li>
-            <li>Sign in</li>
+            <li routerLink="/sign-up">Sign up</li>
+            <li routerLink="/sign-in">Sign in</li>
 
         </ul>
         <ul class="list">
         <span class="label">Contact us</span>
-            <li> <img [src]="ICONS.phone" alt="phone" class="icon" />+961 71 256 289</li>
-           <li><img [src]="ICONS.email" alt="email" class="icon" />modafusion&#64;info.com</li>
+        <div style="display: flex; align-items: center;"> <img [src]="ICONS.phone" alt="phone" class="icon" /><li> +961 71 256 289</li></div>
+           
+           <div style="display: flex; align-items: center;"> <img [src]="ICONS.email" alt="email" class="icon" /><li>modafusion&#64;info.com</li></div>
         </ul>
     </div>
     </div>

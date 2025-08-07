@@ -7,13 +7,14 @@ import { FavoritesService } from '../../services/favorites.service';
 import { Store } from '@ngrx/store';
 import { selectTotalQuantity } from '../../store/cart/cart.selectors';
 import { Router } from '@angular/router';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-socials',
   templateUrl: './socials.component.html',
   styleUrl: './socials.component.scss',
   standalone: true,
-  imports: [NgIf, OverlayBadgeModule,TitleCasePipe]
+  imports: [NgIf, OverlayBadgeModule,TitleCasePipe,ButtonComponent]
 })
 export class SocialsComponent {
   @Input() iconPath: string = '';

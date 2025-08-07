@@ -1,57 +1,79 @@
 <nav class="nav-container" *ngIf="showNavbar">
- <div class="logo">
-        <img
-          [src]="IMAGES.logo"
-          alt="login_illustration"
-          width="120"
-          height="100"
-        />
-      </div>
-      <ul class="nav-links">
-    <li  >
-      <a routerLink="/">Home</a>
+  <div class="logo">
+    <img [src]="IMAGES.logo" alt="login_illustration" width="120" height="100" />
+  </div>
+
+
+  
+
+  <!-- Nav links -->
+  <ul class="nav-links" [ngClass]="{ open: menuOpen }">
+    <li>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
     </li>
     <li>
-      <a routerLink="/about">About</a>
+      <a routerLink="/about" routerLinkActive="active">About</a>
     </li>
     <li>
-      <a routerLink="/products">Products</a>
+      <a routerLink="/products" routerLinkActive="active">Products</a>
     </li>
-      @if(admin){
-        <li>
-      <a routerLink="/admin">Admin</a>
-    </li>}
+    @if(admin){
+      <li>
+        <a routerLink="/admin" routerLinkActive="active">Admin</a>
+      </li>
+    }
+     @if(isLoggedIn){
+      <li class="hide">
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    </li>
+    <li class="hide">
+              <app-button
+          title="Logout"
+          type="button"
+          (click)="logout()"
+        ></app-button>
+  </li>}
   </ul>
 
-    
-
+  <!-- Social icons -->
   @if(admin){
-     <div class="socials">
-    <app-socials  [iconPath]="ICONS.search"></app-socials>
-
-    <app-socials 
-      [iconPath]="ICONS.user_white"   
-      [isDropdown]="true">
-    </app-socials>
-      </div>
+    <div class="socials">
+      <app-socials [iconPath]="ICONS.search"></app-socials>
+      <app-socials [iconPath]="ICONS.user_white" [isDropdown]="true" class="hidden"></app-socials>
+  <div class="circle-icon" (click)="menuOpen = !menuOpen">
+   <div class="burger" >
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  </div>
+    </div>
   }
-  @else{ <div class="socials">
-    <app-socials  [iconPath]="ICONS.search" (iconClick)="openSearchDrawer()"></app-socials>
-<app-socials 
-  [iconPath]="ICONS.cart"
- drawerType="cart"
-  (iconClick)="openCartDrawer()"
-  [showBadge]="true"
-></app-socials>
-
- <app-socials  [iconPath]="ICONS.heart" (iconClick)="openFavoritesDrawer()"  drawerType="favorites"  [showBadge]="true"></app-socials>
-
-
-    <app-socials 
-      [iconPath]="ICONS.user_white"   
-      [isDropdown]="true">
-    </app-socials>
-      </div>}
-  
+  @else{
+    <div class="socials" >
+      <app-socials [iconPath]="ICONS.search" (iconClick)="openSearchDrawer()"></app-socials>
+      <app-socials
+        [iconPath]="ICONS.cart"
+        drawerType="cart"
+        (iconClick)="openCartDrawer()"
+        [showBadge]="true">
+      </app-socials>
+      <app-socials
+        [iconPath]="ICONS.heart"
+        drawerType="favorites"
+        (iconClick)="openFavoritesDrawer()"
+        [showBadge]="true">
+      </app-socials>
+      <app-socials [iconPath]="ICONS.user_white" [isDropdown]="true" class="hidden"></app-socials>
+          <!-- Burger icon -->
+  <div class="circle-icon" (click)="menuOpen = !menuOpen">
+   <div class="burger" >
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  </div>
+    </div>
+  }
 
 </nav>

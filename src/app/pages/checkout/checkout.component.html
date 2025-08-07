@@ -1,6 +1,4 @@
-
-
-  <div class="checkout-container">
+<div class="checkout-container">
   <div class="left-section">
     <app-address-component></app-address-component>
 
@@ -11,78 +9,66 @@
     </div>
 
     <label class="label">Payment:</label>
-    <div class="payment-input" rows="4">
+    <div class="payment-input">
       <p>Cash on delivery</p>
       <p>-------------- or --------------</p>
       <div class="image-container">
-  <img
-    [src]="IMAGES.whish"
-    alt="whish"
-    class="fit-image"
-  />
-</div>
-
+        <img [src]="IMAGES.whish" alt="whish" class="fit-image" />
+      </div>
     </div>
   </div>
 
   <div class="right-section">
-    <div style="display: flex; justify-content: space-between;">  <h3>Order Summary</h3>
-  <span style="font-size: 18px;">Items<span style="color: var(--secondary);">({{ totalItems }})</span></span></div>
-  
+    <div style="display: flex; justify-content: space-between;">
+      <h3>Order Summary</h3>
+      <span style="font-size: 18px;">Items <span style="color: var(--secondary);">({{ totalItems }})</span></span>
+    </div>
 
-    <div class="item-card" >
-      @if(products.length > 0){
-    <app-product-list style="width: 100%;"></app-product-list>
-  }
+    <div class="item-card">
+      <ng-container *ngIf="products.length > 0; else noProducts">
+        <app-product-list style="width: 100%;"></app-product-list>
+      </ng-container>
+      <ng-template #noProducts>
+        <p style="color: gray; font-style: italic;">No products in your cart.</p>
+      </ng-template>
     </div>
 
     <div class="summary-line">
       <span>Delivery :</span>
       <span class="price">4.00$</span>
     </div>
-<ng-container *ngIf="grandTotal$ | async as grandTotal">
-  <div class="summary-line total">
-    <span>Total :</span>
-    <span class="price">{{ (grandTotal + 4) | number: '1.2-2' }} $</span>
-  </div>
-</ng-container>
 
+    <ng-container *ngIf="grandTotal$ | async as grandTotal">
+      <div class="summary-line total">
+        <span>Total :</span>
+        <span class="price">{{ (grandTotal + 4) | number: '1.2-2' }} $</span>
+      </div>
+    </ng-container>
 
+    <div style="display: flex; align-items: end; width: 100%; justify-content: space-between;">
+      <app-text-input label="Enter promo code" [showPlaceholder]="true" style="width: 85%;"></app-text-input>
+      <app-button
+        title="Apply"
+        type="submit"
+        bgColor="var(--secondary)"
+        style="width: 13%; min-width: 70px;"
+      ></app-button>
+    </div>
 
-     <div style="display: flex; align-items: end; width: 100%; justify-content: space-between;">
-        <app-text-input label="Enter promo code" [showPlaceholder]="true" style="width: 85%;"></app-text-input>
-     <app-button
-            title="Apply"
-            type="submit"
-            bgColor="var(--secondary)"
-style="width:13%"
-          >
-           
-          </app-button></div>
-
-<div style="display: flex; justify-content: space-between; gap:10px; margin-top: 20px;">
-    <app-button
-            title="Continue Shopping"
-            type="submit"
-style="width: 50%;"
-(click)="navigateTo('/products')"
-          >
-           
-          </app-button>
-           <app-button
-            title="Checkout"
-            type="submit"
-            bgColor="var(--secondary)"
-            style="width: 50%;"
-(click)="confirmOrder()"
-          >
-           
-          </app-button>
-</div>
-    
-           
-
-
-  
+    <div class="buttons">
+      <app-button
+        title="Continue Shopping"
+        type="submit"
+        class="btn"
+        (click)="navigateTo('/products')"
+      ></app-button>
+      <app-button
+        title="Confirm order"
+        type="submit"
+        bgColor="var(--secondary)"
+       class="btn"
+        (click)="confirmOrder()"
+      ></app-button>
+    </div>
   </div>
 </div>

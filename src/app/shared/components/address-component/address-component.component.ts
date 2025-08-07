@@ -5,6 +5,7 @@ import { TextInputComponent } from '../inputs/text-input/text-input.component';
 import { AddressService } from '../../services/address.service';
 import { NgIf } from '@angular/common';
 import { MessageService } from 'primeng/api';
+import { ICONS } from '../../utils/icons';
 
 @Component({
   selector: 'app-address-component',
@@ -17,7 +18,7 @@ export class AddressComponentComponent implements OnInit {
   addressForm!: FormGroup;
   isEditing = true;
   submittedAddress: any = null;
-
+ICONS=ICONS
   constructor(
     private fb: FormBuilder,
     private addressService: AddressService,
