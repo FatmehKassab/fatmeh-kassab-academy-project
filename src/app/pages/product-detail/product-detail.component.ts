@@ -49,6 +49,9 @@ private favoritesService = inject(FavoritesService);
         private router: Router
   ) {}
 
+trackByProductId(index: number, product: any): number {
+  return product.id;
+}
 
  addToCart(product: any) {
   this.store.dispatch(addToCart({ product }));

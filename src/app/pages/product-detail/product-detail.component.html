@@ -32,10 +32,11 @@
     @if((productQuantity$ | async) ?? 0 > 0){
   <div style="width: fit-content;">
  
-    <div *ngFor="let item of products; let i = index">
-       <p class="label">Quantity</p>
-   <app-counter [productId]="item.id" [product]="item" ></app-counter>
+<div *ngFor="let item of products; let i = index; trackBy: trackByProductId">
+  <p class="label">Quantity</p>
+  <app-counter [productId]="item.id" [product]="item"></app-counter>
 </div>
+
 
     </div>}
  
