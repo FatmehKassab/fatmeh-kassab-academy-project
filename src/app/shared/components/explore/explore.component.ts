@@ -3,6 +3,7 @@ import { ProductCardComponent } from "../product-card/product-card.component";
 import { Product } from '../../interfaces/product.model';
 import { ProductService } from '../../services/product.service';
 import { ButtonComponent } from "../button/button.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-explore',
@@ -15,7 +16,7 @@ export class ExploreComponent implements OnInit {
   @Input() category: string = ''; 
   products: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router:Router) {}
 
   ngOnInit(): void {
     if (this.category) {
@@ -27,5 +28,9 @@ export class ExploreComponent implements OnInit {
         this.products = data.slice(0, 4); 
       });
     }
+  }
+
+    navigateTo(path: string) {
+    this.router.navigate([path]);
   }
 }

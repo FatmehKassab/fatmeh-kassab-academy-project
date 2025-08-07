@@ -49,6 +49,15 @@ private favoritesService = inject(FavoritesService);
         private router: Router
   ) {}
 
+trackByProductId(index: number, product: any): number {
+  return product.id;
+}
+onFavoriteKeyDown(event: KeyboardEvent, product: Product) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    this.addToFavorites(product);
+  }
+}
 
  addToCart(product: any) {
   this.store.dispatch(addToCart({ product }));

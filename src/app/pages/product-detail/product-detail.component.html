@@ -32,10 +32,11 @@
     @if((productQuantity$ | async) ?? 0 > 0){
   <div style="width: fit-content;">
  
-    <div *ngFor="let item of products; let i = index">
-       <p class="label">Quantity</p>
-   <app-counter [productId]="item.id" [product]="item" ></app-counter>
+<div *ngFor="let item of products; let i = index; trackBy: trackByProductId">
+  <p class="label">Quantity</p>
+  <app-counter [productId]="item.id" [product]="item"></app-counter>
 </div>
+
 
     </div>}
  
@@ -51,7 +52,16 @@
   </p-accordion>
 
      <div class="button-container">
-      <app-socials  [iconPath]="isFavorite(product) ? ICONS.filled_heart : ICONS.heart" class="social-icon" (click)="addToFavorites(product)"></app-socials>
+     <app-socials
+  [iconPath]="isFavorite(product) ? ICONS.filled_heart : ICONS.heart"
+  class="social-icon"
+  tabindex="0"
+  role="button"
+  (click)="addToFavorites(product); $event.stopPropagation()"
+  (keydown)="onFavoriteKeyDown($event, product)"
+  [attr.aria-pressed]="isFavorite(product)"
+></app-socials>
+
            <app-button
             title="Add to cart"
             type="submit"
