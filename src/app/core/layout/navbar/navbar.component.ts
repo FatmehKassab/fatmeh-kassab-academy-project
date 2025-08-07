@@ -10,11 +10,12 @@ import { filter, Subscription } from 'rxjs';
 import { NgClass, NgIf } from '@angular/common';
 import { AuthService } from '../../auth/services/auth.service';
 import { SearchDrawerService } from '../../../shared/services/searchDrawer.service';
+import { ButtonComponent } from "../../../shared/components/button/button.component";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [SocialsComponent, RouterModule,NgIf,NgClass],
+  imports: [SocialsComponent, RouterModule, NgIf, NgClass, ButtonComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -22,7 +23,7 @@ export class NavbarComponent {
   IMAGES = IMAGES;
   ICONS = ICONS;
   menuOpen = false;
-
+ isLoggedIn: boolean = false;
   @Input() products: Product[] = [];
   @Input() product!: Product;
 
@@ -47,12 +48,29 @@ this.router.events
       this.admin = this.authService.isAdmin();
       console.log("Admin status updated:", this.admin);
     });
+
+     this.authSubscription = this.authService.isLoggedIn().subscribe((loggedIn) => {
+      this.isLoggedIn = loggedIn;
+    });
   }
+
+  
 
   ngOnDestroy() {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
     }
+  }
+
+    logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        console.log('Logout successful');
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+      }
+    });
   }
 
   showNavbar = true;

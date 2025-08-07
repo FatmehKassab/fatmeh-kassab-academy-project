@@ -22,13 +22,28 @@
 <div *ngIf="isDropdown && showDropdown" class="dropdown-box">
  @if (isLoggedIn) {
     <div style="padding: 8px; min-width: 120px;">
-      <p style="margin: 0 0 8px 0; font-weight: bold;">Hello, {{ firstName | titlecase }}</p>
+      <p style="margin: 0 0 8px 0; font-weight: bold; color: var(--secondary);">Hello, {{ firstName | titlecase }}</p>
       <hr style="margin: 4px 0;">
-    <p style="margin: 8px 0; cursor: pointer;" (click)="navigateTo('/profile')">My Profile</p>
-      <button style="margin: 8px 0; cursor: pointer;" (click)="logout()">Logout</button>
+    <p style="margin: 8px 0; cursor: pointer; font-weight: bold; color: var(--primary);" (click)="navigateTo('/profile')">My Profile</p>
+     <app-button
+          title="Logout"
+          type="button"
+          (click)="logout()"
+        ></app-button>
     </div>
 } @else {
     <div style="padding: 8px; min-width: 120px;">
+       <app-button
+          title="Sign In"
+          type="button"
+          (click)="navigateTo('/sign-in')"
+         bgColor="var(--secondary)"
+        ></app-button>
+         <app-button
+          title="Sign Up"
+          type="button"
+          (click)="navigateTo('/sign-up')"
+        ></app-button>
       <p style="margin: 8px 0; cursor: pointer;" (click)="navigateTo('/sign-in')">Sign In</p>
       <p style="margin: 8px 0; cursor: pointer;" (click)="navigateTo('/sign-up')">Sign Up</p>
     </div>

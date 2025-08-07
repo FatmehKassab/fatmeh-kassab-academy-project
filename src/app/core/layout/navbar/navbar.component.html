@@ -22,9 +22,17 @@
         <a routerLink="/admin" routerLinkActive="active">Admin</a>
       </li>
     }
-     <li class="hide">
+     @if(isLoggedIn){
+      <li class="hide">
       <a routerLink="/profile" routerLinkActive="active">Profile</a>
     </li>
+    <li class="hide">
+              <app-button
+          title="Logout"
+          type="button"
+          (click)="logout()"
+        ></app-button>
+  </li>}
   </ul>
 
   <!-- Social icons -->
