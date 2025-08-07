@@ -7,21 +7,22 @@ import { FavoritesService } from '../../../shared/services/favorites.service';
 import { Product } from '../../../shared/interfaces/product.model';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { AuthService } from '../../auth/services/auth.service';
 import { SearchDrawerService } from '../../../shared/services/searchDrawer.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [SocialsComponent, RouterModule,NgIf],
+  imports: [SocialsComponent, RouterModule,NgIf,NgClass],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
   IMAGES = IMAGES;
   ICONS = ICONS;
-  
+  menuOpen = false;
+
   @Input() products: Product[] = [];
   @Input() product!: Product;
 

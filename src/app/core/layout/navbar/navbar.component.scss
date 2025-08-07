@@ -7,19 +7,62 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  height: 90px; /* Fixed height */
+  height: 90px;
 
+  .burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+
+    span {
+      width: 20px;
+      height: 2px;
+      background-color: var(--white);
+      transition: 0.3s;
+    }
+  }
+
+  .hide {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+
+    .burger {
+      display: flex;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 90px;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      background-color: var(--white);
+      padding: 20px 0;
+      gap: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &.open {
+        display: flex;
+      }
+    }
+
+    .hide {
+      display: flex;
+    }
+  }
 }
 
 .nav-links {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   list-style: none;
   gap: 20px;
-  font-weight: 600;
-  color: var(--primary);
-  cursor: pointer;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -30,33 +73,31 @@
     align-items: center;
     position: relative;
     padding: 0 10px;
-    transition: color 0.3s ease;
 
-    &:hover {
-      color: var(--secondary);
-      
+    a {
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+
       &::after {
         content: '';
         position: absolute;
         bottom: 0;
-        left: 0;
-        width: 100%;
+        left: 10px;
+        width: 0%;
         height: 3px;
         background-color: var(--secondary);
+        transition: width 0.3s ease;
       }
-    }
 
-    &.active {
-      color: var(--secondary);
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background-color: var(--secondary);
+      &:hover,
+      &.active {
+        color: var(--secondary);
+
+        &::after {
+          width: calc(100% - 20px);
+        }
       }
     }
   }
@@ -66,4 +107,30 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.circle-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ddd;
+  }
+}
+
+@media (max-width: 768px) {
+  .hidden {
+    display: none;
+  }
+
+  .circle-icon {
+    display: flex;
+  }
 }
