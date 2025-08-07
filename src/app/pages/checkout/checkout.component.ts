@@ -65,7 +65,7 @@ grandTotal = this.products.reduce((acc, item) => acc + item.price, 0);
           summary: 'Success', 
           detail: 'Order placed successfully!' 
         });
-    
+      this.router.navigate(['/products']);
     }
 
 }
