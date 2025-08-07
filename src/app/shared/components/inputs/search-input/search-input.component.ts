@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICONS } from '../../../utils/icons';
 import { NgIf } from '@angular/common';
+import { SocialsComponent } from "../../socials/socials.component";
 
 @Component({
   selector: 'app-search-input',
-  imports: [NgIf],
+  imports: [NgIf, SocialsComponent],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss'
 })
