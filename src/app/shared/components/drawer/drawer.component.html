@@ -4,27 +4,33 @@
     <h2 *ngIf="drawerType === 'favorites'">My Favorites <span style="color: var(--secondary);">({{ totalFavorites }})</span></h2>
   </ng-template>
 
- <div class="drawer-body">
-  <div class="cart-content">
-  @if(products.length > 0){
-    <app-product-list></app-product-list>
-  }
-    @else{<div>
-      <h4>Your {{ drawerType }} is empty</h4>
-      <h6>Add item to it now</h6>
-    </div>}
-     </div>
+  <div class="drawer-body">
+    <div class="cart-content">
+      @if(products.length > 0){
+        <app-product-list></app-product-list>
+      } @else {
+        <div>
+          <h4>Your {{ drawerType }} is empty</h4>
+          <h6>Add item to it now</h6>
+        </div>
+      }
 
-    <div class="total-container" *ngIf="products.length != 0 && drawerType === 'cart'">
-      <p class="total">Total: {{ grandTotal$ | async | number:'1.2-2' }}$</p>
-    <div (click)="empty()">   <img [src]="ICONS.bin" alt="altText" class="bin" /></div>
+     
+    </div>
+
+    <div class="checkout-button-container" *ngIf="products.length != 0 && drawerType === 'cart'">
+       <div class="total-container">
+        <p class="total">Total: {{ grandTotal$ | async | number:'1.2-2' }}$</p>
+        <div (click)="empty()">
+          <img [src]="ICONS.bin" alt="altText" class="bin" />
+        </div>
+      </div>
+      <app-button
+        title="Checkout"
+        type="submit"
+        bgColor="var(--secondary)"
+        (click)="navigateTo('/checkout')"
+      ></app-button>
+    </div>
   </div>
-  </div>
-   <app-button
-          title="Checkout"
-          type="submit"
-          bgColor="var(--secondary)"
-          style="width: 50%;"
-          (click)="navigateTo('/checkout')"
-        ></app-button>
 </p-drawer>
