@@ -7,6 +7,7 @@
   border: 2px solid var(--primary);
   border-radius: 30px;
   font-weight: 500;
+  background-color: transparent;
 
   button {
     background-color: transparent;
@@ -23,7 +24,7 @@
     &:disabled {
       color: grey;
       cursor: not-allowed;
-      
+
       &:hover {
         color: grey;
         background-color: transparent;
@@ -36,5 +37,22 @@
     width: 2rem;
     text-align: center;
     color: var(--primary);
+  }
+
+  &.in-cart {
+    background-color: var(--primary);
+
+    button,
+    span {
+      color: white;
+    }
+
+    button:disabled {
+      color: lightgray;
+
+      &:hover {
+        color: lightgray;
+      }
+    }
   }
 }

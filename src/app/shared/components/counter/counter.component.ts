@@ -15,7 +15,8 @@ import { selectQuantityByProductId } from '../../store/cart/cart.selectors';
 export class CounterComponent implements OnChanges {
   @Input() productId!: number;
   @Input() product: any;
-  
+  @Input() inCart: boolean = false;
+
   quantity$!: Observable<number>;
 
   constructor(private store: Store) {}

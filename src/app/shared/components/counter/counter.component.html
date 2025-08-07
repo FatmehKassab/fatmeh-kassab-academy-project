@@ -1,4 +1,4 @@
-<div class="counter">
+<div class="counter" [class.in-cart]="inCart">
   <button style="margin-bottom: 3px;"
     [disabled]="(quantity$ | async) === 1"
     (click)="onMinusClick()">-</button>
