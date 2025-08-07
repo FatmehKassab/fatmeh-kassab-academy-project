@@ -13,4 +13,10 @@ gap: 20px;
     width: 40%;
     text-align: center;
 }
+@media (max-width: 768px) {
+.cta-text{
+    width: 90%;
+    text-align: center;
+} 
+}
 }
