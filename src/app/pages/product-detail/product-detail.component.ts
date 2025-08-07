@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Product } from '../../shared/interfaces/product.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../shared/services/product.service';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { TitleService } from '../../shared/services/title.service';
@@ -45,7 +45,8 @@ private favoritesService = inject(FavoritesService);
     private productService: ProductService,
     private customTitleService: TitleService,
     private colorService: ColorService,
-    private store: Store
+    private store: Store,
+        private router: Router
   ) {}
 
 
@@ -102,7 +103,9 @@ ngOnInit(): void {
 }
 
 
-  
+ navigateTo(route: string) {
+  this.router.navigate([route]);
+} 
   
     
 }

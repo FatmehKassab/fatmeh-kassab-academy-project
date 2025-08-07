@@ -64,6 +64,7 @@ style="width: 100%;"
             type="submit"
             bgColor="var(--secondary)"
 style="width: 100%;"
+ (click)="navigateTo('/checkout')"
           >
           </app-button>
         </div>
@@ -94,5 +95,5 @@ style="width: 100%;"
   <div class="rating-row"><span>4 (7)</span><p-progressbar [value]="70" /></div>
   <div class="rating-row"><span>5 (2)</span><p-progressbar [value]="20" /></div>
 </div>
-<app-explore [category]="product.category"></app-explore>
+<app-explore></app-explore>
 
