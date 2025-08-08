@@ -30,9 +30,9 @@ isAdmin(): boolean {
   const user = this.getUserData();
   const isAdmin = user?.email === this.ADMIN_EMAIL;
 
-  if (isAdmin) {
-    this.router.navigate(['/admin']);
-  }
+  // if (isAdmin) {
+  //   this.router.navigate(['/admin']);
+  // }
 
   return isAdmin;
 }
