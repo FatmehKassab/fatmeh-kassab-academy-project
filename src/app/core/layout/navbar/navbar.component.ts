@@ -91,6 +91,8 @@ this.router.events
         console.log("drawerrrr111")
   this.searchDrawerService.openSearchDrawer();
 }
-
+  navigateTo(route: string) {
+  this.router.navigate([route]);
+}
 
 }

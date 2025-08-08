@@ -33,6 +33,19 @@
           (click)="logout()"
         ></app-button>
   </li>}
+       @if(!isLoggedIn){<li class="hide btn">
+     <app-button
+          title="Sign In"
+          type="button"
+          (click)="navigateTo('/sign-in')"
+         bgColor="var(--secondary)"
+        ></app-button>
+         <app-button
+          title="Sign Up"
+          type="button"
+          (click)="navigateTo('/sign-up')"
+        ></app-button>
+  </li>}
   </ul>
 
   <!-- Social icons -->

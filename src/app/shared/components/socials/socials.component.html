@@ -32,7 +32,7 @@
         ></app-button>
     </div>
 } @else {
-    <div style="padding: 8px; min-width: 120px;">
+    <div class="btn">
        <app-button
           title="Sign In"
           type="button"
@@ -44,8 +44,7 @@
           type="button"
           (click)="navigateTo('/sign-up')"
         ></app-button>
-      <p style="margin: 8px 0; cursor: pointer;" (click)="navigateTo('/sign-in')">Sign In</p>
-      <p style="margin: 8px 0; cursor: pointer;" (click)="navigateTo('/sign-up')">Sign Up</p>
+    
     </div>
 }
 </div>

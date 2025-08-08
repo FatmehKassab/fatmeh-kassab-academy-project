@@ -10,13 +10,14 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { adminGuard } from './core/auth/guards/admin.guard';
 
 export const routes: Routes = [
-  { path: 'checkout', component: CheckoutComponent, data: { title: 'Checkout' } },
+  { path: 'checkout', component: CheckoutComponent, data: { title: 'Checkout' } ,canActivate: [authGuard]},
   { path: 'not-found', component: NotFoundComponent, data: { title: 'Not Found' } },
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
-  { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
-  { path: 'admin', component: AdminComponent, data: { title: 'Admin' } }, 
+  { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } ,canActivate: [authGuard]},
+  { path: 'admin', component: AdminComponent, data: { title: 'Admin' }, canActivate: [adminGuard] }, 
   // { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: 'about', component: AboutComponent, data: { title: 'About' } },
   {  path: 'products', loadComponent: () => import('./pages/products/products.component').then(m => m.ProductsComponent), data: { title: 'Products' } },

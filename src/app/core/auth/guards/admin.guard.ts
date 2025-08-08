@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from 'primeng/api';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const adminGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const messageService = inject(MessageService);
@@ -12,11 +12,11 @@ export const authGuard: CanActivateFn = (route, state) => {
   const isLoggedIn = !!token;
   const isAdmin = authService.isAdmin();
 
-  if (!isLoggedIn) {
+  if (!isLoggedIn || !isAdmin) {
     messageService.add({
       severity: 'warn',
       summary: 'Access Denied',
-      detail: 'Login to access this page.'
+      detail: 'You do not have permission to access this page.'
     });
 
   
