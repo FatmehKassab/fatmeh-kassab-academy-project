@@ -1,8 +1,16 @@
-FROM node:20-alpine
+FROM node:20-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install --force
 COPY . .
-RUN npm run build --configuration=production
-RUN npm install -g http-server
-CMD ["http-server", "dist/fatmeh-kassab-academy-project", "-p", "80"]
+RUN npm run build -- --configuration production
+EXPOSE 80
+CMD ["npm", "start"]
+
+
+
+
+
+
+
+
